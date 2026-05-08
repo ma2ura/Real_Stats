@@ -1,0 +1,101 @@
+project:
+  type: book
+  output-dir: docs
+
+lightbox: auto
+
+book:
+  title: "社会科学のための統計分析入門の勉強ノート"
+  author: "Soichi Matsuura"
+  search: true
+  reader-mode: true
+  cover-image: img/real_stats.jpg
+  favicon: img/favicon.ico
+  site-url: https://so-ichi.com
+  repo-url: https://github.com/ma2ura/Real_Stats
+  repo-branch: main
+
+  page-footer:
+      border: true
+      background: "#a10000"
+      left: "Copyright 2026, Soichi Matsuura"
+      right:
+        - icon: house
+          href: https://so-ichi.com/r.html
+        - icon: github
+          href: https://github.com/ma2ura
+        - icon: twitter
+          href: https://twitter.com/matsuura_rits
+          aria-label: Twitter
+
+
+  chapters:
+    - index.qmd
+    - chapter01.qmd
+    # - chapter02.qmd
+    # - part: part01.qmd
+    #   chapters:
+    #     - chapter03.qmd
+    #     - chapter04.qmd
+    #     - chapter05.qmd
+    #     - chapter06.qmd
+    #     - chapter07.qmd
+    # - part: part02.qmd
+    #   chapters:
+    #     - chapter08.qmd
+
+
+website:
+  back-to-top-navigation: true
+
+format:
+  live-html:
+    theme:
+      - cosmo
+      - styles.scss
+
+    toc: true
+    toc-location: left
+    toc-title: "ここの目次"
+    toc-depth: 2
+    toc-expand: true
+
+    code-tools: true
+    code-link: true
+    code-line-numbers: true
+    code-block-bg: true
+    code-block-border-left: "#002D72"
+    html-math-method: katex
+    author-meta: "Soichi Matsuura"
+
+    # mainfont: "Noto Sans JP" # _brand.ymlで指定しているため、ここではコメントアウト
+    # monofont: "0xProto"
+    # fontsize: 1.2em
+
+    callout-appearance: simple
+    code-copy: hover
+    code-overflow: scroll
+    link-external-icon: true
+    df-print: paged
+
+    twitter-card: true
+    page-navigation: true
+    back-to-top-navigation: true
+
+    include-in-header:
+      text: |
+        <style>
+        .marky {background: linear-gradient(transparent 60%, #FCFFC1 0%);}
+        .markb {background: linear-gradient(transparent 60%, #b1f6fc 0%);} 
+        .markp {background: linear-gradient(transparent 60%, #ffcdd2 0%);}
+        </style>
+# 88E2EA
+engine: knitr
+
+knitr:
+  opts_chunk:
+    dev: ragg_png     # 文字化け防止
+    dpi: 450          # 高解像度の図を使用（サイズ大きめ）
+    fig-align: center # 図は中央揃え
+    warning: false    # 警告メッセージを消す
+    message: false    # 通常メッセージを消す

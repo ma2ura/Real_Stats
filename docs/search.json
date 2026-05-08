@@ -1,0 +1,52 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "社会科学のための統計分析入門の勉強ノート",
+    "section": "",
+    "text": "0.1 はじめに\nこのノートは、マイケル・ベイリー先生が書かれた「Real Stats: Using Econometrics for Political Science and Public Policy, 2nd ed.」の翻訳書である「社会科学のための統計分析入門」勁草書房の勉強内容をまとめたものです。",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>はじめに</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#準備",
+    "href": "index.html#準備",
+    "title": "社会科学のための統計分析入門の勉強ノート",
+    "section": "\n0.2 準備",
+    "text": "0.2 準備\n各自のPC(WindowsかMacを想定)の好きな場所にReal_Statsというフォルダを作成し，そこを作業ディレクトリにしていることを想定しています。 この文章の意味が分からない人は，Rの入門書を確認してください。 作業ディレクトリの中にdataというフォルダを作成し，そこにテキストで使うデータファイルを保存してある，という前提で進めます。Rdataファイルを読み込む場合は、以下のようにload()関数を使います。\n\nload(\"data/Ch2_Exercise1_DonutX.RData\")\nls() # データセットの中身を確認\n\n[1] \"dta\"             \"pandoc_dir\"      \"quarto_bin_path\"\n\ndta # データセットの内容を確認",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>はじめに</span>"
+    ]
+  },
+  {
+    "objectID": "chapter01.html",
+    "href": "chapter01.html",
+    "title": "\n2  因果の探究\n",
+    "section": "",
+    "text": "2.1 特定化 - 基本となるモデル\n他人や自分の説得させる証拠を提供したい。 ある現象の原因と結果を直接観察できないとき、データを用いて因果関係を探究する方法を学びます。 とはいえ、\n\\text{相関係数} \\not = \\text{因果関係}\nであることを理解することが重要です。\n本書では、原因を特定し、本当は何が重要で何が重要でないかを議論するために役立つ統計学を学びます。 そのために、第1章では、3つの重要な概念を紹介します。\n統計的推論と識別において2つの解決すべき課題も議論する。\n何が原因で何が結果なのかをみるために、\nという2つのステップを踏む必要があります。 とりわけ、結果を表す変数を従属変数(dependent variable)と呼び、原因を表す変数を独立変数(independent variable)と呼びます。\nたとえば、結果を表す変数を売上高、原因を表す変数を広告宣伝費とし、この2つの変数間の関係を\n\\text{売上高} = a + b \\times \\text{広告宣伝費}\nという数式で表現することを特定化といいます。 上の式を、a=10、b=0.5とすると、以下のようなグラフになります。\na &lt;- 10\nb &lt;- 0.5\nx &lt;- seq(0, 100, by = 10)\ny &lt;- a + b * x\nplot(x, y, type = \"b\", xlab = \"広告宣伝費\", ylab = \"売上高\")\nテキストでは、ドーナツを食べた個数を独立変数、体重を従属変数とするモデルを特定化しています。 データハンドリングや作図のために、tidyverseパッケージを使用します。 pacmanパッケージのp_load関数を使って、必要なパッケージをインストール/ロードします。 load()関数を使って、ドーナツのデータDonutData.Rdataを読み込みます。 読み込んだデータをdata.frame()関数を使ってデータフレームdfにまとめます。 次に、ggplot2パッケージを使って、ドーナツを食べた個数と体重の関係を散布図で可視化します。\npacman::p_load(tidyverse)\nload(\"data/DonutData.Rdata\")\ndf &lt;- data.frame(name, donuts, weight, child , male)\nggplot(df) + \n    aes(x = donuts, y = weight) + geom_point() + \n    # ラベルにnameを重ならないように表示\n    geom_text(aes(label = name), vjust = -1, hjust = 0.5) +\n    theme_bw() + labs(x = \"ドーナツを食べた個数\", y = \"体重(kg)\")\nこのとき、次のような関係を想定する。\n\\text{体重}_i = \\beta_0 + \\beta_1 \\times \\text{ドーナツを食べた個数}_i + \\varepsilon_i\nここで、iは個人を表す番号、\\beta_0は切片、\\beta_1はドーナツを食べた個数の係数、\\varepsilon_iは誤差項を表します。 関心があるのは、「ドーナツを食べた個数」が1単位増えたとき、「体重」がどれだけ増えるのかを意味する、\\beta_1の値です。 上のモデルは、「ドーナツを食べた個数」と「体重」との間に、切片が\\beta_0、傾きが\\beta_1の線形関係があると仮定しています。 つまり、次のような直線を想定していることになります。\nコードを表示ggplot(df) + \n    aes(x = donuts, y = weight) + geom_point() + \n    # ラベルにnameを重ならないように表示\n    geom_text(aes(label = name), vjust = -1, hjust = 0.5) +\n    geom_smooth(method = \"lm\", se = FALSE, color = \"blue\") +\n    # 誤差項を表す点線を追加\n    geom_segment(aes(x = donuts, xend = donuts, y = weight, yend = predict(lm(weight ~ donuts, data = df))), \n                 linetype = \"dashed\", color = \"red\") +\n    theme_bw() + labs(x = \"ドーナツを食べた個数\", y = \"体重(kg)\")\nこの図の黒い点が実際のデータを、青い線が特定化したモデルを表しており、実際のデータとモデルの乖離である誤差項を赤い点線で表しています。 この統計モデルが現実のデータを完全に説明できているなら、実際のデータはすべて青い直線上に位置するはずですが、実際にはモデルからズレた場所に点があるため、誤差が存在します。 つまり、「ドーナツを食べた個数」が「体重」に与える影響を完全に説明できていないということになり、説明できていない部分が誤差項\\varepsilon_iに含まれていることになります。",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>因果の探究</span>"
+    ]
+  },
+  {
+    "objectID": "chapter01.html#特定化---基本となるモデル",
+    "href": "chapter01.html#特定化---基本となるモデル",
+    "title": "\n2  因果の探究\n",
+    "section": "",
+    "text": "変数の特定\n変数間の関係を数式で表現",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>因果の探究</span>"
+    ]
+  },
+  {
+    "objectID": "chapter01.html#つの大きな課題-ランダム性と内生性",
+    "href": "chapter01.html#つの大きな課題-ランダム性と内生性",
+    "title": "\n2  因果の探究\n",
+    "section": "\n2.2 2つの大きな課題 : ランダム性と内生性",
+    "text": "2.2 2つの大きな課題 : ランダム性と内生性\n\n2.2.1 ランダム性と推論\n偶然にたまたま生じてしまっている結果と、偶然ではなく必然的に生じている結果を区別することは重要です。 いま得られた結果が、本当は何の関係もないのに、偶然にたまたま関係があるように見えているのか、それとも因果関係によって生じているのかを区別するため、たまたま得られた結果ではない、という確信を得るための方法があります。 この方法は、統計的推論(statistical inference)、あるいは単に推論と呼ばれています。\n\n2.2.2 内生性、外生性、および識別\n統計学におけるもう一つの重要な課題は、内生性(endogeneity)と呼ばれる問題です。",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>因果の探究</span>"
+    ]
+  }
+]

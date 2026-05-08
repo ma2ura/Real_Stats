@@ -1,0 +1,17 @@
+typography:
+  base:
+    family: Hiragino Sans
+    size: 14pt
+  headings:
+    family: Hiragino Sans
+    weight: bold
+    color: "#002D72"
+  monospace:
+    family: "0xProto"
+    size: 12pt
+  monospace-inline:
+    family: "0xProto"
+    size: 12pt
+  monospace-block:
+    family: "0xProto"
+    size: 12pt
