@@ -32,10 +32,10 @@ book:
   chapters:
     - index.qmd
     - chapter01.qmd
-    # - chapter02.qmd
-    # - part: part01.qmd
-    #   chapters:
-    #     - chapter03.qmd
+    - chapter02.qmd
+    - part: part01.qmd
+      chapters:
+        - chapter03.qmd
     #     - chapter04.qmd
     #     - chapter05.qmd
     #     - chapter06.qmd
@@ -49,7 +49,8 @@ website:
   back-to-top-navigation: true
 
 format:
-  live-html:
+  # live-html:
+  html:
     theme:
       - cosmo
       - styles.scss
@@ -59,7 +60,6 @@ format:
     toc-title: "ここの目次"
     toc-depth: 2
     toc-expand: true
-
     code-tools: true
     code-link: true
     code-line-numbers: true
@@ -67,11 +67,6 @@ format:
     code-block-border-left: "#002D72"
     html-math-method: katex
     author-meta: "Soichi Matsuura"
-
-    # mainfont: "Noto Sans JP" # _brand.ymlで指定しているため、ここではコメントアウト
-    # monofont: "0xProto"
-    # fontsize: 1.2em
-
     callout-appearance: simple
     code-copy: hover
     code-overflow: scroll
@@ -80,7 +75,7 @@ format:
 
     twitter-card: true
     page-navigation: true
-    back-to-top-navigation: true
+
 
     include-in-header:
       text: |
