@@ -55,7 +55,6 @@ table(df$male) |> knitr::kable()
 
 ```{r}
 hist(df$donuts)
-view(df)
 ```
 
 `hist()`関数はデフォルトで、右閉左開区間でビンを作成しますが、例外的に最小値(ここでは0)だけは含まれることになっているので、

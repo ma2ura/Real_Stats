@@ -342,13 +342,12 @@ window.Quarto = {
 </figure>
 </div>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">view</span>(df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><code><a href="https://rdrr.io/r/graphics/hist.html">hist()</a></code>関数はデフォルトで、右閉左開区間でビンを作成しますが、例外的に最小値(ここでは0)だけは含まれることになっているので、 区間は、<span class="math inline">[0,5], (5,10], (10,15], (15,20], (20,25]</span> のようになります。</p>
 <p>この図から、ほとんどの人が0〜5個のドーナツを食べているのに対して、10個以上が1人、15個以上が1人、20個以上が1人いることが分かり、この3名がたくさんのドーナツを食べていることで、平均値が引き上げられていることが分かります。</p>
 <p>箱ひげ図は次のように書きます。</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">boxplot</span>(df<span class="sc">$</span>donuts)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">boxplot</span>(df<span class="sc">$</span>donuts)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><a href="chapter02_files/figure-html/unnamed-chunk-5-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="chapter02_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="3150"></a></p>
@@ -448,24 +447,24 @@ esttab m1 using "results.rtf", replace b(3) t(3) r2 ar2 star(* 0.1 ** 0.05 *** 0
 <div class="code-with-filename-file">
 <pre><strong>Rでの分析例</strong></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, modelsummary)</span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="co"># データの読み込み</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data.csv"</span>)</span>
-<span id="cb8-4"><a href="#cb8-4"></a><span class="co"># データの前処理</span></span>
-<span id="cb8-5"><a href="#cb8-5"></a>analysis_data <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
-<span id="cb8-6"><a href="#cb8-6"></a>  <span class="fu">select</span>(sales, ln_assets, debt, industry) <span class="sc">|&gt;</span></span>
-<span id="cb8-7"><a href="#cb8-7"></a>  <span class="fu">mutate</span>(<span class="at">ln_assets =</span> <span class="fu">log</span>(assets))</span>
-<span id="cb8-8"><a href="#cb8-8"></a><span class="co"># 回帰分析</span></span>
-<span id="cb8-9"><a href="#cb8-9"></a>model_ols <span class="ot">&lt;-</span> <span class="fu">lm</span>(sales <span class="sc">~</span> ln_assets <span class="sc">+</span> debt, <span class="at">data =</span> analysis_data)</span>
-<span id="cb8-10"><a href="#cb8-10"></a><span class="co"># 作表</span></span>
-<span id="cb8-11"><a href="#cb8-11"></a><span class="fu">modelsummary</span>(</span>
-<span id="cb8-12"><a href="#cb8-12"></a>  model_ols,</span>
-<span id="cb8-13"><a href="#cb8-13"></a>  <span class="at">fmt =</span> <span class="dv">3</span>,                 <span class="co"># 小数点第3位まで表示</span></span>
-<span id="cb8-14"><a href="#cb8-14"></a>  <span class="at">estimate =</span> <span class="st">"{estimate}{stars}"</span>, <span class="co"># 係数に有意水準の星を付与</span></span>
-<span id="cb8-15"><a href="#cb8-15"></a>  <span class="at">statistic =</span> <span class="st">"std.error"</span>, <span class="co"># 括弧内は標準誤差（t値への変更も可能）</span></span>
-<span id="cb8-16"><a href="#cb8-16"></a>  <span class="at">gof_omit =</span> <span class="st">"IC|Log|F"</span>,   <span class="co"># 不要な適合度指標を非表示にする</span></span>
-<span id="cb8-17"><a href="#cb8-17"></a>  <span class="at">output =</span> <span class="st">"markdown"</span>      <span class="co"># ファイル保存時は "table.docx" や "table.pdf"</span></span>
-<span id="cb8-18"><a href="#cb8-18"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, modelsummary)</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="co"># データの読み込み</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data.csv"</span>)</span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="co"># データの前処理</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a>analysis_data <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a>  <span class="fu">select</span>(sales, ln_assets, debt, industry) <span class="sc">|&gt;</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a>  <span class="fu">mutate</span>(<span class="at">ln_assets =</span> <span class="fu">log</span>(assets))</span>
+<span id="cb7-8"><a href="#cb7-8"></a><span class="co"># 回帰分析</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a>model_ols <span class="ot">&lt;-</span> <span class="fu">lm</span>(sales <span class="sc">~</span> ln_assets <span class="sc">+</span> debt, <span class="at">data =</span> analysis_data)</span>
+<span id="cb7-10"><a href="#cb7-10"></a><span class="co"># 作表</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a><span class="fu">modelsummary</span>(</span>
+<span id="cb7-12"><a href="#cb7-12"></a>  model_ols,</span>
+<span id="cb7-13"><a href="#cb7-13"></a>  <span class="at">fmt =</span> <span class="dv">3</span>,                 <span class="co"># 小数点第3位まで表示</span></span>
+<span id="cb7-14"><a href="#cb7-14"></a>  <span class="at">estimate =</span> <span class="st">"{estimate}{stars}"</span>, <span class="co"># 係数に有意水準の星を付与</span></span>
+<span id="cb7-15"><a href="#cb7-15"></a>  <span class="at">statistic =</span> <span class="st">"std.error"</span>, <span class="co"># 括弧内は標準誤差（t値への変更も可能）</span></span>
+<span id="cb7-16"><a href="#cb7-16"></a>  <span class="at">gof_omit =</span> <span class="st">"IC|Log|F"</span>,   <span class="co"># 不要な適合度指標を非表示にする</span></span>
+<span id="cb7-17"><a href="#cb7-17"></a>  <span class="at">output =</span> <span class="st">"markdown"</span>      <span class="co"># ファイル保存時は "table.docx" や "table.pdf"</span></span>
+<span id="cb7-18"><a href="#cb7-18"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 
@@ -935,192 +934,191 @@ esttab m1 using "results.rtf", replace b(3) t(3) r2 ar2 star(* 0.1 ** 0.05 *** 0
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">## 現場で使う統計</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a></span>
-<span id="cb9-3"><a href="#cb9-3"></a><span class="in">```{r filename="各種設定"}</span></span>
-<span id="cb9-4"><a href="#cb9-4"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, psych, ggthemes) <span class="co"># パッケージをインストール/ロード</span></span>
-<span id="cb9-5"><a href="#cb9-5"></a><span class="in">```</span></span>
-<span id="cb9-6"><a href="#cb9-6"></a></span>
-<span id="cb9-7"><a href="#cb9-7"></a>本書の目標は、<span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"markp"</span><span class="dt">&gt;</span>**データを使って世界をよりよく理解すること**<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span>です。</span>
-<span id="cb9-8"><a href="#cb9-8"></a>そしてデータを加工・分析することで、<span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"markp"</span><span class="dt">&gt;</span>**データから意味のある情報を引き出す**ために必要な統計学の基礎を身につけること<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span>です。</span>
-<span id="cb9-9"><a href="#cb9-9"></a></span>
-<span id="cb9-10"><a href="#cb9-10"></a><span class="ss">1. </span>データについて理解する</span>
-<span id="cb9-11"><a href="#cb9-11"></a><span class="ss">2. </span>他人を納得させるための準備として、分析の再現可能性を確保する</span>
-<span id="cb9-12"><a href="#cb9-12"></a><span class="ss">3. </span>プログラミング言語を使って分析を行う</span>
-<span id="cb9-13"><a href="#cb9-13"></a></span>
-<span id="cb9-14"><a href="#cb9-14"></a></span>
-<span id="cb9-15"><a href="#cb9-15"></a><span class="fu">## データを知る</span></span>
-<span id="cb9-16"><a href="#cb9-16"></a></span>
-<span id="cb9-17"><a href="#cb9-17"></a>経営学で用いられるデータは、公表されているデータや、研究者が自分で収集したデータなど、さまざまな種類があります。</span>
-<span id="cb9-18"><a href="#cb9-18"></a>経営関連のデータの多くは**観察データ**(observational data)であり、研究者がコントロールできない状況で収集されたデータです。</span>
-<span id="cb9-19"><a href="#cb9-19"></a>したがって、無重力の真空状態で行われる物理学の実験で得られたデータとは異なり、経営学のデータは、ゴミやノイズが多く混入しています。</span>
-<span id="cb9-20"><a href="#cb9-20"></a>そのため、分析の前にデータをクリーニングする必要もあります。</span>
-<span id="cb9-21"><a href="#cb9-21"></a>そういったゴミやノイズが含まれていることを前提として、自分の手元にあるデータについて理解することが重要です。</span>
-<span id="cb9-22"><a href="#cb9-22"></a></span>
-<span id="cb9-23"><a href="#cb9-23"></a>データの大きな特徴をつかむために、**記述統計**(descriptive statistics)を用います。</span>
-<span id="cb9-24"><a href="#cb9-24"></a>ここでは、</span>
-<span id="cb9-25"><a href="#cb9-25"></a></span>
-<span id="cb9-26"><a href="#cb9-26"></a><span class="ss">- </span>観測値の数 <span class="in">`n()`</span></span>
-<span id="cb9-27"><a href="#cb9-27"></a><span class="ss">- </span>平均値 <span class="in">`mean()`</span></span>
-<span id="cb9-28"><a href="#cb9-28"></a><span class="ss">- </span>標準偏差 <span class="in">`sd()`</span></span>
-<span id="cb9-29"><a href="#cb9-29"></a><span class="ss">- </span>最小値 <span class="in">`min()`</span></span>
-<span id="cb9-30"><a href="#cb9-30"></a><span class="ss">- </span>最大値 <span class="in">`max()`</span></span>
-<span id="cb9-31"><a href="#cb9-31"></a></span>
-<span id="cb9-32"><a href="#cb9-32"></a>を確認することが重要です。</span>
-<span id="cb9-33"><a href="#cb9-33"></a>第1章のドーナツのデータを例にして、これらの記述統計を確認してみましょう。</span>
-<span id="cb9-34"><a href="#cb9-34"></a></span>
-<span id="cb9-37"><a href="#cb9-37"></a><span class="in">```{r}</span></span>
-<span id="cb9-38"><a href="#cb9-38"></a><span class="fu">load</span>(<span class="st">"data/DonutData.Rdata"</span>) <span class="co"># ドーナツのデータを読み込む</span></span>
-<span id="cb9-39"><a href="#cb9-39"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(name, donuts, weight, child , male) <span class="co"># データフレームにまとめる</span></span>
-<span id="cb9-40"><a href="#cb9-40"></a>df <span class="sc">|&gt;</span></span>
-<span id="cb9-41"><a href="#cb9-41"></a>    <span class="fu">select</span>(weight, donuts) <span class="sc">|&gt;</span> <span class="co"># donutsとweightの列を選択</span></span>
-<span id="cb9-42"><a href="#cb9-42"></a>    <span class="fu">describe</span>() <span class="sc">|&gt;</span> <span class="co"># psychパッケージのdescribe関数で記述統計を計算</span></span>
-<span id="cb9-43"><a href="#cb9-43"></a>    <span class="fu">select</span>(n, mean, sd, min, max) <span class="sc">|&gt;</span> <span class="co"># 必要な列だけを選択</span></span>
-<span id="cb9-44"><a href="#cb9-44"></a>    <span class="fu">round</span>(<span class="dv">2</span>) <span class="co"># 小数点以下2桁に丸める</span></span>
-<span id="cb9-45"><a href="#cb9-45"></a><span class="in">```</span></span>
-<span id="cb9-46"><a href="#cb9-46"></a></span>
-<span id="cb9-47"><a href="#cb9-47"></a>このデータに含まれている男性と女性の人数も重要な要素なので、確認してみましょう。</span>
-<span id="cb9-48"><a href="#cb9-48"></a></span>
-<span id="cb9-51"><a href="#cb9-51"></a><span class="in">```{r}</span></span>
-<span id="cb9-52"><a href="#cb9-52"></a><span class="fu">table</span>(df<span class="sc">$</span>male) <span class="sc">|&gt;</span> knitr<span class="sc">::</span><span class="fu">kable</span>()</span>
-<span id="cb9-53"><a href="#cb9-53"></a><span class="in">```</span></span>
-<span id="cb9-54"><a href="#cb9-54"></a></span>
-<span id="cb9-55"><a href="#cb9-55"></a>データのグラフ化も異常な観測値の存在に気づくために重要な手段です。</span>
-<span id="cb9-56"><a href="#cb9-56"></a>**散布図**(scatter plot)を使って、変数間の関係を確認したり、**箱ひげ図**(boxplot)や**ヒストグラム**(histogram)を使って、変数の分布を確認することもできます。</span>
-<span id="cb9-57"><a href="#cb9-57"></a></span>
-<span id="cb9-58"><a href="#cb9-58"></a>たとえば、ドーナツを食べた個数の分布をヒストグラムで確認してみましょう。</span>
-<span id="cb9-59"><a href="#cb9-59"></a></span>
-<span id="cb9-62"><a href="#cb9-62"></a><span class="in">```{r}</span></span>
-<span id="cb9-63"><a href="#cb9-63"></a><span class="fu">hist</span>(df<span class="sc">$</span>donuts)</span>
-<span id="cb9-64"><a href="#cb9-64"></a><span class="fu">view</span>(df)</span>
-<span id="cb9-65"><a href="#cb9-65"></a><span class="in">```</span></span>
-<span id="cb9-66"><a href="#cb9-66"></a></span>
-<span id="cb9-67"><a href="#cb9-67"></a><span class="in">`hist()`</span>関数はデフォルトで、右閉左開区間でビンを作成しますが、例外的に最小値(ここでは0)だけは含まれることになっているので、</span>
-<span id="cb9-68"><a href="#cb9-68"></a>区間は、$<span class="co">[</span><span class="ot">0,5</span><span class="co">]</span>, (5,10], (10,15], (15,20], (20,25]$ のようになります。</span>
-<span id="cb9-69"><a href="#cb9-69"></a></span>
-<span id="cb9-70"><a href="#cb9-70"></a>この図から、ほとんどの人が0〜5個のドーナツを食べているのに対して、10個以上が1人、15個以上が1人、20個以上が1人いることが分かり、この3名がたくさんのドーナツを食べていることで、平均値が引き上げられていることが分かります。</span>
-<span id="cb9-71"><a href="#cb9-71"></a></span>
-<span id="cb9-72"><a href="#cb9-72"></a></span>
-<span id="cb9-73"><a href="#cb9-73"></a>箱ひげ図は次のように書きます。</span>
-<span id="cb9-74"><a href="#cb9-74"></a></span>
-<span id="cb9-75"><a href="#cb9-75"></a></span>
-<span id="cb9-78"><a href="#cb9-78"></a><span class="in">```{r}</span></span>
-<span id="cb9-79"><a href="#cb9-79"></a><span class="fu">boxplot</span>(df<span class="sc">$</span>donuts)</span>
-<span id="cb9-80"><a href="#cb9-80"></a><span class="in">```</span></span>
-<span id="cb9-81"><a href="#cb9-81"></a></span>
-<span id="cb9-82"><a href="#cb9-82"></a>:::{.column-margin}</span>
-<span id="cb9-83"><a href="#cb9-83"></a>ヒストグラムは基本関数<span class="in">`hist()`</span>関数で、箱ひげ図は基本関数<span class="in">`boxplot()`</span>関数で書くことができます。</span>
-<span id="cb9-84"><a href="#cb9-84"></a>より凝ったグラフを描きたい場合は、<span class="in">`ggplot2`</span>パッケージを使い、</span>
-<span id="cb9-85"><a href="#cb9-85"></a><span class="in">`geom_histogram()`</span>関数でヒストグラムを、<span class="in">`geom_boxplot()`</span>関数で箱ひげ図を描くことができます。</span>
-<span id="cb9-86"><a href="#cb9-86"></a></span>
-<span id="cb9-89"><a href="#cb9-89"></a><span class="in">```{r}</span></span>
-<span id="cb9-90"><a href="#cb9-90"></a><span class="co">#| echo: false</span></span>
-<span id="cb9-91"><a href="#cb9-91"></a>res_hist <span class="ot">&lt;-</span> <span class="fu">hist</span>(df<span class="sc">$</span>donuts, <span class="at">plot =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb9-92"><a href="#cb9-92"></a>breaks_val <span class="ot">&lt;-</span> res_hist<span class="sc">$</span>breaks</span>
-<span id="cb9-93"><a href="#cb9-93"></a></span>
-<span id="cb9-94"><a href="#cb9-94"></a><span class="co"># 2. ggplot2 で再現する</span></span>
-<span id="cb9-95"><a href="#cb9-95"></a><span class="co"># boundary は hist() の挙動に合わせて調整し、breaks を直接指定します</span></span>
-<span id="cb9-96"><a href="#cb9-96"></a>g <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> donuts)) <span class="sc">+</span></span>
-<span id="cb9-97"><a href="#cb9-97"></a>  <span class="fu">geom_histogram</span>(</span>
-<span id="cb9-98"><a href="#cb9-98"></a>    <span class="at">breaks =</span> breaks_val,</span>
-<span id="cb9-99"><a href="#cb9-99"></a>    <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"lightblue"</span>,</span>
-<span id="cb9-100"><a href="#cb9-100"></a>    <span class="at">closed =</span> <span class="st">"right"</span>      <span class="co"># hist(right = TRUE) と同じ挙動にする</span></span>
-<span id="cb9-101"><a href="#cb9-101"></a>  ) <span class="sc">+</span></span>
-<span id="cb9-102"><a href="#cb9-102"></a>  <span class="fu">labs</span>(</span>
-<span id="cb9-103"><a href="#cb9-103"></a>    <span class="at">x =</span> <span class="st">"Donuts"</span>,</span>
-<span id="cb9-104"><a href="#cb9-104"></a>    <span class="at">y =</span> <span class="st">"Frequency"</span></span>
-<span id="cb9-105"><a href="#cb9-105"></a>  ) <span class="sc">+</span> <span class="fu">theme_bw</span>()</span>
-<span id="cb9-106"><a href="#cb9-106"></a></span>
-<span id="cb9-107"><a href="#cb9-107"></a><span class="co"># 表示</span></span>
-<span id="cb9-108"><a href="#cb9-108"></a><span class="fu">print</span>(g)</span>
-<span id="cb9-109"><a href="#cb9-109"></a><span class="in">```</span></span>
-<span id="cb9-110"><a href="#cb9-110"></a>:::</span>
-<span id="cb9-111"><a href="#cb9-111"></a></span>
-<span id="cb9-112"><a href="#cb9-112"></a>適切なグラフは一目でデータの特徴をつかむことができるので、分析の前にデータをグラフ化してみることをお勧めします。</span>
-<span id="cb9-113"><a href="#cb9-113"></a>ただし、**3Dグラフは避けましょう**。</span>
-<span id="cb9-114"><a href="#cb9-114"></a></span>
-<span id="cb9-115"><a href="#cb9-115"></a><span class="fu">## 再現性</span></span>
-<span id="cb9-116"><a href="#cb9-116"></a></span>
-<span id="cb9-117"><a href="#cb9-117"></a>科学的知識の確信は**再現性**(replication)です。</span>
-<span id="cb9-118"><a href="#cb9-118"></a>だれでも研究の詳細が分かれば、同じ結果を得られるようにすることが重要です。</span>
-<span id="cb9-119"><a href="#cb9-119"></a>その基準を満たすために、**研究再現用ファイル**(replication files)を作成して、</span>
-<span id="cb9-120"><a href="#cb9-120"></a></span>
-<span id="cb9-121"><a href="#cb9-121"></a><span class="ss">- </span>データの収集方法</span>
-<span id="cb9-122"><a href="#cb9-122"></a><span class="ss">- </span>欠損データの処理方法</span>
-<span id="cb9-123"><a href="#cb9-123"></a><span class="ss">- </span>データの整理方法</span>
-<span id="cb9-124"><a href="#cb9-124"></a><span class="ss">- </span>変数の定義や加工プロセスを書いたコードブック</span>
-<span id="cb9-125"><a href="#cb9-125"></a><span class="ss">- </span>分析を行うためのコード</span>
-<span id="cb9-126"><a href="#cb9-126"></a></span>
-<span id="cb9-127"><a href="#cb9-127"></a>を保持することが重要です。</span>
-<span id="cb9-128"><a href="#cb9-128"></a>レポートや論文を書く際に、</span>
-<span id="cb9-129"><a href="#cb9-129"></a></span>
-<span id="cb9-130"><a href="#cb9-130"></a><span class="ss">- </span>財務データや日経NEEDSから取得し、</span>
-<span id="cb9-131"><a href="#cb9-131"></a><span class="ss">- </span>情報が欠損している観測値を削除し、</span>
-<span id="cb9-132"><a href="#cb9-132"></a><span class="ss">- </span>連続変数については上下1％を切り落として外れ値を処理し、</span>
-<span id="cb9-133"><a href="#cb9-133"></a><span class="ss">- </span>売上高や総資産は対数変換して、</span>
-<span id="cb9-134"><a href="#cb9-134"></a><span class="ss">- </span>統計モデルを構築して、最小二乗法で分析を行った</span>
-<span id="cb9-135"><a href="#cb9-135"></a></span>
-<span id="cb9-136"><a href="#cb9-136"></a>といった分析のプロセスを書いておく必要があるのです。</span>
-<span id="cb9-137"><a href="#cb9-137"></a>分析に用いた変数の定義については、誰でも同じ変数が構築できるように、正確かつ厳密に書いておく必要があります。</span>
-<span id="cb9-138"><a href="#cb9-138"></a>たとえば、Warren (2025, TAR)という自発的開示の質とアナリストカバレッジの関係を分析した論文では、変数の定義一覧を付録(appendix)に掲載しています。以下の表はその一部ですが、定義が詳細に書かれていることが分かります。</span>
-<span id="cb9-139"><a href="#cb9-139"></a></span>
-<span id="cb9-140"><a href="#cb9-140"></a><span class="pp">|</span> 変数名 <span class="pp">|</span> 定義 <span class="pp">|</span></span>
-<span id="cb9-141"><a href="#cb9-141"></a><span class="pp">| ---</span> <span class="pp">| -------</span> <span class="pp">|</span></span>
-<span id="cb9-142"><a href="#cb9-142"></a><span class="pp">|</span> <span class="in">`N_forecasts`</span> <span class="pp">|</span> 企業が発表した経営者予測の数 <span class="pp">|</span></span>
-<span id="cb9-143"><a href="#cb9-143"></a><span class="pp">|</span> <span class="in">`Accuracy`</span> <span class="pp">|</span> 経営者予測の精度。I/B/E/S Guidanceからの経営者予測とI/B/E/Sからの実際のEPSの絶対値の差を、期間開始時の株価で割り、100倍して算出。範囲予測が提供された場合は、範囲の上限を使用 (Ciconte et al. 2014)。 <span class="pp">|</span></span>
-<span id="cb9-144"><a href="#cb9-144"></a><span class="pp">|</span> <span class="in">`Accuracy Bias`</span> <span class="pp">|</span> 経営者予測のバイアス。I/B/E/S Guidanceからの経営者予測とI/B/E/Sからの実際のEPSの差を、期首の株価で割り、100を乗じて算出。範囲予測が提供された場合は、範囲の上限を使用 (Ciconte et al. 2014)。 <span class="pp">|</span></span>
-<span id="cb9-145"><a href="#cb9-145"></a><span class="pp">|</span> <span class="in">`Horizon`</span> <span class="pp">|</span> 予測日から期末の日数を365で割って算出。イベントの前後に複数の予測が発表された場合は、前期間と後期間の平均予測期間をとる。 <span class="pp">|</span></span>
-<span id="cb9-146"><a href="#cb9-146"></a></span>
-<span id="cb9-147"><a href="#cb9-147"></a>のように変数名とその定義を表形式でまとめている。</span>
-<span id="cb9-148"><a href="#cb9-148"></a></span>
-<span id="cb9-149"><a href="#cb9-149"></a>研究再現用ファイルの作成は、研究結果の**頑健性**(robustness)を確認するためにも重要です。</span>
-<span id="cb9-150"><a href="#cb9-150"></a>変数を他の代理変数に置き換えたり、分析方法を変えたりしても、同じ結論が得られるかどうかを確認することができます。</span>
-<span id="cb9-151"><a href="#cb9-151"></a></span>
-<span id="cb9-152"><a href="#cb9-152"></a><span class="fu">## 統計ソフトウェア</span></span>
-<span id="cb9-153"><a href="#cb9-153"></a></span>
-<span id="cb9-154"><a href="#cb9-154"></a>ここでは、RとStataという2つの統計ソフトウェアを紹介します。</span>
-<span id="cb9-155"><a href="#cb9-155"></a>たとえば、CSVファイルを読み込み、データの中から一部の変数を取り出し、変数を対数変換してから回帰分析を行う、といった一連の流れを、StataとRでどのように書くのかを見てみましょう。</span>
-<span id="cb9-156"><a href="#cb9-156"></a></span>
-<span id="cb9-157"><a href="#cb9-157"></a><span class="ss">- </span>**Stata**：強力な統計分析機能をもつソフトウェアで、社会科学の分野で研究者に広く愛用されているが、値段が高いのが難点です。</span>
-<span id="cb9-158"><a href="#cb9-158"></a>しかし立命館大学の学生は在学中なら無料で利用できるので、一度使ってみることをオススメします。</span>
-<span id="cb9-159"><a href="#cb9-159"></a></span>
-<span id="cb9-160"><a href="#cb9-160"></a><span class="in">```{filename="Stataでの分析例"}</span></span>
-<span id="cb9-161"><a href="#cb9-161"></a>* データの読み込み</span>
-<span id="cb9-162"><a href="#cb9-162"></a>import "data.csv", clear</span>
-<span id="cb9-163"><a href="#cb9-163"></a>* データの前処理</span>
-<span id="cb9-164"><a href="#cb9-164"></a>keep id year sales assets debt industry</span>
-<span id="cb9-165"><a href="#cb9-165"></a>gen ln_assets = ln(assets)</span>
-<span id="cb9-166"><a href="#cb9-166"></a>* 回帰分析</span>
-<span id="cb9-167"><a href="#cb9-167"></a>reg sales ln_assets debt</span>
-<span id="cb9-168"><a href="#cb9-168"></a>* 作表</span>
-<span id="cb9-169"><a href="#cb9-169"></a>estimates store m1</span>
-<span id="cb9-170"><a href="#cb9-170"></a>esttab m1 using "results.rtf", replace b(3) t(3) r2 ar2 star(* 0.1 ** 0.05 *** 0.01)</span>
-<span id="cb9-171"><a href="#cb9-171"></a><span class="in">```</span></span>
-<span id="cb9-172"><a href="#cb9-172"></a></span>
-<span id="cb9-173"><a href="#cb9-173"></a></span>
-<span id="cb9-174"><a href="#cb9-174"></a><span class="ss">- </span>**R**：無料で使えるオープンソースのプログラミング言語で、データ分析の世界ではPythonと並んで人気の言語ですが、ソースコードを書く必要があるため、ユーザーフレンドリーではありません。</span>
-<span id="cb9-175"><a href="#cb9-175"></a></span>
-<span id="cb9-176"><a href="#cb9-176"></a><span class="in">```{r filename="Rでの分析例"}</span></span>
-<span id="cb9-177"><a href="#cb9-177"></a><span class="co">#| eval: false</span></span>
-<span id="cb9-178"><a href="#cb9-178"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, modelsummary)</span>
-<span id="cb9-179"><a href="#cb9-179"></a><span class="co"># データの読み込み</span></span>
-<span id="cb9-180"><a href="#cb9-180"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data.csv"</span>)</span>
-<span id="cb9-181"><a href="#cb9-181"></a><span class="co"># データの前処理</span></span>
-<span id="cb9-182"><a href="#cb9-182"></a>analysis_data <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
-<span id="cb9-183"><a href="#cb9-183"></a>  <span class="fu">select</span>(sales, ln_assets, debt, industry) <span class="sc">|&gt;</span></span>
-<span id="cb9-184"><a href="#cb9-184"></a>  <span class="fu">mutate</span>(<span class="at">ln_assets =</span> <span class="fu">log</span>(assets))</span>
-<span id="cb9-185"><a href="#cb9-185"></a><span class="co"># 回帰分析</span></span>
-<span id="cb9-186"><a href="#cb9-186"></a>model_ols <span class="ot">&lt;-</span> <span class="fu">lm</span>(sales <span class="sc">~</span> ln_assets <span class="sc">+</span> debt, <span class="at">data =</span> analysis_data)</span>
-<span id="cb9-187"><a href="#cb9-187"></a><span class="co"># 作表</span></span>
-<span id="cb9-188"><a href="#cb9-188"></a><span class="fu">modelsummary</span>(</span>
-<span id="cb9-189"><a href="#cb9-189"></a>  model_ols,</span>
-<span id="cb9-190"><a href="#cb9-190"></a>  <span class="at">fmt =</span> <span class="dv">3</span>,                 <span class="co"># 小数点第3位まで表示</span></span>
-<span id="cb9-191"><a href="#cb9-191"></a>  <span class="at">estimate =</span> <span class="st">"{estimate}{stars}"</span>, <span class="co"># 係数に有意水準の星を付与</span></span>
-<span id="cb9-192"><a href="#cb9-192"></a>  <span class="at">statistic =</span> <span class="st">"std.error"</span>, <span class="co"># 括弧内は標準誤差（t値への変更も可能）</span></span>
-<span id="cb9-193"><a href="#cb9-193"></a>  <span class="at">gof_omit =</span> <span class="st">"IC|Log|F"</span>,   <span class="co"># 不要な適合度指標を非表示にする</span></span>
-<span id="cb9-194"><a href="#cb9-194"></a>  <span class="at">output =</span> <span class="st">"markdown"</span>      <span class="co"># ファイル保存時は "table.docx" や "table.pdf"</span></span>
-<span id="cb9-195"><a href="#cb9-195"></a>)</span>
-<span id="cb9-196"><a href="#cb9-196"></a><span class="in">```</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">## 現場で使う統計</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="in">```{r filename="各種設定"}</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, psych, ggthemes) <span class="co"># パッケージをインストール/ロード</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="in">```</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a></span>
+<span id="cb8-7"><a href="#cb8-7"></a>本書の目標は、<span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"markp"</span><span class="dt">&gt;</span>**データを使って世界をよりよく理解すること**<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span>です。</span>
+<span id="cb8-8"><a href="#cb8-8"></a>そしてデータを加工・分析することで、<span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"markp"</span><span class="dt">&gt;</span>**データから意味のある情報を引き出す**ために必要な統計学の基礎を身につけること<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span>です。</span>
+<span id="cb8-9"><a href="#cb8-9"></a></span>
+<span id="cb8-10"><a href="#cb8-10"></a><span class="ss">1. </span>データについて理解する</span>
+<span id="cb8-11"><a href="#cb8-11"></a><span class="ss">2. </span>他人を納得させるための準備として、分析の再現可能性を確保する</span>
+<span id="cb8-12"><a href="#cb8-12"></a><span class="ss">3. </span>プログラミング言語を使って分析を行う</span>
+<span id="cb8-13"><a href="#cb8-13"></a></span>
+<span id="cb8-14"><a href="#cb8-14"></a></span>
+<span id="cb8-15"><a href="#cb8-15"></a><span class="fu">## データを知る</span></span>
+<span id="cb8-16"><a href="#cb8-16"></a></span>
+<span id="cb8-17"><a href="#cb8-17"></a>経営学で用いられるデータは、公表されているデータや、研究者が自分で収集したデータなど、さまざまな種類があります。</span>
+<span id="cb8-18"><a href="#cb8-18"></a>経営関連のデータの多くは**観察データ**(observational data)であり、研究者がコントロールできない状況で収集されたデータです。</span>
+<span id="cb8-19"><a href="#cb8-19"></a>したがって、無重力の真空状態で行われる物理学の実験で得られたデータとは異なり、経営学のデータは、ゴミやノイズが多く混入しています。</span>
+<span id="cb8-20"><a href="#cb8-20"></a>そのため、分析の前にデータをクリーニングする必要もあります。</span>
+<span id="cb8-21"><a href="#cb8-21"></a>そういったゴミやノイズが含まれていることを前提として、自分の手元にあるデータについて理解することが重要です。</span>
+<span id="cb8-22"><a href="#cb8-22"></a></span>
+<span id="cb8-23"><a href="#cb8-23"></a>データの大きな特徴をつかむために、**記述統計**(descriptive statistics)を用います。</span>
+<span id="cb8-24"><a href="#cb8-24"></a>ここでは、</span>
+<span id="cb8-25"><a href="#cb8-25"></a></span>
+<span id="cb8-26"><a href="#cb8-26"></a><span class="ss">- </span>観測値の数 <span class="in">`n()`</span></span>
+<span id="cb8-27"><a href="#cb8-27"></a><span class="ss">- </span>平均値 <span class="in">`mean()`</span></span>
+<span id="cb8-28"><a href="#cb8-28"></a><span class="ss">- </span>標準偏差 <span class="in">`sd()`</span></span>
+<span id="cb8-29"><a href="#cb8-29"></a><span class="ss">- </span>最小値 <span class="in">`min()`</span></span>
+<span id="cb8-30"><a href="#cb8-30"></a><span class="ss">- </span>最大値 <span class="in">`max()`</span></span>
+<span id="cb8-31"><a href="#cb8-31"></a></span>
+<span id="cb8-32"><a href="#cb8-32"></a>を確認することが重要です。</span>
+<span id="cb8-33"><a href="#cb8-33"></a>第1章のドーナツのデータを例にして、これらの記述統計を確認してみましょう。</span>
+<span id="cb8-34"><a href="#cb8-34"></a></span>
+<span id="cb8-37"><a href="#cb8-37"></a><span class="in">```{r}</span></span>
+<span id="cb8-38"><a href="#cb8-38"></a><span class="fu">load</span>(<span class="st">"data/DonutData.Rdata"</span>) <span class="co"># ドーナツのデータを読み込む</span></span>
+<span id="cb8-39"><a href="#cb8-39"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(name, donuts, weight, child , male) <span class="co"># データフレームにまとめる</span></span>
+<span id="cb8-40"><a href="#cb8-40"></a>df <span class="sc">|&gt;</span></span>
+<span id="cb8-41"><a href="#cb8-41"></a>    <span class="fu">select</span>(weight, donuts) <span class="sc">|&gt;</span> <span class="co"># donutsとweightの列を選択</span></span>
+<span id="cb8-42"><a href="#cb8-42"></a>    <span class="fu">describe</span>() <span class="sc">|&gt;</span> <span class="co"># psychパッケージのdescribe関数で記述統計を計算</span></span>
+<span id="cb8-43"><a href="#cb8-43"></a>    <span class="fu">select</span>(n, mean, sd, min, max) <span class="sc">|&gt;</span> <span class="co"># 必要な列だけを選択</span></span>
+<span id="cb8-44"><a href="#cb8-44"></a>    <span class="fu">round</span>(<span class="dv">2</span>) <span class="co"># 小数点以下2桁に丸める</span></span>
+<span id="cb8-45"><a href="#cb8-45"></a><span class="in">```</span></span>
+<span id="cb8-46"><a href="#cb8-46"></a></span>
+<span id="cb8-47"><a href="#cb8-47"></a>このデータに含まれている男性と女性の人数も重要な要素なので、確認してみましょう。</span>
+<span id="cb8-48"><a href="#cb8-48"></a></span>
+<span id="cb8-51"><a href="#cb8-51"></a><span class="in">```{r}</span></span>
+<span id="cb8-52"><a href="#cb8-52"></a><span class="fu">table</span>(df<span class="sc">$</span>male) <span class="sc">|&gt;</span> knitr<span class="sc">::</span><span class="fu">kable</span>()</span>
+<span id="cb8-53"><a href="#cb8-53"></a><span class="in">```</span></span>
+<span id="cb8-54"><a href="#cb8-54"></a></span>
+<span id="cb8-55"><a href="#cb8-55"></a>データのグラフ化も異常な観測値の存在に気づくために重要な手段です。</span>
+<span id="cb8-56"><a href="#cb8-56"></a>**散布図**(scatter plot)を使って、変数間の関係を確認したり、**箱ひげ図**(boxplot)や**ヒストグラム**(histogram)を使って、変数の分布を確認することもできます。</span>
+<span id="cb8-57"><a href="#cb8-57"></a></span>
+<span id="cb8-58"><a href="#cb8-58"></a>たとえば、ドーナツを食べた個数の分布をヒストグラムで確認してみましょう。</span>
+<span id="cb8-59"><a href="#cb8-59"></a></span>
+<span id="cb8-62"><a href="#cb8-62"></a><span class="in">```{r}</span></span>
+<span id="cb8-63"><a href="#cb8-63"></a><span class="fu">hist</span>(df<span class="sc">$</span>donuts)</span>
+<span id="cb8-64"><a href="#cb8-64"></a><span class="in">```</span></span>
+<span id="cb8-65"><a href="#cb8-65"></a></span>
+<span id="cb8-66"><a href="#cb8-66"></a><span class="in">`hist()`</span>関数はデフォルトで、右閉左開区間でビンを作成しますが、例外的に最小値(ここでは0)だけは含まれることになっているので、</span>
+<span id="cb8-67"><a href="#cb8-67"></a>区間は、$<span class="co">[</span><span class="ot">0,5</span><span class="co">]</span>, (5,10], (10,15], (15,20], (20,25]$ のようになります。</span>
+<span id="cb8-68"><a href="#cb8-68"></a></span>
+<span id="cb8-69"><a href="#cb8-69"></a>この図から、ほとんどの人が0〜5個のドーナツを食べているのに対して、10個以上が1人、15個以上が1人、20個以上が1人いることが分かり、この3名がたくさんのドーナツを食べていることで、平均値が引き上げられていることが分かります。</span>
+<span id="cb8-70"><a href="#cb8-70"></a></span>
+<span id="cb8-71"><a href="#cb8-71"></a></span>
+<span id="cb8-72"><a href="#cb8-72"></a>箱ひげ図は次のように書きます。</span>
+<span id="cb8-73"><a href="#cb8-73"></a></span>
+<span id="cb8-74"><a href="#cb8-74"></a></span>
+<span id="cb8-77"><a href="#cb8-77"></a><span class="in">```{r}</span></span>
+<span id="cb8-78"><a href="#cb8-78"></a><span class="fu">boxplot</span>(df<span class="sc">$</span>donuts)</span>
+<span id="cb8-79"><a href="#cb8-79"></a><span class="in">```</span></span>
+<span id="cb8-80"><a href="#cb8-80"></a></span>
+<span id="cb8-81"><a href="#cb8-81"></a>:::{.column-margin}</span>
+<span id="cb8-82"><a href="#cb8-82"></a>ヒストグラムは基本関数<span class="in">`hist()`</span>関数で、箱ひげ図は基本関数<span class="in">`boxplot()`</span>関数で書くことができます。</span>
+<span id="cb8-83"><a href="#cb8-83"></a>より凝ったグラフを描きたい場合は、<span class="in">`ggplot2`</span>パッケージを使い、</span>
+<span id="cb8-84"><a href="#cb8-84"></a><span class="in">`geom_histogram()`</span>関数でヒストグラムを、<span class="in">`geom_boxplot()`</span>関数で箱ひげ図を描くことができます。</span>
+<span id="cb8-85"><a href="#cb8-85"></a></span>
+<span id="cb8-88"><a href="#cb8-88"></a><span class="in">```{r}</span></span>
+<span id="cb8-89"><a href="#cb8-89"></a><span class="co">#| echo: false</span></span>
+<span id="cb8-90"><a href="#cb8-90"></a>res_hist <span class="ot">&lt;-</span> <span class="fu">hist</span>(df<span class="sc">$</span>donuts, <span class="at">plot =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb8-91"><a href="#cb8-91"></a>breaks_val <span class="ot">&lt;-</span> res_hist<span class="sc">$</span>breaks</span>
+<span id="cb8-92"><a href="#cb8-92"></a></span>
+<span id="cb8-93"><a href="#cb8-93"></a><span class="co"># 2. ggplot2 で再現する</span></span>
+<span id="cb8-94"><a href="#cb8-94"></a><span class="co"># boundary は hist() の挙動に合わせて調整し、breaks を直接指定します</span></span>
+<span id="cb8-95"><a href="#cb8-95"></a>g <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> donuts)) <span class="sc">+</span></span>
+<span id="cb8-96"><a href="#cb8-96"></a>  <span class="fu">geom_histogram</span>(</span>
+<span id="cb8-97"><a href="#cb8-97"></a>    <span class="at">breaks =</span> breaks_val,</span>
+<span id="cb8-98"><a href="#cb8-98"></a>    <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"lightblue"</span>,</span>
+<span id="cb8-99"><a href="#cb8-99"></a>    <span class="at">closed =</span> <span class="st">"right"</span>      <span class="co"># hist(right = TRUE) と同じ挙動にする</span></span>
+<span id="cb8-100"><a href="#cb8-100"></a>  ) <span class="sc">+</span></span>
+<span id="cb8-101"><a href="#cb8-101"></a>  <span class="fu">labs</span>(</span>
+<span id="cb8-102"><a href="#cb8-102"></a>    <span class="at">x =</span> <span class="st">"Donuts"</span>,</span>
+<span id="cb8-103"><a href="#cb8-103"></a>    <span class="at">y =</span> <span class="st">"Frequency"</span></span>
+<span id="cb8-104"><a href="#cb8-104"></a>  ) <span class="sc">+</span> <span class="fu">theme_bw</span>()</span>
+<span id="cb8-105"><a href="#cb8-105"></a></span>
+<span id="cb8-106"><a href="#cb8-106"></a><span class="co"># 表示</span></span>
+<span id="cb8-107"><a href="#cb8-107"></a><span class="fu">print</span>(g)</span>
+<span id="cb8-108"><a href="#cb8-108"></a><span class="in">```</span></span>
+<span id="cb8-109"><a href="#cb8-109"></a>:::</span>
+<span id="cb8-110"><a href="#cb8-110"></a></span>
+<span id="cb8-111"><a href="#cb8-111"></a>適切なグラフは一目でデータの特徴をつかむことができるので、分析の前にデータをグラフ化してみることをお勧めします。</span>
+<span id="cb8-112"><a href="#cb8-112"></a>ただし、**3Dグラフは避けましょう**。</span>
+<span id="cb8-113"><a href="#cb8-113"></a></span>
+<span id="cb8-114"><a href="#cb8-114"></a><span class="fu">## 再現性</span></span>
+<span id="cb8-115"><a href="#cb8-115"></a></span>
+<span id="cb8-116"><a href="#cb8-116"></a>科学的知識の確信は**再現性**(replication)です。</span>
+<span id="cb8-117"><a href="#cb8-117"></a>だれでも研究の詳細が分かれば、同じ結果を得られるようにすることが重要です。</span>
+<span id="cb8-118"><a href="#cb8-118"></a>その基準を満たすために、**研究再現用ファイル**(replication files)を作成して、</span>
+<span id="cb8-119"><a href="#cb8-119"></a></span>
+<span id="cb8-120"><a href="#cb8-120"></a><span class="ss">- </span>データの収集方法</span>
+<span id="cb8-121"><a href="#cb8-121"></a><span class="ss">- </span>欠損データの処理方法</span>
+<span id="cb8-122"><a href="#cb8-122"></a><span class="ss">- </span>データの整理方法</span>
+<span id="cb8-123"><a href="#cb8-123"></a><span class="ss">- </span>変数の定義や加工プロセスを書いたコードブック</span>
+<span id="cb8-124"><a href="#cb8-124"></a><span class="ss">- </span>分析を行うためのコード</span>
+<span id="cb8-125"><a href="#cb8-125"></a></span>
+<span id="cb8-126"><a href="#cb8-126"></a>を保持することが重要です。</span>
+<span id="cb8-127"><a href="#cb8-127"></a>レポートや論文を書く際に、</span>
+<span id="cb8-128"><a href="#cb8-128"></a></span>
+<span id="cb8-129"><a href="#cb8-129"></a><span class="ss">- </span>財務データや日経NEEDSから取得し、</span>
+<span id="cb8-130"><a href="#cb8-130"></a><span class="ss">- </span>情報が欠損している観測値を削除し、</span>
+<span id="cb8-131"><a href="#cb8-131"></a><span class="ss">- </span>連続変数については上下1％を切り落として外れ値を処理し、</span>
+<span id="cb8-132"><a href="#cb8-132"></a><span class="ss">- </span>売上高や総資産は対数変換して、</span>
+<span id="cb8-133"><a href="#cb8-133"></a><span class="ss">- </span>統計モデルを構築して、最小二乗法で分析を行った</span>
+<span id="cb8-134"><a href="#cb8-134"></a></span>
+<span id="cb8-135"><a href="#cb8-135"></a>といった分析のプロセスを書いておく必要があるのです。</span>
+<span id="cb8-136"><a href="#cb8-136"></a>分析に用いた変数の定義については、誰でも同じ変数が構築できるように、正確かつ厳密に書いておく必要があります。</span>
+<span id="cb8-137"><a href="#cb8-137"></a>たとえば、Warren (2025, TAR)という自発的開示の質とアナリストカバレッジの関係を分析した論文では、変数の定義一覧を付録(appendix)に掲載しています。以下の表はその一部ですが、定義が詳細に書かれていることが分かります。</span>
+<span id="cb8-138"><a href="#cb8-138"></a></span>
+<span id="cb8-139"><a href="#cb8-139"></a><span class="pp">|</span> 変数名 <span class="pp">|</span> 定義 <span class="pp">|</span></span>
+<span id="cb8-140"><a href="#cb8-140"></a><span class="pp">| ---</span> <span class="pp">| -------</span> <span class="pp">|</span></span>
+<span id="cb8-141"><a href="#cb8-141"></a><span class="pp">|</span> <span class="in">`N_forecasts`</span> <span class="pp">|</span> 企業が発表した経営者予測の数 <span class="pp">|</span></span>
+<span id="cb8-142"><a href="#cb8-142"></a><span class="pp">|</span> <span class="in">`Accuracy`</span> <span class="pp">|</span> 経営者予測の精度。I/B/E/S Guidanceからの経営者予測とI/B/E/Sからの実際のEPSの絶対値の差を、期間開始時の株価で割り、100倍して算出。範囲予測が提供された場合は、範囲の上限を使用 (Ciconte et al. 2014)。 <span class="pp">|</span></span>
+<span id="cb8-143"><a href="#cb8-143"></a><span class="pp">|</span> <span class="in">`Accuracy Bias`</span> <span class="pp">|</span> 経営者予測のバイアス。I/B/E/S Guidanceからの経営者予測とI/B/E/Sからの実際のEPSの差を、期首の株価で割り、100を乗じて算出。範囲予測が提供された場合は、範囲の上限を使用 (Ciconte et al. 2014)。 <span class="pp">|</span></span>
+<span id="cb8-144"><a href="#cb8-144"></a><span class="pp">|</span> <span class="in">`Horizon`</span> <span class="pp">|</span> 予測日から期末の日数を365で割って算出。イベントの前後に複数の予測が発表された場合は、前期間と後期間の平均予測期間をとる。 <span class="pp">|</span></span>
+<span id="cb8-145"><a href="#cb8-145"></a></span>
+<span id="cb8-146"><a href="#cb8-146"></a>のように変数名とその定義を表形式でまとめている。</span>
+<span id="cb8-147"><a href="#cb8-147"></a></span>
+<span id="cb8-148"><a href="#cb8-148"></a>研究再現用ファイルの作成は、研究結果の**頑健性**(robustness)を確認するためにも重要です。</span>
+<span id="cb8-149"><a href="#cb8-149"></a>変数を他の代理変数に置き換えたり、分析方法を変えたりしても、同じ結論が得られるかどうかを確認することができます。</span>
+<span id="cb8-150"><a href="#cb8-150"></a></span>
+<span id="cb8-151"><a href="#cb8-151"></a><span class="fu">## 統計ソフトウェア</span></span>
+<span id="cb8-152"><a href="#cb8-152"></a></span>
+<span id="cb8-153"><a href="#cb8-153"></a>ここでは、RとStataという2つの統計ソフトウェアを紹介します。</span>
+<span id="cb8-154"><a href="#cb8-154"></a>たとえば、CSVファイルを読み込み、データの中から一部の変数を取り出し、変数を対数変換してから回帰分析を行う、といった一連の流れを、StataとRでどのように書くのかを見てみましょう。</span>
+<span id="cb8-155"><a href="#cb8-155"></a></span>
+<span id="cb8-156"><a href="#cb8-156"></a><span class="ss">- </span>**Stata**：強力な統計分析機能をもつソフトウェアで、社会科学の分野で研究者に広く愛用されているが、値段が高いのが難点です。</span>
+<span id="cb8-157"><a href="#cb8-157"></a>しかし立命館大学の学生は在学中なら無料で利用できるので、一度使ってみることをオススメします。</span>
+<span id="cb8-158"><a href="#cb8-158"></a></span>
+<span id="cb8-159"><a href="#cb8-159"></a><span class="in">```{filename="Stataでの分析例"}</span></span>
+<span id="cb8-160"><a href="#cb8-160"></a>* データの読み込み</span>
+<span id="cb8-161"><a href="#cb8-161"></a>import "data.csv", clear</span>
+<span id="cb8-162"><a href="#cb8-162"></a>* データの前処理</span>
+<span id="cb8-163"><a href="#cb8-163"></a>keep id year sales assets debt industry</span>
+<span id="cb8-164"><a href="#cb8-164"></a>gen ln_assets = ln(assets)</span>
+<span id="cb8-165"><a href="#cb8-165"></a>* 回帰分析</span>
+<span id="cb8-166"><a href="#cb8-166"></a>reg sales ln_assets debt</span>
+<span id="cb8-167"><a href="#cb8-167"></a>* 作表</span>
+<span id="cb8-168"><a href="#cb8-168"></a>estimates store m1</span>
+<span id="cb8-169"><a href="#cb8-169"></a>esttab m1 using "results.rtf", replace b(3) t(3) r2 ar2 star(* 0.1 ** 0.05 *** 0.01)</span>
+<span id="cb8-170"><a href="#cb8-170"></a><span class="in">```</span></span>
+<span id="cb8-171"><a href="#cb8-171"></a></span>
+<span id="cb8-172"><a href="#cb8-172"></a></span>
+<span id="cb8-173"><a href="#cb8-173"></a><span class="ss">- </span>**R**：無料で使えるオープンソースのプログラミング言語で、データ分析の世界ではPythonと並んで人気の言語ですが、ソースコードを書く必要があるため、ユーザーフレンドリーではありません。</span>
+<span id="cb8-174"><a href="#cb8-174"></a></span>
+<span id="cb8-175"><a href="#cb8-175"></a><span class="in">```{r filename="Rでの分析例"}</span></span>
+<span id="cb8-176"><a href="#cb8-176"></a><span class="co">#| eval: false</span></span>
+<span id="cb8-177"><a href="#cb8-177"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, modelsummary)</span>
+<span id="cb8-178"><a href="#cb8-178"></a><span class="co"># データの読み込み</span></span>
+<span id="cb8-179"><a href="#cb8-179"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data.csv"</span>)</span>
+<span id="cb8-180"><a href="#cb8-180"></a><span class="co"># データの前処理</span></span>
+<span id="cb8-181"><a href="#cb8-181"></a>analysis_data <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
+<span id="cb8-182"><a href="#cb8-182"></a>  <span class="fu">select</span>(sales, ln_assets, debt, industry) <span class="sc">|&gt;</span></span>
+<span id="cb8-183"><a href="#cb8-183"></a>  <span class="fu">mutate</span>(<span class="at">ln_assets =</span> <span class="fu">log</span>(assets))</span>
+<span id="cb8-184"><a href="#cb8-184"></a><span class="co"># 回帰分析</span></span>
+<span id="cb8-185"><a href="#cb8-185"></a>model_ols <span class="ot">&lt;-</span> <span class="fu">lm</span>(sales <span class="sc">~</span> ln_assets <span class="sc">+</span> debt, <span class="at">data =</span> analysis_data)</span>
+<span id="cb8-186"><a href="#cb8-186"></a><span class="co"># 作表</span></span>
+<span id="cb8-187"><a href="#cb8-187"></a><span class="fu">modelsummary</span>(</span>
+<span id="cb8-188"><a href="#cb8-188"></a>  model_ols,</span>
+<span id="cb8-189"><a href="#cb8-189"></a>  <span class="at">fmt =</span> <span class="dv">3</span>,                 <span class="co"># 小数点第3位まで表示</span></span>
+<span id="cb8-190"><a href="#cb8-190"></a>  <span class="at">estimate =</span> <span class="st">"{estimate}{stars}"</span>, <span class="co"># 係数に有意水準の星を付与</span></span>
+<span id="cb8-191"><a href="#cb8-191"></a>  <span class="at">statistic =</span> <span class="st">"std.error"</span>, <span class="co"># 括弧内は標準誤差（t値への変更も可能）</span></span>
+<span id="cb8-192"><a href="#cb8-192"></a>  <span class="at">gof_omit =</span> <span class="st">"IC|Log|F"</span>,   <span class="co"># 不要な適合度指標を非表示にする</span></span>
+<span id="cb8-193"><a href="#cb8-193"></a>  <span class="at">output =</span> <span class="st">"markdown"</span>      <span class="co"># ファイル保存時は "table.docx" や "table.pdf"</span></span>
+<span id="cb8-194"><a href="#cb8-194"></a>)</span>
+<span id="cb8-195"><a href="#cb8-195"></a><span class="in">```</span></span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
