@@ -2,10 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://so-ichi.com/index.html</loc>
-    <lastmod>2026-05-08T16:48:17.801Z</lastmod>
+    <lastmod>2026-05-09T03:22:10.659Z</lastmod>
   </url>
   <url>
     <loc>https://so-ichi.com/chapter01.html</loc>
-    <lastmod>2026-05-08T17:39:41.574Z</lastmod>
+    <lastmod>2026-05-09T03:22:20.031Z</lastmod>
+  </url>
+  <url>
+    <loc>https://so-ichi.com/chapter02.html</loc>
+    <lastmod>2026-05-10T08:45:08.784Z</lastmod>
+  </url>
+  <url>
+    <loc>https://so-ichi.com/part01.html</loc>
+    <lastmod>2026-05-10T01:56:20.793Z</lastmod>
+  </url>
+  <url>
+    <loc>https://so-ichi.com/chapter03.html</loc>
+    <lastmod>2026-05-10T08:44:48.604Z</lastmod>
   </url>
 </urlset>

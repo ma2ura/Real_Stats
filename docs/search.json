@@ -24,7 +24,7 @@
     "href": "chapter01.html",
     "title": "\n2  因果の探究\n",
     "section": "",
-    "text": "2.1 特定化 - 基本となるモデル\n他人や自分の説得させる証拠を提供したい。 ある現象の原因と結果を直接観察できないとき、データを用いて因果関係を探究する方法を学びます。 とはいえ、\n\\text{相関係数} \\not = \\text{因果関係}\nであることを理解することが重要です。\n本書では、原因を特定し、本当は何が重要で何が重要でないかを議論するために役立つ統計学を学びます。 そのために、第1章では、3つの重要な概念を紹介します。\n統計的推論と識別において2つの解決すべき課題も議論する。\n何が原因で何が結果なのかをみるために、\nという2つのステップを踏む必要があります。 とりわけ、結果を表す変数を従属変数(dependent variable)と呼び、原因を表す変数を独立変数(independent variable)と呼びます。\nたとえば、結果を表す変数を売上高、原因を表す変数を広告宣伝費とし、この2つの変数間の関係を\n\\text{売上高} = a + b \\times \\text{広告宣伝費}\nという数式で表現することを特定化といいます。 上の式を、a=10、b=0.5とすると、以下のようなグラフになります。\na &lt;- 10\nb &lt;- 0.5\nx &lt;- seq(0, 100, by = 10)\ny &lt;- a + b * x\nplot(x, y, type = \"b\", xlab = \"広告宣伝費\", ylab = \"売上高\")\nテキストでは、ドーナツを食べた個数を独立変数、体重を従属変数とするモデルを特定化しています。 データハンドリングや作図のために、tidyverseパッケージを使用します。 pacmanパッケージのp_load関数を使って、必要なパッケージをインストール/ロードします。 load()関数を使って、ドーナツのデータDonutData.Rdataを読み込みます。 読み込んだデータをdata.frame()関数を使ってデータフレームdfにまとめます。 次に、ggplot2パッケージを使って、ドーナツを食べた個数と体重の関係を散布図で可視化します。\npacman::p_load(tidyverse)\nload(\"data/DonutData.Rdata\")\ndf &lt;- data.frame(name, donuts, weight, child , male)\nggplot(df) + \n    aes(x = donuts, y = weight) + geom_point() + \n    # ラベルにnameを重ならないように表示\n    geom_text(aes(label = name), vjust = -1, hjust = 0.5) +\n    theme_bw() + labs(x = \"ドーナツを食べた個数\", y = \"体重(kg)\")\nこのとき、次のような関係を想定する。\n\\text{体重}_i = \\beta_0 + \\beta_1 \\times \\text{ドーナツを食べた個数}_i + \\varepsilon_i\nここで、iは個人を表す番号、\\beta_0は切片、\\beta_1はドーナツを食べた個数の係数、\\varepsilon_iは誤差項を表します。 関心があるのは、「ドーナツを食べた個数」が1単位増えたとき、「体重」がどれだけ増えるのかを意味する、\\beta_1の値です。 上のモデルは、「ドーナツを食べた個数」と「体重」との間に、切片が\\beta_0、傾きが\\beta_1の線形関係があると仮定しています。 つまり、次のような直線を想定していることになります。\nコードを表示ggplot(df) + \n    aes(x = donuts, y = weight) + geom_point() + \n    # ラベルにnameを重ならないように表示\n    geom_text(aes(label = name), vjust = -1, hjust = 0.5) +\n    geom_smooth(method = \"lm\", se = FALSE, color = \"blue\") +\n    # 誤差項を表す点線を追加\n    geom_segment(aes(x = donuts, xend = donuts, y = weight, yend = predict(lm(weight ~ donuts, data = df))), \n                 linetype = \"dashed\", color = \"red\") +\n    theme_bw() + labs(x = \"ドーナツを食べた個数\", y = \"体重(kg)\")\nこの図の黒い点が実際のデータを、青い線が特定化したモデルを表しており、実際のデータとモデルの乖離である誤差項を赤い点線で表しています。 この統計モデルが現実のデータを完全に説明できているなら、実際のデータはすべて青い直線上に位置するはずですが、実際にはモデルからズレた場所に点があるため、誤差が存在します。 つまり、「ドーナツを食べた個数」が「体重」に与える影響を完全に説明できていないということになり、説明できていない部分が誤差項\\varepsilon_iに含まれていることになります。",
+    "text": "2.1 特定化 - 基本となるモデル\n他人や自分の説得させる証拠を提供したい。 ある現象の原因と結果を直接観察できないとき、データを用いて因果関係を探究する方法を学びます。 とはいえ、\n\\text{相関係数} \\not = \\text{因果関係}\nであることを理解することが重要です。\n本書では、原因を特定し、本当は何が重要で何が重要でないかを議論するために役立つ統計学を学びます。 そのために、第1章では、3つの重要な概念を紹介します。\n統計的推論と識別において2つの解決すべき課題も議論する。\n何が原因で何が結果なのかをみるために、\nという2つのステップを踏む必要があります。 とりわけ、結果を表す変数を従属変数(dependent variable)と呼び、原因を表す変数を独立変数(independent variable)と呼びます。\nたとえば、結果を表す変数を売上高、原因を表す変数を広告宣伝費とし、この2つの変数間の関係を\n\\text{売上高} = a + b \\times \\text{広告宣伝費}\nという数式で表現することを特定化といいます。 上の式を、a=10、b=0.5とすると、以下のようなグラフになります。\na &lt;- 10\nb &lt;- 0.5\nx &lt;- seq(0, 100, by = 10)\ny &lt;- a + b * x\nplot(x, y, type = \"b\", xlab = \"広告宣伝費\", ylab = \"売上高\")\nこの特定化が正しければ、広告宣伝費を10増加させると、売上高は5増加することになります。\nテキストでは、ドーナツを食べた個数を独立変数、体重を従属変数とするモデルを特定化しています。 データハンドリングや作図のために、tidyverseパッケージを使用します。 pacmanパッケージのp_load関数を使って、必要なパッケージをインストール/ロードします。 load()関数を使って、ドーナツのデータDonutData.Rdataを読み込みます。 読み込んだデータをdata.frame()関数を使ってデータフレームdfにまとめます。 次に、ggplot2パッケージを使って、ドーナツを食べた個数と体重の関係を散布図で可視化します。\npacman::p_load(tidyverse) # パッケージをインストール/ロード\nload(\"data/DonutData.Rdata\") # ドーナツのデータを読み込む\ndf &lt;- data.frame(name, donuts, weight, child , male) # データフレームにまとめる\nggplot(df) + # ggplotで作図\n    aes(x = donuts, y = weight) + # ドーナツを食べた個数を横軸、体重を縦軸に設定\n    geom_point() + # 散布図を書く\n    geom_text(aes(label = name), vjust = -1, hjust = 0.5) + # ラベルを追加\n    labs(x = \"ドーナツを食べた個数\", y = \"体重(kg)\") + # 軸ラベルを設定\n    theme_bw() # 白黒テーマを適用\nこのとき、次のような関係を想定する。\n\\text{体重}_i = \\beta_0 + \\beta_1 \\times \\text{ドーナツを食べた個数}_i + \\varepsilon_i\nここで、iは個人を表す番号、\\beta_0は切片、\\beta_1はドーナツを食べた個数の係数、\\varepsilon_iは誤差項を表します。 関心があるのは、「ドーナツを食べた個数」が1単位増えたとき、「体重」がどれだけ増えるのかを意味する、\\beta_1の値です。 上のモデルは、「ドーナツを食べた個数」と「体重」との間に、切片が\\beta_0、傾きが\\beta_1の線形関係があると仮定しています。 つまり、次のような直線を想定していることになります。\nコードを表示ggplot(df) + \n    aes(x = donuts, y = weight) + geom_point() + \n    # ラベルにnameを重ならないように表示\n    geom_text(aes(label = name), vjust = -1, hjust = 0.5) +\n    geom_smooth(method = \"lm\", se = FALSE, color = \"blue\") +\n    # 誤差項を表す点線を追加\n    geom_segment(aes(x = donuts, xend = donuts, y = weight, yend = predict(lm(weight ~ donuts, data = df))), \n                 linetype = \"dashed\", color = \"red\") +\n    theme_bw() + labs(x = \"ドーナツを食べた個数\", y = \"体重(kg)\")\nこの図の黒い点が実際のデータを、青い線が特定化したモデルを表しており、実際のデータとモデルの乖離である誤差項を赤い点線で表しています。 この統計モデルが現実のデータを完全に説明できているなら、実際のデータはすべて青い直線上に位置するはずですが、実際にはモデルからズレた場所に点があるため、誤差が存在します。 つまり、「ドーナツを食べた個数」が「体重」に与える影響を完全に説明できていないということになり、説明できていない部分が誤差項\\varepsilon_iに含まれていることになります。",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>因果の探究</span>"
     ]
@@ -44,9 +44,179 @@
     "href": "chapter01.html#つの大きな課題-ランダム性と内生性",
     "title": "\n2  因果の探究\n",
     "section": "\n2.2 2つの大きな課題 : ランダム性と内生性",
-    "text": "2.2 2つの大きな課題 : ランダム性と内生性\n\n2.2.1 ランダム性と推論\n偶然にたまたま生じてしまっている結果と、偶然ではなく必然的に生じている結果を区別することは重要です。 いま得られた結果が、本当は何の関係もないのに、偶然にたまたま関係があるように見えているのか、それとも因果関係によって生じているのかを区別するため、たまたま得られた結果ではない、という確信を得るための方法があります。 この方法は、統計的推論(statistical inference)、あるいは単に推論と呼ばれています。\n\n2.2.2 内生性、外生性、および識別\n統計学におけるもう一つの重要な課題は、内生性(endogeneity)と呼ばれる問題です。",
+    "text": "2.2 2つの大きな課題 : ランダム性と内生性\n\n2.2.1 ランダム性と推論\n偶然にたまたま生じてしまっている結果と、偶然ではなく必然的に生じている結果を区別することは重要です。 いま得られた結果が、本当は何の関係もないのに、偶然にたまたま関係があるように見えているのか、それとも因果関係によって生じているのかを区別するため、たまたま得られた結果ではない、という確信を得るための方法があります。 この方法は、統計的推論(statistical inference)、あるいは単に推論と呼ばれています。\n\n2.2.2 内生性、外生性、および識別\n統計学におけるもう一つの重要な課題は、内生性(endogeneity)と呼ばれる問題です。 これは、XとYの間の関係を分析する際に、XがYに影響を与えるだけでなく、YもXに影響を与える可能性があることを指します。ドーナツを食べた個数以外にも体重に影響を与えている要因が存在するのに、それらをモデルに含めず、ドーナツを食べた個数だけを独立変数としてモデルを特定化していると、見落とされているその他の要因が体重に与えている影響はすべて誤差項\\varepsilon_iに含まれてしまい、誤差項と独立変数が相関してしまうことになります。 このとき、ドーナツを食べた個数は内生的(endogenous)であると言います。\n内生性の反対は外生性(exogeneity)です。 ある独立変数が外生的であるとは、その独立変数が誤差項と関係していないことを意味します。 われわれが変数間の関係を特定化する際の中心的な課題は、内生性を回避し、外生的な独立変数を特定化することで、このプロセスを識別(identification)と呼びます。 その確認のために、相関係数(correlation coefficient)を用います。 テキストp.15の図1.5のように、独立変数と誤差項の相関係数を散布図で確認するのがよいでしょう。\n\n2.2.3 ケーススタディ：インフルエンザの予防接種\nインフルエンザの予防接種が死亡を防いでいるかどうかを調べたい。 インフルエンザの予防接種を受けていれば1，受けていなければ0という変数を独立変数に、死亡したら1，死亡しなかったら0という変数を従属変数として特定します。\n\n\nあるカテゴリーに該当すれば1、該当しなければ0という変数をダミー変数(dummy variable)と呼びます。\n次に、この変数間の関係が次のようになっていると想定します。\n\n\\text{死亡}_i = \\beta_0 + \\beta_1 \\times \\text{予防接種}_i + \\varepsilon_i\n\n\n\n\n\n\ngraph LR\n    予防接種 --&gt; 死亡\n\n\n\n\n\n\nこの特定化は正しいでしょうか？ もしかすると、健康への意識が高い人ほど、予防接種を受ける傾向があるかもしれません。\n\n\n\n\n\ngraph LR\n    健康への意識 --&gt; 予防接種\n    予防接種 --&gt; 死亡\n\n\n\n\n\n\n健康への意識が高い人は、普段から健康的な生活を送っている可能性が高く、長生きする傾向がある、ということが考えられます。 つまり、普段の生活やその他条件をそろえた上で、予防接種を受けた人と受けなかった人の死亡率を比較することは非常に難しいということです。\n\n2.2.4 議論してみよう - 労働経済学\n大学を卒業することが収入にどのような影響を与えるかを調べたいとします。 独立変数として大学卒業を表すダミー変数を、従属変数として給与を設定して、次のようなモデルを特定化します。\n\n\\text{給与}_i = \\beta_0 + \\beta_1 \\times \\text{大学卒業}_i + \\varepsilon_i\n\nこのとき、\n\n\n\\beta_0や\\beta_1の値はどのような意味を持つでしょうか？\n誤差項にはどのようなものが含まれているだろうか？\n独立変数が内生的であるための条件は何でしょうか？\n独立変数は内生的でしょうか？そうであるならなぜでしょうか？\n内生性がどのようにして間違った推論になるか考えてみましょう。",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>因果の探究</span>"
+    ]
+  },
+  {
+    "objectID": "chapter01.html#絶対的基準としてのランダム化実験",
+    "href": "chapter01.html#絶対的基準としてのランダム化実験",
+    "title": "\n2  因果の探究\n",
+    "section": "\n2.3 絶対的基準としてのランダム化実験",
+    "text": "2.3 絶対的基準としてのランダム化実験\n外生的な変動をつくり出す法法として、ランダム化実験(randomized experiment)があります。があります。 ドーナツの例で言うと、大勢の人をランダムに集めて2つのグループに分け、片方のグループ(処置群)にはドーナツを食べさせ、もう片方のグループ(統制群)にはドーナツを食べさせないようにします。 その後、両グループの体重を比較することで、ドーナツを食べた個数が外生的に変動するようにして、ドーナツを食べた個数が体重に与える影響を推定することができます。 このような実験はランダム化比較実験(Randomized Controlled Trial: RCT)と呼ばれ、因果関係を特定するための最も信頼できる方法とされています。ただし、倫理的な理由や実行の難しさから、すべての研究でRCTを行うことはできません。\nRCTで得られた実験結果はどこまで一般化できるでしょうか？ ドーナツのRCTで得られた結果は、その他のスイーツや、その他の国の人々に一般化できるでしょうか？ このような問題は外的妥当性(external validity)の問題と呼ばれます。\n\n\n\n\n\n\n外的妥当性とは、推論がどの程度一般化できるか、つまり、研究の結果が他の状況や集団に適用できるかどうかを指します。 それに対して、内的妥当性(internal validity)は、研究の結果がどの程度正確であるか、つまり、研究のデザインや実施が適切であり、結果が真の因果関係を反映しているかどうかを指します。",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>因果の探究</span>"
+    ]
+  },
+  {
+    "objectID": "chapter02.html",
+    "href": "chapter02.html",
+    "title": "\n3  現場で使う統計\n",
+    "section": "",
+    "text": "3.1 データを知る\n本書の目標は、データを使って世界をよりよく理解することです。 そしてデータを加工・分析することで、データから意味のある情報を引き出すために必要な統計学の基礎を身につけることです。\n経営学で用いられるデータは、公表されているデータや、研究者が自分で収集したデータなど、さまざまな種類があります。 経営関連のデータの多くは観察データ(observational data)であり、研究者がコントロールできない状況で収集されたデータです。 したがって、無重力の真空状態で行われる物理学の実験で得られたデータとは異なり、経営学のデータは、ゴミやノイズが多く混入しています。 そのため、分析の前にデータをクリーニングする必要もあります。 そういったゴミやノイズが含まれていることを前提として、自分の手元にあるデータについて理解することが重要です。\nデータの大きな特徴をつかむために、記述統計(descriptive statistics)を用います。 ここでは、\nを確認することが重要です。 第1章のドーナツのデータを例にして、これらの記述統計を確認してみましょう。\nload(\"data/DonutData.Rdata\") # ドーナツのデータを読み込む\ndf &lt;- data.frame(name, donuts, weight, child , male) # データフレームにまとめる\ndf |&gt;\n    select(weight, donuts) |&gt; # donutsとweightの列を選択\n    describe() |&gt; # psychパッケージのdescribe関数で記述統計を計算\n    select(n, mean, sd, min, max) |&gt; # 必要な列だけを選択\n    round(2) # 小数点以下2桁に丸める\nこのデータに含まれている男性と女性の人数も重要な要素なので、確認してみましょう。\ntable(df$male) |&gt; knitr::kable()\n\n\n\nVar1\nFreq\n\n\n\n0\n4\n\n\n1\n9\nデータのグラフ化も異常な観測値の存在に気づくために重要な手段です。 散布図(scatter plot)を使って、変数間の関係を確認したり、箱ひげ図(boxplot)やヒストグラム(histogram)を使って、変数の分布を確認することもできます。\nたとえば、ドーナツを食べた個数の分布をヒストグラムで確認してみましょう。\nhist(df$donuts)\n\n\n\n\n\n\nview(df)\nhist()関数はデフォルトで、右閉左開区間でビンを作成しますが、例外的に最小値(ここでは0)だけは含まれることになっているので、 区間は、[0,5], (5,10], (10,15], (15,20], (20,25] のようになります。\nこの図から、ほとんどの人が0〜5個のドーナツを食べているのに対して、10個以上が1人、15個以上が1人、20個以上が1人いることが分かり、この3名がたくさんのドーナツを食べていることで、平均値が引き上げられていることが分かります。\n箱ひげ図は次のように書きます。\nboxplot(df$donuts)\n適切なグラフは一目でデータの特徴をつかむことができるので、分析の前にデータをグラフ化してみることをお勧めします。 ただし、3Dグラフは避けましょう。",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>現場で使う統計</span>"
+    ]
+  },
+  {
+    "objectID": "chapter02.html#データを知る",
+    "href": "chapter02.html#データを知る",
+    "title": "\n3  現場で使う統計\n",
+    "section": "",
+    "text": "観測値の数 n()\n\n平均値 mean()\n\n標準偏差 sd()\n\n最小値 min()\n\n最大値 max()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nヒストグラムは基本関数hist()関数で、箱ひげ図は基本関数boxplot()関数で書くことができます。 より凝ったグラフを描きたい場合は、ggplot2パッケージを使い、 geom_histogram()関数でヒストグラムを、geom_boxplot()関数で箱ひげ図を描くことができます。",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>現場で使う統計</span>"
+    ]
+  },
+  {
+    "objectID": "chapter02.html#再現性",
+    "href": "chapter02.html#再現性",
+    "title": "\n3  現場で使う統計\n",
+    "section": "\n3.2 再現性",
+    "text": "3.2 再現性\n科学的知識の確信は再現性(replication)です。 だれでも研究の詳細が分かれば、同じ結果を得られるようにすることが重要です。 その基準を満たすために、研究再現用ファイル(replication files)を作成して、\n\nデータの収集方法\n欠損データの処理方法\nデータの整理方法\n変数の定義や加工プロセスを書いたコードブック\n分析を行うためのコード\n\nを保持することが重要です。 レポートや論文を書く際に、\n\n財務データや日経NEEDSから取得し、\n情報が欠損している観測値を削除し、\n連続変数については上下1％を切り落として外れ値を処理し、\n売上高や総資産は対数変換して、\n統計モデルを構築して、最小二乗法で分析を行った\n\nといった分析のプロセスを書いておく必要があるのです。 分析に用いた変数の定義については、誰でも同じ変数が構築できるように、正確かつ厳密に書いておく必要があります。 たとえば、Warren (2025, TAR)という自発的開示の質とアナリストカバレッジの関係を分析した論文では、変数の定義一覧を付録(appendix)に掲載しています。以下の表はその一部ですが、定義が詳細に書かれていることが分かります。\n\n\n\n\n\n\n変数名\n定義\n\n\n\nN_forecasts\n企業が発表した経営者予測の数\n\n\nAccuracy\n経営者予測の精度。I/B/E/S Guidanceからの経営者予測とI/B/E/Sからの実際のEPSの絶対値の差を、期間開始時の株価で割り、100倍して算出。範囲予測が提供された場合は、範囲の上限を使用 (Ciconte et al. 2014)。\n\n\nAccuracy Bias\n経営者予測のバイアス。I/B/E/S Guidanceからの経営者予測とI/B/E/Sからの実際のEPSの差を、期首の株価で割り、100を乗じて算出。範囲予測が提供された場合は、範囲の上限を使用 (Ciconte et al. 2014)。\n\n\nHorizon\n予測日から期末の日数を365で割って算出。イベントの前後に複数の予測が発表された場合は、前期間と後期間の平均予測期間をとる。\n\n\n\nのように変数名とその定義を表形式でまとめている。\n研究再現用ファイルの作成は、研究結果の頑健性(robustness)を確認するためにも重要です。 変数を他の代理変数に置き換えたり、分析方法を変えたりしても、同じ結論が得られるかどうかを確認することができます。",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>現場で使う統計</span>"
+    ]
+  },
+  {
+    "objectID": "chapter02.html#統計ソフトウェア",
+    "href": "chapter02.html#統計ソフトウェア",
+    "title": "\n3  現場で使う統計\n",
+    "section": "\n3.3 統計ソフトウェア",
+    "text": "3.3 統計ソフトウェア\nここでは、RとStataという2つの統計ソフトウェアを紹介します。 たとえば、CSVファイルを読み込み、データの中から一部の変数を取り出し、変数を対数変換してから回帰分析を行う、といった一連の流れを、StataとRでどのように書くのかを見てみましょう。\n\n\nStata：強力な統計分析機能をもつソフトウェアで、社会科学の分野で研究者に広く愛用されているが、値段が高いのが難点です。 しかし立命館大学の学生は在学中なら無料で利用できるので、一度使ってみることをオススメします。\n\n\n\nStataでの分析例\n\n* データの読み込み\nimport \"data.csv\", clear\n* データの前処理\nkeep id year sales assets debt industry\ngen ln_assets = ln(assets)\n* 回帰分析\nreg sales ln_assets debt\n* 作表\nestimates store m1\nesttab m1 using \"results.rtf\", replace b(3) t(3) r2 ar2 star(* 0.1 ** 0.05 *** 0.01)\n\n\n\nR：無料で使えるオープンソースのプログラミング言語で、データ分析の世界ではPythonと並んで人気の言語ですが、ソースコードを書く必要があるため、ユーザーフレンドリーではありません。\n\n\n\n\nRでの分析例\n\npacman::p_load(tidyverse, modelsummary)\n# データの読み込み\ndf &lt;- read_csv(\"data.csv\")\n# データの前処理\nanalysis_data &lt;- df |&gt;\n  select(sales, ln_assets, debt, industry) |&gt;\n  mutate(ln_assets = log(assets))\n# 回帰分析\nmodel_ols &lt;- lm(sales ~ ln_assets + debt, data = analysis_data)\n# 作表\nmodelsummary(\n  model_ols,\n  fmt = 3,                 # 小数点第3位まで表示\n  estimate = \"{estimate}{stars}\", # 係数に有意水準の星を付与\n  statistic = \"std.error\", # 括弧内は標準誤差（t値への変更も可能）\n  gof_omit = \"IC|Log|F\",   # 不要な適合度指標を非表示にする\n  output = \"markdown\"      # ファイル保存時は \"table.docx\" や \"table.pdf\"\n)",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>現場で使う統計</span>"
+    ]
+  },
+  {
+    "objectID": "part01.html",
+    "href": "part01.html",
+    "title": "第1部 OLSの分析枠組みを理解する",
+    "section": "",
+    "text": "第1部では、変数間の関係が線形(linear)であると想定して構築されたモデルを分析するための手法として、最小二乗法(ordinary least squares: OLS)を紹介します。 OLSは、独立変数と従属変数の関係を分析するための基本的な方法であり、社会科学の分野で広く使用されているため、非常に重要な分析手法です。\n\n\n\n\n\n Back to top",
+    "crumbs": [
+      "第1部 OLSの分析枠組みを理解する"
+    ]
+  },
+  {
+    "objectID": "chapter03.html",
+    "href": "chapter03.html",
+    "title": "\n4  二変量OLS | 計量社会科学分析の基礎\n",
+    "section": "",
+    "text": "4.1 二変量OLS | 計量社会科学分析の基礎\nここでは、2つの変数間の関係を定量化して、その関係が、\nを分析します。\n先に、数式の表記について説明しておきます。",
+    "crumbs": [
+      "第1部 OLSの分析枠組みを理解する",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>二変量OLS | 計量社会科学分析の基礎</span>"
+    ]
+  },
+  {
+    "objectID": "chapter03.html#二変量ols-計量社会科学分析の基礎",
+    "href": "chapter03.html#二変量ols-計量社会科学分析の基礎",
+    "title": "\n4  二変量OLS | 計量社会科学分析の基礎\n",
+    "section": "",
+    "text": "本当は無関係なのに、たまたま手にしたサンプルで関係があるように見えてしまうのか、\nそれとも、サンプルで見えている関係が、母集団でも同じように存在しているのか、\n\n\n\n\n確率変数は大文字のイタリック体で表記します。例: Y, X。\n変数の観測値はインデックスをつけて表記します。例: Y_i, X_i。\nパラメータはギリシャ文字で表記します。例: \\beta_0, \\beta_1。\n確率変数の平均は、変数の上にバーをつけて表記します。例: \\bar{Y}, \\bar{X}。\nパラメータの推定値には、ハットをつけて表記します。例: \\hat{\\beta}_0, \\hat{\\beta}_1。\nサンプルサイズは N で表記します。",
+    "crumbs": [
+      "第1部 OLSの分析枠組みを理解する",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>二変量OLS | 計量社会科学分析の基礎</span>"
+    ]
+  },
+  {
+    "objectID": "chapter03.html#二変量回帰モデル",
+    "href": "chapter03.html#二変量回帰モデル",
+    "title": "\n4  二変量OLS | 計量社会科学分析の基礎\n",
+    "section": "\n4.2 二変量回帰モデル",
+    "text": "4.2 二変量回帰モデル\nここでは従属変数 Y 1つと独立変数 X 1つの2変数からなる二変量回帰モデルを考えます。 次のようなモデルを推定する方法として、二変量OLSを学習します。\n\nY_i = \\beta_0 + \\beta_1 X_i + \\varepsilon_i\n\nここで、\\beta_0 や \\beta_1 はパラメータ(parameter)と呼ばれるもので、それぞれ切片と傾きを表します。 \\varepsilon_i は誤差項(error term)と呼ばれるもので、観測されない要因を表します。 i は観測単位を表すインデックスで、i=1, 2, \\ldots, N とします。\n今、売上高 Y_i と従業員数 X_i のデータが手元にあるとしましょう。 横軸を従業員数、縦軸を売上高とした散布図に描くと次のようになります。\n\n\nCode\n従業員数と売上高の散布図\n\npacman::p_load(tidyverse, ggthemes, GGally, gt, gtExtra, knitr, kableExtra, modelsummary)\n\nset.seed(123) # 乱数のタネ\nn &lt;- 15 # サンプルサイズ\nx &lt;- seq(1, 10, length.out = n) # 独立変数\ny &lt;- 3 + 1.5 * x + rnorm(n, mean = 0, sd = 2) # 従属変数\ndata &lt;- data.frame(x = x, y = y) # データフレームの作成\nmy_font &lt;- if (Sys.info()[\"sysname\"] == \"Darwin\") \"HiraKakuProN-W3\" else \"sans\"\n\n# 作図\ng &lt;- ggplot(data, aes(x = x, y = y)) +\n    geom_point(size = 2.5, color = \"black\", alpha = 0.8) +\n    theme_economist_white(base_family = my_font) +\n        labs(\n        title = \"データの散布図\",\n        x = \"従業員数 (X)\",\n        y = \"売上高 (Y)\"\n    )\n\nprint(g)\n\n\n\n\n\n\n\n\n\n散布図をみると右肩上がりの関係があるように見えますが、もっと明確に変数間の関係を表すために、そのデータを最も良く説明できる直線をひこうと思います。 つまり、切片の\\beta_0と傾きの\\beta_1を決めるということです。 この直線が「モデル」で、それぞれの黒い点とモデルの直線との縦軸方向への距離を「誤差」または「残差」と呼びます。",
+    "crumbs": [
+      "第1部 OLSの分析枠組みを理解する",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>二変量OLS | 計量社会科学分析の基礎</span>"
+    ]
+  },
+  {
+    "objectID": "chapter03.html#最小二乗法による係数推定",
+    "href": "chapter03.html#最小二乗法による係数推定",
+    "title": "\n4  二変量OLS | 計量社会科学分析の基礎\n",
+    "section": "\n4.3 最小二乗法による係数推定",
+    "text": "4.3 最小二乗法による係数推定\n\n\nCode\n回帰式と誤差\n\nmodel &lt;- lm(y ~ x, data = data)\n# 予測値をpredictedに格納\ndata$predicted &lt;- predict(model)\n# OSに合わせてフォントを自動選択（Macならヒラギノ、それ以外ならデフォルト）\n\ng &lt;- ggplot(data, aes(x = x, y = y)) +\n    geom_segment(\n        aes(xend = x, yend = predicted),\n        color = \"#D55E00\", linetype = \"dashed\", alpha = 0.8, linewidth = 0.8\n    ) +\n    geom_point(size = 2.5, color = \"black\", alpha = 0.8) +\n    theme_economist_white(base_family = my_font) +\n    labs(\n        title = \"回帰式と誤差\",\n        x = \"従業員数 (x)\",\n        y = \"売上高 (y)\"\n    ) +\n    geom_smooth(method = \"lm\", se = FALSE, color = \"#0072B2\", linewidth = 1.2) +\n    theme(\n        plot.title = element_text(face = \"bold\", size = 16),\n        axis.title = element_text(size = 12),\n    ) +\n    annotate(\"text\",\n        x = min(data$x) + 2,\n        y = max(data$y) + 1,\n        label = \"y[i] == beta[0] + beta[1] * x[i] + u[i]\",\n        parse = TRUE,\n        size = 6, family = my_font\n    )\nprint(g)\n\n\n\n\n\n\n\n\n\n望ましい性質を備えた直線の引き方の1つとして、ガウス(Gauss)が構築した最小二乗法(Ordinaly Least Square Methods: OLS)について説明します。",
+    "crumbs": [
+      "第1部 OLSの分析枠組みを理解する",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>二変量OLS | 計量社会科学分析の基礎</span>"
+    ]
+  },
+  {
+    "objectID": "chapter03.html#内生性とバイアス",
+    "href": "chapter03.html#内生性とバイアス",
+    "title": "\n4  二変量OLS | 計量社会科学分析の基礎\n",
+    "section": "\n4.4 内生性とバイアス",
+    "text": "4.4 内生性とバイアス",
+    "crumbs": [
+      "第1部 OLSの分析枠組みを理解する",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>二変量OLS | 計量社会科学分析の基礎</span>"
+    ]
+  },
+  {
+    "objectID": "chapter03.html#推定値の制度",
+    "href": "chapter03.html#推定値の制度",
+    "title": "\n4  二変量OLS | 計量社会科学分析の基礎\n",
+    "section": "\n4.5 推定値の制度",
+    "text": "4.5 推定値の制度",
+    "crumbs": [
+      "第1部 OLSの分析枠組みを理解する",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>二変量OLS | 計量社会科学分析の基礎</span>"
+    ]
+  },
+  {
+    "objectID": "chapter03.html#確率の限界と一貫性",
+    "href": "chapter03.html#確率の限界と一貫性",
+    "title": "\n4  二変量OLS | 計量社会科学分析の基礎\n",
+    "section": "\n4.6 確率の限界と一貫性",
+    "text": "4.6 確率の限界と一貫性",
+    "crumbs": [
+      "第1部 OLSの分析枠組みを理解する",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>二変量OLS | 計量社会科学分析の基礎</span>"
+    ]
+  },
+  {
+    "objectID": "chapter03.html#回答可能な問題---不均一分散と誤作同士の相関",
+    "href": "chapter03.html#回答可能な問題---不均一分散と誤作同士の相関",
+    "title": "\n4  二変量OLS | 計量社会科学分析の基礎\n",
+    "section": "\n4.7 回答可能な問題 - 不均一分散と誤作同士の相関",
+    "text": "4.7 回答可能な問題 - 不均一分散と誤作同士の相関",
+    "crumbs": [
+      "第1部 OLSの分析枠組みを理解する",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>二変量OLS | 計量社会科学分析の基礎</span>"
+    ]
+  },
+  {
+    "objectID": "chapter03.html#適合度",
+    "href": "chapter03.html#適合度",
+    "title": "\n4  二変量OLS | 計量社会科学分析の基礎\n",
+    "section": "\n4.8 適合度",
+    "text": "4.8 適合度",
+    "crumbs": [
+      "第1部 OLSの分析枠組みを理解する",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>二変量OLS | 計量社会科学分析の基礎</span>"
+    ]
+  },
+  {
+    "objectID": "chapter03.html#外れ値",
+    "href": "chapter03.html#外れ値",
+    "title": "\n4  二変量OLS | 計量社会科学分析の基礎\n",
+    "section": "\n4.9 外れ値",
+    "text": "4.9 外れ値",
+    "crumbs": [
+      "第1部 OLSの分析枠組みを理解する",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>二変量OLS | 計量社会科学分析の基礎</span>"
     ]
   }
 ]

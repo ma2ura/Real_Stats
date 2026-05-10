@@ -1,0 +1,126 @@
+---
+title: "二変量OLS | 計量社会科学分析の基礎"
+---
+
+## 二変量OLS | 計量社会科学分析の基礎
+
+ここでは、2つの変数間の関係を定量化して、その関係が、
+
+- 本当は無関係なのに、たまたま手にしたサンプルで関係があるように見えてしまうのか、
+- それとも、サンプルで見えている関係が、母集団でも同じように存在しているのか、
+
+を分析します。
+
+先に、数式の表記について説明しておきます。
+
+- 確率変数は大文字のイタリック体で表記します。例: $Y$, $X$。
+- 変数の観測値はインデックスをつけて表記します。例: $Y_i$, $X_i$。
+- パラメータはギリシャ文字で表記します。例: $\beta_0$, $\beta_1$。
+- 確率変数の平均は、変数の上にバーをつけて表記します。例: $\bar{Y}$, $\bar{X}$。
+- パラメータの推定値には、ハットをつけて表記します。例: $\hat{\beta}_0$, $\hat{\beta}_1$。
+- サンプルサイズは $N$ で表記します。
+
+
+## 二変量回帰モデル
+
+ここでは従属変数 $Y$ 1つと独立変数 $X$ 1つの2変数からなる二変量回帰モデルを考えます。
+次のようなモデルを推定する方法として、二変量OLSを学習します。
+
+$$
+Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i
+$$
+
+ここで、$\beta_0$ や $\beta_1$ は**パラメータ**(parameter)と呼ばれるもので、それぞれ切片と傾きを表します。
+$\varepsilon_i$ は**誤差項**(error term)と呼ばれるもので、観測されない要因を表します。
+$i$ は観測単位を表すインデックスで、$i=1, 2, \ldots, N$ とします。
+
+
+
+
+今、売上高 $Y_i$ と従業員数 $X_i$ のデータが手元にあるとしましょう。
+横軸を従業員数、縦軸を売上高とした散布図に描くと次のようになります。
+
+```{r fig01, filename="従業員数と売上高の散布図"}
+#| code-fold: true
+#| warning: false
+#| message: false
+pacman::p_load(tidyverse, ggthemes, GGally, gt, gtExtra, knitr, kableExtra, modelsummary)
+
+set.seed(123) # 乱数のタネ
+n <- 15 # サンプルサイズ
+x <- seq(1, 10, length.out = n) # 独立変数
+y <- 3 + 1.5 * x + rnorm(n, mean = 0, sd = 2) # 従属変数
+data <- data.frame(x = x, y = y) # データフレームの作成
+my_font <- if (Sys.info()["sysname"] == "Darwin") "HiraKakuProN-W3" else "sans"
+
+# 作図
+g <- ggplot(data, aes(x = x, y = y)) +
+    geom_point(size = 2.5, color = "black", alpha = 0.8) +
+    theme_economist_white(base_family = my_font) +
+        labs(
+        title = "データの散布図",
+        x = "従業員数 (X)",
+        y = "売上高 (Y)"
+    )
+
+print(g)
+```
+
+散布図をみると右肩上がりの関係があるように見えますが、もっと明確に変数間の関係を表すために、<span class="markp">そのデータを最も良く説明できる直線</span>をひこうと思います。
+つまり、<span class="markp">切片の$\beta_0$と傾きの$\beta_1$を決めるということ</span>です。
+この直線が「モデル」で、それぞれの黒い点とモデルの直線との縦軸方向への距離を「誤差」または「残差」と呼びます。
+
+
+## 最小二乗法による係数推定
+
+```{r fig02, filename="回帰式と誤差"}
+#| code-fold: true
+#| warning: false
+#| message: false
+#| # 回帰式をlm()で推定
+model <- lm(y ~ x, data = data)
+# 予測値をpredictedに格納
+data$predicted <- predict(model)
+# OSに合わせてフォントを自動選択（Macならヒラギノ、それ以外ならデフォルト）
+
+g <- ggplot(data, aes(x = x, y = y)) +
+    geom_segment(
+        aes(xend = x, yend = predicted),
+        color = "#D55E00", linetype = "dashed", alpha = 0.8, linewidth = 0.8
+    ) +
+    geom_point(size = 2.5, color = "black", alpha = 0.8) +
+    theme_economist_white(base_family = my_font) +
+    labs(
+        title = "回帰式と誤差",
+        x = "従業員数 (x)",
+        y = "売上高 (y)"
+    ) +
+    geom_smooth(method = "lm", se = FALSE, color = "#0072B2", linewidth = 1.2) +
+    theme(
+        plot.title = element_text(face = "bold", size = 16),
+        axis.title = element_text(size = 12),
+    ) +
+    annotate("text",
+        x = min(data$x) + 2,
+        y = max(data$y) + 1,
+        label = "y[i] == beta[0] + beta[1] * x[i] + u[i]",
+        parse = TRUE,
+        size = 6, family = my_font
+    )
+print(g)
+```
+
+望ましい性質を備えた直線の引き方の1つとして、ガウス(Gauss)が構築した最小二乗法(Ordinaly Least Square Methods: OLS)について説明します。
+
+## 内生性とバイアス
+
+## 推定値の制度
+
+## 確率の限界と一貫性
+
+## 回答可能な問題 - 不均一分散と誤作同士の相関
+
+## 適合度
+
+## 外れ値
+

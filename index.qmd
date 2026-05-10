@@ -14,3 +14,4 @@ load("data/Ch2_Exercise1_DonutX.RData")
 ls() # データセットの中身を確認
 dta # データセットの内容を確認
 ```
+

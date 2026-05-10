@@ -62,6 +62,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./chapter02.html" rel="next">
 <link href="./index.html" rel="prev">
 <link href="./img/favicon.ico" rel="icon">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
@@ -79,8 +80,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/bootstrap/bootstrap-52e09e6e303b1dda867a222b625ac07f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark-52e09e6e303b1dda867a222b625ac07f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-52e09e6e303b1dda867a222b625ac07f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
-<script src="site_libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
-<link href="site_libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet">
 <script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
@@ -109,7 +108,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><script type="module" src="site_libs/quarto-ojs/quarto-ojs-runtime.js"></script><link href="site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+}</script><script src="site_libs/quarto-diagram/mermaid.min.js"></script><script src="site_libs/quarto-diagram/mermaid-init.js"></script><link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
 <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script><style>
 .marky {background: linear-gradient(transparent 60%, #FCFFC1 0%);}
@@ -163,7 +162,7 @@ window.Quarto = {
 <meta name="twitter:image-width" content="6300">
 <meta name="twitter:card" content="summary_large_image">
 </head>
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-sidebar floating slimcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
@@ -211,6 +210,29 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">因果の探究</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">現場で使う統計</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./part01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">第1部 OLSの分析枠組みを理解する</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">二変量OLS | 計量社会科学分析の基礎</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
     </ul>
 </div>
     <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99"><h2 id="toc-title">ここの目次</h2>
@@ -218,13 +240,14 @@ window.Quarto = {
   <ul class="collapse">
 <li><a href="#%E7%89%B9%E5%AE%9A%E5%8C%96---%E5%9F%BA%E6%9C%AC%E3%81%A8%E3%81%AA%E3%82%8B%E3%83%A2%E3%83%87%E3%83%AB" id="toc-特定化---基本となるモデル" class="nav-link active" data-scroll-target="#%E7%89%B9%E5%AE%9A%E5%8C%96---%E5%9F%BA%E6%9C%AC%E3%81%A8%E3%81%AA%E3%82%8B%E3%83%A2%E3%83%87%E3%83%AB"><span class="header-section-number">2.1</span> 特定化 - 基本となるモデル</a></li>
   <li><a href="#%E3%81%A4%E3%81%AE%E5%A4%A7%E3%81%8D%E3%81%AA%E8%AA%B2%E9%A1%8C-%E3%83%A9%E3%83%B3%E3%83%80%E3%83%A0%E6%80%A7%E3%81%A8%E5%86%85%E7%94%9F%E6%80%A7" id="toc-つの大きな課題-ランダム性と内生性" class="nav-link" data-scroll-target="#%E3%81%A4%E3%81%AE%E5%A4%A7%E3%81%8D%E3%81%AA%E8%AA%B2%E9%A1%8C-%E3%83%A9%E3%83%B3%E3%83%80%E3%83%A0%E6%80%A7%E3%81%A8%E5%86%85%E7%94%9F%E6%80%A7"><span class="header-section-number">2.2</span> 2つの大きな課題 : ランダム性と内生性</a></li>
+  <li><a href="#%E7%B5%B6%E5%AF%BE%E7%9A%84%E5%9F%BA%E6%BA%96%E3%81%A8%E3%81%97%E3%81%A6%E3%81%AE%E3%83%A9%E3%83%B3%E3%83%80%E3%83%A0%E5%8C%96%E5%AE%9F%E9%A8%93" id="toc-絶対的基準としてのランダム化実験" class="nav-link" data-scroll-target="#%E7%B5%B6%E5%AF%BE%E7%9A%84%E5%9F%BA%E6%BA%96%E3%81%A8%E3%81%97%E3%81%A6%E3%81%AE%E3%83%A9%E3%83%B3%E3%83%80%E3%83%A0%E5%8C%96%E5%AE%9F%E9%A8%93"><span class="header-section-number">2.3</span> 絶対的基準としてのランダム化実験</a></li>
   </ul></nav>
 </nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<main class="content page-columns page-full" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">
 <span class="chapter-number">2</span>&nbsp; <span class="chapter-title">因果の探究</span>
 </h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
@@ -283,16 +306,18 @@ window.Quarto = {
 </div>
 </div>
 </div>
+<p>この特定化が正しければ、広告宣伝費を10増加させると、売上高は5増加することになります。</p>
 <p>テキストでは、ドーナツを食べた個数を独立変数、体重を従属変数とするモデルを特定化しています。 データハンドリングや作図のために、<code>tidyverse</code>パッケージを使用します。 <code>pacman</code>パッケージの<code>p_load</code>関数を使って、必要なパッケージをインストール/ロードします。 <code><a href="https://rdrr.io/r/base/load.html">load()</a></code>関数を使って、ドーナツのデータ<code>DonutData.Rdata</code>を読み込みます。 読み込んだデータを<code><a href="https://rdrr.io/r/base/data.frame.html">data.frame()</a></code>関数を使ってデータフレーム<code>df</code>にまとめます。 次に、<code>ggplot2</code>パッケージを使って、ドーナツを食べた個数と体重の関係を散布図で可視化します。</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse)</span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">load</span>(<span class="st">"data/DonutData.Rdata"</span>)</span>
-<span id="cb2-3"><a href="#cb2-3"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(name, donuts, weight, child , male)</span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="fu">ggplot</span>(df) <span class="sc">+</span> </span>
-<span id="cb2-5"><a href="#cb2-5"></a>    <span class="fu">aes</span>(<span class="at">x =</span> donuts, <span class="at">y =</span> weight) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb2-6"><a href="#cb2-6"></a>    <span class="co"># ラベルにnameを重ならないように表示</span></span>
-<span id="cb2-7"><a href="#cb2-7"></a>    <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> name), <span class="at">vjust =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb2-8"><a href="#cb2-8"></a>    <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"ドーナツを食べた個数"</span>, <span class="at">y =</span> <span class="st">"体重(kg)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse) <span class="co"># パッケージをインストール/ロード</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">load</span>(<span class="st">"data/DonutData.Rdata"</span>) <span class="co"># ドーナツのデータを読み込む</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(name, donuts, weight, child , male) <span class="co"># データフレームにまとめる</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="fu">ggplot</span>(df) <span class="sc">+</span> <span class="co"># ggplotで作図</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a>    <span class="fu">aes</span>(<span class="at">x =</span> donuts, <span class="at">y =</span> weight) <span class="sc">+</span> <span class="co"># ドーナツを食べた個数を横軸、体重を縦軸に設定</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="co"># 散布図を書く</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a>    <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> name), <span class="at">vjust =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>) <span class="sc">+</span> <span class="co"># ラベルを追加</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"ドーナツを食べた個数"</span>, <span class="at">y =</span> <span class="st">"体重(kg)"</span>) <span class="sc">+</span> <span class="co"># 軸ラベルを設定</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a>    <span class="fu">theme_bw</span>() <span class="co"># 白黒テーマを適用</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><a href="chapter01_files/figure-html/unnamed-chunk-2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="chapter01_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="3150"></a></p>
@@ -323,40 +348,80 @@ window.Quarto = {
 </div>
 </div>
 <p>この図の黒い点が実際のデータを、青い線が特定化したモデルを表しており、実際のデータとモデルの乖離である誤差項を赤い点線で表しています。 この統計モデルが現実のデータを完全に説明できているなら、実際のデータはすべて青い直線上に位置するはずですが、実際にはモデルからズレた場所に点があるため、誤差が存在します。 つまり、<span class="markp">「ドーナツを食べた個数」が「体重」に与える影響を完全に説明できていないということになり、説明できていない部分が誤差項<span class="math inline">\varepsilon_i</span>に含まれている</span>ことになります。</p>
-</section><section id="つの大きな課題-ランダム性と内生性" class="level2" data-number="2.2"><h2 data-number="2.2" class="anchored" data-anchor-id="つの大きな課題-ランダム性と内生性">
+</section><section id="つの大きな課題-ランダム性と内生性" class="level2 page-columns page-full" data-number="2.2"><h2 data-number="2.2" class="anchored" data-anchor-id="つの大きな課題-ランダム性と内生性">
 <span class="header-section-number">2.2</span> 2つの大きな課題 : ランダム性と内生性</h2>
 <section id="ランダム性と推論" class="level3" data-number="2.2.1"><h3 data-number="2.2.1" class="anchored" data-anchor-id="ランダム性と推論">
 <span class="header-section-number">2.2.1</span> ランダム性と推論</h3>
 <p><span class="markb">偶然にたまたま生じてしまっている結果</span>と、<span class="markp">偶然ではなく必然的に生じている結果</span>を区別することは重要です。 いま得られた結果が、本当は何の関係もないのに、偶然にたまたま関係があるように見えているのか、それとも因果関係によって生じているのかを区別するため、たまたま得られた結果ではない、という確信を得るための方法があります。 この方法は、<strong>統計的推論</strong>(statistical inference)、あるいは単に<strong>推論</strong>と呼ばれています。</p>
 </section><section id="内生性外生性および識別" class="level3" data-number="2.2.2"><h3 data-number="2.2.2" class="anchored" data-anchor-id="内生性外生性および識別">
 <span class="header-section-number">2.2.2</span> 内生性、外生性、および識別</h3>
-<p>統計学におけるもう一つの重要な課題は、<strong>内生性</strong>(endogeneity)と呼ばれる問題です。</p>
+<p>統計学におけるもう一つの重要な課題は、<strong>内生性</strong>(endogeneity)と呼ばれる問題です。 これは、<span class="math inline">X</span>と<span class="math inline">Y</span>の間の関係を分析する際に、<span class="math inline">X</span>が<span class="math inline">Y</span>に影響を与えるだけでなく、<span class="math inline">Y</span>も<span class="math inline">X</span>に影響を与える可能性があることを指します。ドーナツを食べた個数以外にも体重に影響を与えている要因が存在するのに、それらをモデルに含めず、ドーナツを食べた個数だけを独立変数としてモデルを特定化していると、見落とされているその他の要因が体重に与えている影響はすべて誤差項<span class="math inline">\varepsilon_i</span>に含まれてしまい、誤差項と独立変数が相関してしまうことになります。 このとき、ドーナツを食べた個数は<strong>内生的</strong>(endogenous)であると言います。</p>
+<p>内生性の反対は<strong>外生性</strong>(exogeneity)です。 ある独立変数が外生的であるとは、その独立変数が誤差項と関係していないことを意味します。 われわれが変数間の関係を特定化する際の中心的な課題は、<span class="markp">内生性を回避し、外生的な独立変数を特定化すること</span>で、このプロセスを<strong>識別</strong>(identification)と呼びます。 その確認のために、<strong>相関係数</strong>(correlation coefficient)を用います。 テキストp.15の図1.5のように、独立変数と誤差項の相関係数を散布図で確認するのがよいでしょう。</p>
+</section><section id="ケーススタディインフルエンザの予防接種" class="level3 page-columns page-full" data-number="2.2.3"><h3 data-number="2.2.3" class="anchored" data-anchor-id="ケーススタディインフルエンザの予防接種">
+<span class="header-section-number">2.2.3</span> ケーススタディ：インフルエンザの予防接種</h3>
+<p>インフルエンザの予防接種が死亡を防いでいるかどうかを調べたい。 インフルエンザの予防接種を受けていれば1，受けていなければ0という変数を独立変数に、死亡したら1，死亡しなかったら0という変数を従属変数として特定します。</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>あるカテゴリーに該当すれば1、該当しなければ0という変数を<strong>ダミー変数</strong>(dummy variable)と呼びます。</p>
+</div></div><p>次に、この変数間の関係が次のようになっていると想定します。</p>
+<p><span class="math display">
+\text{死亡}_i = \beta_0 + \beta_1 \times \text{予防接種}_i + \varepsilon_i
+</span></p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"></figure><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph LR
+    予防接種 --&gt; 死亡
+</pre>
+</div>
+<p></p>
+</div>
+</div>
+</div>
+<p>この特定化は正しいでしょうか？ もしかすると、健康への意識が高い人ほど、予防接種を受ける傾向があるかもしれません。</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"></figure><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph LR
+    健康への意識 --&gt; 予防接種
+    予防接種 --&gt; 死亡
+</pre>
+</div>
+<p></p>
+</div>
+</div>
+</div>
+<p>健康への意識が高い人は、普段から健康的な生活を送っている可能性が高く、長生きする傾向がある、ということが考えられます。 つまり、普段の生活やその他条件をそろえた上で、予防接種を受けた人と受けなかった人の死亡率を比較することは非常に難しいということです。</p>
+</section><section id="議論してみよう---労働経済学" class="level3" data-number="2.2.4"><h3 data-number="2.2.4" class="anchored" data-anchor-id="議論してみよう---労働経済学">
+<span class="header-section-number">2.2.4</span> 議論してみよう - 労働経済学</h3>
+<p>大学を卒業することが収入にどのような影響を与えるかを調べたいとします。 独立変数として大学卒業を表すダミー変数を、従属変数として給与を設定して、次のようなモデルを特定化します。</p>
+<p><span class="math display">
+\text{給与}_i = \beta_0 + \beta_1 \times \text{大学卒業}_i + \varepsilon_i
+</span></p>
+<p>このとき、</p>
+<ol type="1">
+<li>
+<span class="math inline">\beta_0</span>や<span class="math inline">\beta_1</span>の値はどのような意味を持つでしょうか？</li>
+<li>誤差項にはどのようなものが含まれているだろうか？</li>
+<li>独立変数が内生的であるための条件は何でしょうか？</li>
+<li>独立変数は内生的でしょうか？そうであるならなぜでしょうか？</li>
+<li>内生性がどのようにして間違った推論になるか考えてみましょう。</li>
+</ol></section></section><section id="絶対的基準としてのランダム化実験" class="level2 page-columns page-full" data-number="2.3"><h2 data-number="2.3" class="anchored" data-anchor-id="絶対的基準としてのランダム化実験">
+<span class="header-section-number">2.3</span> 絶対的基準としてのランダム化実験</h2>
+<p>外生的な変動をつくり出す法法として、<strong>ランダム化実験</strong>(randomized experiment)があります。があります。 ドーナツの例で言うと、大勢の人をランダムに集めて2つのグループに分け、片方のグループ(処置群)にはドーナツを食べさせ、もう片方のグループ(統制群)にはドーナツを食べさせないようにします。 その後、両グループの体重を比較することで、ドーナツを食べた個数が外生的に変動するようにして、ドーナツを食べた個数が体重に与える影響を推定することができます。 このような実験は<strong>ランダム化比較実験</strong>(Randomized Controlled Trial: <strong>RCT</strong>)と呼ばれ、因果関係を特定するための最も信頼できる方法とされています。ただし、倫理的な理由や実行の難しさから、すべての研究でRCTを行うことはできません。</p>
+<p>RCTで得られた実験結果はどこまで一般化できるでしょうか？ ドーナツのRCTで得られた結果は、その他のスイーツや、その他の国の人々に一般化できるでしょうか？ このような問題は<strong>外的妥当性</strong>(external validity)の問題と呼ばれます。</p>
+
 
 
 <!-- -->
 
-<script type="ojs-module-contents">
-eyJjb250ZW50cyI6W119
-</script><div id="exercise-loading-indicator" class="exercise-loading-indicator d-none d-flex align-items-center gap-2">
-<div id="exercise-loading-status" class="d-flex gap-2">
-
-</div>
-<div class="spinner-grow spinner-grow-sm">
-
-</div>
-</div>
-<script type="vfs-file">
-W10=
-</script></section></section><a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main><!-- /main --><script type="ojs-module-contents">
-eyJjb250ZW50cyI6W119
-</script><script type="module">
-if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
-window._ojs.paths.runtimeToDoc = "../..";
-window._ojs.paths.runtimeToRoot = "../..";
-window._ojs.paths.docToRoot = "";
-window._ojs.selfContained = false;
-window._ojs.runtime.interpretFromScriptTags();
-</script><script id="quarto-html-after-body" type="application/javascript">
+<div class="no-row-height column-margin column-container"><div class="">
+<p>外的妥当性とは、推論がどの程度一般化できるか、つまり、研究の結果が他の状況や集団に適用できるかどうかを指します。 それに対して、<strong>内的妥当性</strong>(internal validity)は、研究の結果がどの程度正確であるか、つまり、研究のデザインや実施が適切であり、結果が真の因果関係を反映しているかどうかを指します。</p>
+</div></div></section><a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
     const anchorJS = new window.AnchorJS();
@@ -814,6 +879,9 @@ window._ojs.runtime.interpretFromScriptTags();
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./chapter02.html" class="pagination-link" aria-label="現場で使う統計">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">現場で使う統計</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">## 因果の探究</span></span>
@@ -868,62 +936,138 @@ window._ojs.runtime.interpretFromScriptTags();
 <span id="cb4-52"><a href="#cb4-52"></a><span class="fu">plot</span>(x, y, <span class="at">type =</span> <span class="st">"b"</span>, <span class="at">xlab =</span> <span class="st">"広告宣伝費"</span>, <span class="at">ylab =</span> <span class="st">"売上高"</span>)</span>
 <span id="cb4-53"><a href="#cb4-53"></a><span class="in">```</span></span>
 <span id="cb4-54"><a href="#cb4-54"></a></span>
-<span id="cb4-55"><a href="#cb4-55"></a>テキストでは、ドーナツを食べた個数を独立変数、体重を従属変数とするモデルを特定化しています。</span>
-<span id="cb4-56"><a href="#cb4-56"></a>データハンドリングや作図のために、<span class="in">`tidyverse`</span>パッケージを使用します。</span>
-<span id="cb4-57"><a href="#cb4-57"></a><span class="in">`pacman`</span>パッケージの<span class="in">`p_load`</span>関数を使って、必要なパッケージをインストール/ロードします。</span>
-<span id="cb4-58"><a href="#cb4-58"></a><span class="in">`load()`</span>関数を使って、ドーナツのデータ<span class="in">`DonutData.Rdata`</span>を読み込みます。</span>
-<span id="cb4-59"><a href="#cb4-59"></a>読み込んだデータを<span class="in">`data.frame()`</span>関数を使ってデータフレーム<span class="in">`df`</span>にまとめます。</span>
-<span id="cb4-60"><a href="#cb4-60"></a>次に、<span class="in">`ggplot2`</span>パッケージを使って、ドーナツを食べた個数と体重の関係を散布図で可視化します。</span>
-<span id="cb4-63"><a href="#cb4-63"></a><span class="in">```{r}</span></span>
-<span id="cb4-64"><a href="#cb4-64"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse)</span>
-<span id="cb4-65"><a href="#cb4-65"></a><span class="fu">load</span>(<span class="st">"data/DonutData.Rdata"</span>)</span>
-<span id="cb4-66"><a href="#cb4-66"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(name, donuts, weight, child , male)</span>
-<span id="cb4-67"><a href="#cb4-67"></a><span class="fu">ggplot</span>(df) <span class="sc">+</span> </span>
-<span id="cb4-68"><a href="#cb4-68"></a>    <span class="fu">aes</span>(<span class="at">x =</span> donuts, <span class="at">y =</span> weight) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb4-69"><a href="#cb4-69"></a>    <span class="co"># ラベルにnameを重ならないように表示</span></span>
-<span id="cb4-70"><a href="#cb4-70"></a>    <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> name), <span class="at">vjust =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb4-71"><a href="#cb4-71"></a>    <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"ドーナツを食べた個数"</span>, <span class="at">y =</span> <span class="st">"体重(kg)"</span>)</span>
-<span id="cb4-72"><a href="#cb4-72"></a><span class="in">```</span></span>
-<span id="cb4-73"><a href="#cb4-73"></a></span>
-<span id="cb4-74"><a href="#cb4-74"></a>このとき、次のような関係を想定する。</span>
-<span id="cb4-75"><a href="#cb4-75"></a></span>
-<span id="cb4-76"><a href="#cb4-76"></a>$$</span>
-<span id="cb4-77"><a href="#cb4-77"></a>\text{体重}_i = \beta_0 + \beta_1 \times \text{ドーナツを食べた個数}_i + \varepsilon_i</span>
-<span id="cb4-78"><a href="#cb4-78"></a>$$</span>
-<span id="cb4-79"><a href="#cb4-79"></a></span>
-<span id="cb4-80"><a href="#cb4-80"></a>ここで、$i$は個人を表す番号、$\beta_0$は切片、$\beta_1$はドーナツを食べた個数の係数、$\varepsilon_i$は誤差項を表します。</span>
-<span id="cb4-81"><a href="#cb4-81"></a>関心があるのは、「ドーナツを食べた個数」が1単位増えたとき、「体重」がどれだけ増えるのかを意味する、$\beta_1$の値です。</span>
-<span id="cb4-82"><a href="#cb4-82"></a>上のモデルは、「ドーナツを食べた個数」と「体重」との間に、切片が$\beta_0$、傾きが$\beta_1$の線形関係があると仮定しています。</span>
-<span id="cb4-83"><a href="#cb4-83"></a>つまり、次のような直線を想定していることになります。</span>
-<span id="cb4-86"><a href="#cb4-86"></a><span class="in">```{r}</span></span>
-<span id="cb4-87"><a href="#cb4-87"></a><span class="co">#| code-fold: true</span></span>
-<span id="cb4-88"><a href="#cb4-88"></a><span class="co">#| code-summary: "コードを表示"</span></span>
-<span id="cb4-89"><a href="#cb4-89"></a><span class="fu">ggplot</span>(df) <span class="sc">+</span> </span>
-<span id="cb4-90"><a href="#cb4-90"></a>    <span class="fu">aes</span>(<span class="at">x =</span> donuts, <span class="at">y =</span> weight) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb4-91"><a href="#cb4-91"></a>    <span class="co"># ラベルにnameを重ならないように表示</span></span>
-<span id="cb4-92"><a href="#cb4-92"></a>    <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> name), <span class="at">vjust =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb4-93"><a href="#cb4-93"></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
-<span id="cb4-94"><a href="#cb4-94"></a>    <span class="co"># 誤差項を表す点線を追加</span></span>
-<span id="cb4-95"><a href="#cb4-95"></a>    <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> donuts, <span class="at">xend =</span> donuts, <span class="at">y =</span> weight, <span class="at">yend =</span> <span class="fu">predict</span>(<span class="fu">lm</span>(weight <span class="sc">~</span> donuts, <span class="at">data =</span> df))), </span>
-<span id="cb4-96"><a href="#cb4-96"></a>                 <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
-<span id="cb4-97"><a href="#cb4-97"></a>    <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"ドーナツを食べた個数"</span>, <span class="at">y =</span> <span class="st">"体重(kg)"</span>)</span>
-<span id="cb4-98"><a href="#cb4-98"></a><span class="in">```</span></span>
-<span id="cb4-99"><a href="#cb4-99"></a></span>
-<span id="cb4-100"><a href="#cb4-100"></a>この図の黒い点が実際のデータを、青い線が特定化したモデルを表しており、実際のデータとモデルの乖離である誤差項を赤い点線で表しています。</span>
-<span id="cb4-101"><a href="#cb4-101"></a>この統計モデルが現実のデータを完全に説明できているなら、実際のデータはすべて青い直線上に位置するはずですが、実際にはモデルからズレた場所に点があるため、誤差が存在します。</span>
-<span id="cb4-102"><a href="#cb4-102"></a>つまり、<span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"markp"</span><span class="dt">&gt;</span>「ドーナツを食べた個数」が「体重」に与える影響を完全に説明できていないということになり、説明できていない部分が誤差項$\varepsilon_i$に含まれている<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span>ことになります。</span>
-<span id="cb4-103"><a href="#cb4-103"></a></span>
-<span id="cb4-104"><a href="#cb4-104"></a><span class="fu">## 2つの大きな課題 : ランダム性と内生性</span></span>
-<span id="cb4-105"><a href="#cb4-105"></a></span>
-<span id="cb4-106"><a href="#cb4-106"></a><span class="fu">### ランダム性と推論</span></span>
-<span id="cb4-107"><a href="#cb4-107"></a></span>
-<span id="cb4-108"><a href="#cb4-108"></a><span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"markb"</span><span class="dt">&gt;</span>偶然にたまたま生じてしまっている結果<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span>と、<span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"markp"</span><span class="dt">&gt;</span>偶然ではなく必然的に生じている結果<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span>を区別することは重要です。</span>
-<span id="cb4-109"><a href="#cb4-109"></a>いま得られた結果が、本当は何の関係もないのに、偶然にたまたま関係があるように見えているのか、それとも因果関係によって生じているのかを区別するため、たまたま得られた結果ではない、という確信を得るための方法があります。</span>
-<span id="cb4-110"><a href="#cb4-110"></a>この方法は、**統計的推論**(statistical inference)、あるいは単に**推論**と呼ばれています。</span>
-<span id="cb4-111"><a href="#cb4-111"></a></span>
-<span id="cb4-112"><a href="#cb4-112"></a><span class="fu">### 内生性、外生性、および識別</span></span>
-<span id="cb4-113"><a href="#cb4-113"></a></span>
-<span id="cb4-114"><a href="#cb4-114"></a>統計学におけるもう一つの重要な課題は、**内生性**(endogeneity)と呼ばれる問題です。</span>
+<span id="cb4-55"><a href="#cb4-55"></a>この特定化が正しければ、広告宣伝費を10増加させると、売上高は5増加することになります。</span>
+<span id="cb4-56"><a href="#cb4-56"></a></span>
+<span id="cb4-57"><a href="#cb4-57"></a>テキストでは、ドーナツを食べた個数を独立変数、体重を従属変数とするモデルを特定化しています。</span>
+<span id="cb4-58"><a href="#cb4-58"></a>データハンドリングや作図のために、<span class="in">`tidyverse`</span>パッケージを使用します。</span>
+<span id="cb4-59"><a href="#cb4-59"></a><span class="in">`pacman`</span>パッケージの<span class="in">`p_load`</span>関数を使って、必要なパッケージをインストール/ロードします。</span>
+<span id="cb4-60"><a href="#cb4-60"></a><span class="in">`load()`</span>関数を使って、ドーナツのデータ<span class="in">`DonutData.Rdata`</span>を読み込みます。</span>
+<span id="cb4-61"><a href="#cb4-61"></a>読み込んだデータを<span class="in">`data.frame()`</span>関数を使ってデータフレーム<span class="in">`df`</span>にまとめます。</span>
+<span id="cb4-62"><a href="#cb4-62"></a>次に、<span class="in">`ggplot2`</span>パッケージを使って、ドーナツを食べた個数と体重の関係を散布図で可視化します。</span>
+<span id="cb4-65"><a href="#cb4-65"></a><span class="in">```{r}</span></span>
+<span id="cb4-66"><a href="#cb4-66"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse) <span class="co"># パッケージをインストール/ロード</span></span>
+<span id="cb4-67"><a href="#cb4-67"></a><span class="fu">load</span>(<span class="st">"data/DonutData.Rdata"</span>) <span class="co"># ドーナツのデータを読み込む</span></span>
+<span id="cb4-68"><a href="#cb4-68"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(name, donuts, weight, child , male) <span class="co"># データフレームにまとめる</span></span>
+<span id="cb4-69"><a href="#cb4-69"></a><span class="fu">ggplot</span>(df) <span class="sc">+</span> <span class="co"># ggplotで作図</span></span>
+<span id="cb4-70"><a href="#cb4-70"></a>    <span class="fu">aes</span>(<span class="at">x =</span> donuts, <span class="at">y =</span> weight) <span class="sc">+</span> <span class="co"># ドーナツを食べた個数を横軸、体重を縦軸に設定</span></span>
+<span id="cb4-71"><a href="#cb4-71"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="co"># 散布図を書く</span></span>
+<span id="cb4-72"><a href="#cb4-72"></a>    <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> name), <span class="at">vjust =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>) <span class="sc">+</span> <span class="co"># ラベルを追加</span></span>
+<span id="cb4-73"><a href="#cb4-73"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"ドーナツを食べた個数"</span>, <span class="at">y =</span> <span class="st">"体重(kg)"</span>) <span class="sc">+</span> <span class="co"># 軸ラベルを設定</span></span>
+<span id="cb4-74"><a href="#cb4-74"></a>    <span class="fu">theme_bw</span>() <span class="co"># 白黒テーマを適用</span></span>
+<span id="cb4-75"><a href="#cb4-75"></a><span class="in">```</span></span>
+<span id="cb4-76"><a href="#cb4-76"></a></span>
+<span id="cb4-77"><a href="#cb4-77"></a>このとき、次のような関係を想定する。</span>
+<span id="cb4-78"><a href="#cb4-78"></a></span>
+<span id="cb4-79"><a href="#cb4-79"></a>$$</span>
+<span id="cb4-80"><a href="#cb4-80"></a>\text{体重}_i = \beta_0 + \beta_1 \times \text{ドーナツを食べた個数}_i + \varepsilon_i</span>
+<span id="cb4-81"><a href="#cb4-81"></a>$$</span>
+<span id="cb4-82"><a href="#cb4-82"></a></span>
+<span id="cb4-83"><a href="#cb4-83"></a>ここで、$i$は個人を表す番号、$\beta_0$は切片、$\beta_1$はドーナツを食べた個数の係数、$\varepsilon_i$は誤差項を表します。</span>
+<span id="cb4-84"><a href="#cb4-84"></a>関心があるのは、「ドーナツを食べた個数」が1単位増えたとき、「体重」がどれだけ増えるのかを意味する、$\beta_1$の値です。</span>
+<span id="cb4-85"><a href="#cb4-85"></a>上のモデルは、「ドーナツを食べた個数」と「体重」との間に、切片が$\beta_0$、傾きが$\beta_1$の線形関係があると仮定しています。</span>
+<span id="cb4-86"><a href="#cb4-86"></a>つまり、次のような直線を想定していることになります。</span>
+<span id="cb4-89"><a href="#cb4-89"></a><span class="in">```{r}</span></span>
+<span id="cb4-90"><a href="#cb4-90"></a><span class="co">#| code-fold: true</span></span>
+<span id="cb4-91"><a href="#cb4-91"></a><span class="co">#| code-summary: "コードを表示"</span></span>
+<span id="cb4-92"><a href="#cb4-92"></a><span class="fu">ggplot</span>(df) <span class="sc">+</span> </span>
+<span id="cb4-93"><a href="#cb4-93"></a>    <span class="fu">aes</span>(<span class="at">x =</span> donuts, <span class="at">y =</span> weight) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb4-94"><a href="#cb4-94"></a>    <span class="co"># ラベルにnameを重ならないように表示</span></span>
+<span id="cb4-95"><a href="#cb4-95"></a>    <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> name), <span class="at">vjust =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb4-96"><a href="#cb4-96"></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb4-97"><a href="#cb4-97"></a>    <span class="co"># 誤差項を表す点線を追加</span></span>
+<span id="cb4-98"><a href="#cb4-98"></a>    <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> donuts, <span class="at">xend =</span> donuts, <span class="at">y =</span> weight, <span class="at">yend =</span> <span class="fu">predict</span>(<span class="fu">lm</span>(weight <span class="sc">~</span> donuts, <span class="at">data =</span> df))), </span>
+<span id="cb4-99"><a href="#cb4-99"></a>                 <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb4-100"><a href="#cb4-100"></a>    <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"ドーナツを食べた個数"</span>, <span class="at">y =</span> <span class="st">"体重(kg)"</span>)</span>
+<span id="cb4-101"><a href="#cb4-101"></a><span class="in">```</span></span>
+<span id="cb4-102"><a href="#cb4-102"></a></span>
+<span id="cb4-103"><a href="#cb4-103"></a>この図の黒い点が実際のデータを、青い線が特定化したモデルを表しており、実際のデータとモデルの乖離である誤差項を赤い点線で表しています。</span>
+<span id="cb4-104"><a href="#cb4-104"></a>この統計モデルが現実のデータを完全に説明できているなら、実際のデータはすべて青い直線上に位置するはずですが、実際にはモデルからズレた場所に点があるため、誤差が存在します。</span>
+<span id="cb4-105"><a href="#cb4-105"></a>つまり、<span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"markp"</span><span class="dt">&gt;</span>「ドーナツを食べた個数」が「体重」に与える影響を完全に説明できていないということになり、説明できていない部分が誤差項$\varepsilon_i$に含まれている<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span>ことになります。</span>
+<span id="cb4-106"><a href="#cb4-106"></a></span>
+<span id="cb4-107"><a href="#cb4-107"></a><span class="fu">## 2つの大きな課題 : ランダム性と内生性</span></span>
+<span id="cb4-108"><a href="#cb4-108"></a></span>
+<span id="cb4-109"><a href="#cb4-109"></a><span class="fu">### ランダム性と推論</span></span>
+<span id="cb4-110"><a href="#cb4-110"></a></span>
+<span id="cb4-111"><a href="#cb4-111"></a><span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"markb"</span><span class="dt">&gt;</span>偶然にたまたま生じてしまっている結果<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span>と、<span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"markp"</span><span class="dt">&gt;</span>偶然ではなく必然的に生じている結果<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span>を区別することは重要です。</span>
+<span id="cb4-112"><a href="#cb4-112"></a>いま得られた結果が、本当は何の関係もないのに、偶然にたまたま関係があるように見えているのか、それとも因果関係によって生じているのかを区別するため、たまたま得られた結果ではない、という確信を得るための方法があります。</span>
+<span id="cb4-113"><a href="#cb4-113"></a>この方法は、**統計的推論**(statistical inference)、あるいは単に**推論**と呼ばれています。</span>
+<span id="cb4-114"><a href="#cb4-114"></a></span>
+<span id="cb4-115"><a href="#cb4-115"></a><span class="fu">### 内生性、外生性、および識別</span></span>
+<span id="cb4-116"><a href="#cb4-116"></a></span>
+<span id="cb4-117"><a href="#cb4-117"></a>統計学におけるもう一つの重要な課題は、**内生性**(endogeneity)と呼ばれる問題です。</span>
+<span id="cb4-118"><a href="#cb4-118"></a>これは、$X$と$Y$の間の関係を分析する際に、$X$が$Y$に影響を与えるだけでなく、$Y$も$X$に影響を与える可能性があることを指します。ドーナツを食べた個数以外にも体重に影響を与えている要因が存在するのに、それらをモデルに含めず、ドーナツを食べた個数だけを独立変数としてモデルを特定化していると、見落とされているその他の要因が体重に与えている影響はすべて誤差項$\varepsilon_i$に含まれてしまい、誤差項と独立変数が相関してしまうことになります。</span>
+<span id="cb4-119"><a href="#cb4-119"></a>このとき、ドーナツを食べた個数は**内生的**(endogenous)であると言います。</span>
+<span id="cb4-120"><a href="#cb4-120"></a></span>
+<span id="cb4-121"><a href="#cb4-121"></a>内生性の反対は**外生性**(exogeneity)です。</span>
+<span id="cb4-122"><a href="#cb4-122"></a>ある独立変数が外生的であるとは、その独立変数が誤差項と関係していないことを意味します。</span>
+<span id="cb4-123"><a href="#cb4-123"></a>われわれが変数間の関係を特定化する際の中心的な課題は、<span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"markp"</span><span class="dt">&gt;</span>内生性を回避し、外生的な独立変数を特定化すること<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span>で、このプロセスを**識別**(identification)と呼びます。</span>
+<span id="cb4-124"><a href="#cb4-124"></a>その確認のために、**相関係数**(correlation coefficient)を用います。</span>
+<span id="cb4-125"><a href="#cb4-125"></a>テキストp.15の図1.5のように、独立変数と誤差項の相関係数を散布図で確認するのがよいでしょう。</span>
+<span id="cb4-126"><a href="#cb4-126"></a></span>
+<span id="cb4-127"><a href="#cb4-127"></a><span class="fu">### ケーススタディ：インフルエンザの予防接種</span></span>
+<span id="cb4-128"><a href="#cb4-128"></a></span>
+<span id="cb4-129"><a href="#cb4-129"></a>インフルエンザの予防接種が死亡を防いでいるかどうかを調べたい。</span>
+<span id="cb4-130"><a href="#cb4-130"></a>インフルエンザの予防接種を受けていれば1，受けていなければ0という変数を独立変数に、死亡したら1，死亡しなかったら0という変数を従属変数として特定します。</span>
+<span id="cb4-131"><a href="#cb4-131"></a></span>
+<span id="cb4-132"><a href="#cb4-132"></a>:::{.column-margin}</span>
+<span id="cb4-133"><a href="#cb4-133"></a>あるカテゴリーに該当すれば1、該当しなければ0という変数を**ダミー変数**(dummy variable)と呼びます。</span>
+<span id="cb4-134"><a href="#cb4-134"></a>:::</span>
+<span id="cb4-135"><a href="#cb4-135"></a></span>
+<span id="cb4-136"><a href="#cb4-136"></a>次に、この変数間の関係が次のようになっていると想定します。</span>
+<span id="cb4-137"><a href="#cb4-137"></a></span>
+<span id="cb4-138"><a href="#cb4-138"></a>$$</span>
+<span id="cb4-139"><a href="#cb4-139"></a>\text{死亡}_i = \beta_0 + \beta_1 \times \text{予防接種}_i + \varepsilon_i</span>
+<span id="cb4-140"><a href="#cb4-140"></a>$$</span>
+<span id="cb4-141"><a href="#cb4-141"></a></span>
+<span id="cb4-144"><a href="#cb4-144"></a><span class="in">```{mermaid}</span></span>
+<span id="cb4-145"><a href="#cb4-145"></a>graph LR</span>
+<span id="cb4-146"><a href="#cb4-146"></a>    予防接種 --&gt; 死亡</span>
+<span id="cb4-147"><a href="#cb4-147"></a><span class="in">```</span></span>
+<span id="cb4-148"><a href="#cb4-148"></a></span>
+<span id="cb4-149"><a href="#cb4-149"></a>この特定化は正しいでしょうか？</span>
+<span id="cb4-150"><a href="#cb4-150"></a>もしかすると、健康への意識が高い人ほど、予防接種を受ける傾向があるかもしれません。</span>
+<span id="cb4-151"><a href="#cb4-151"></a></span>
+<span id="cb4-154"><a href="#cb4-154"></a><span class="in">```{mermaid}</span></span>
+<span id="cb4-155"><a href="#cb4-155"></a>graph LR</span>
+<span id="cb4-156"><a href="#cb4-156"></a>    健康への意識 --&gt; 予防接種</span>
+<span id="cb4-157"><a href="#cb4-157"></a>    予防接種 --&gt; 死亡</span>
+<span id="cb4-158"><a href="#cb4-158"></a><span class="in">```</span></span>
+<span id="cb4-159"><a href="#cb4-159"></a></span>
+<span id="cb4-160"><a href="#cb4-160"></a>健康への意識が高い人は、普段から健康的な生活を送っている可能性が高く、長生きする傾向がある、ということが考えられます。</span>
+<span id="cb4-161"><a href="#cb4-161"></a>つまり、普段の生活やその他条件をそろえた上で、予防接種を受けた人と受けなかった人の死亡率を比較することは非常に難しいということです。</span>
+<span id="cb4-162"><a href="#cb4-162"></a></span>
+<span id="cb4-163"><a href="#cb4-163"></a><span class="fu">### 議論してみよう - 労働経済学</span></span>
+<span id="cb4-164"><a href="#cb4-164"></a></span>
+<span id="cb4-165"><a href="#cb4-165"></a>大学を卒業することが収入にどのような影響を与えるかを調べたいとします。</span>
+<span id="cb4-166"><a href="#cb4-166"></a>独立変数として大学卒業を表すダミー変数を、従属変数として給与を設定して、次のようなモデルを特定化します。</span>
+<span id="cb4-167"><a href="#cb4-167"></a></span>
+<span id="cb4-168"><a href="#cb4-168"></a>$$</span>
+<span id="cb4-169"><a href="#cb4-169"></a>\text{給与}_i = \beta_0 + \beta_1 \times \text{大学卒業}_i + \varepsilon_i</span>
+<span id="cb4-170"><a href="#cb4-170"></a>$$</span>
+<span id="cb4-171"><a href="#cb4-171"></a></span>
+<span id="cb4-172"><a href="#cb4-172"></a>このとき、</span>
+<span id="cb4-173"><a href="#cb4-173"></a></span>
+<span id="cb4-174"><a href="#cb4-174"></a><span class="ss">1. </span>$\beta_0$や$\beta_1$の値はどのような意味を持つでしょうか？</span>
+<span id="cb4-175"><a href="#cb4-175"></a><span class="ss">2. </span>誤差項にはどのようなものが含まれているだろうか？</span>
+<span id="cb4-176"><a href="#cb4-176"></a><span class="ss">3. </span>独立変数が内生的であるための条件は何でしょうか？</span>
+<span id="cb4-177"><a href="#cb4-177"></a><span class="ss">4. </span>独立変数は内生的でしょうか？そうであるならなぜでしょうか？</span>
+<span id="cb4-178"><a href="#cb4-178"></a><span class="ss">5. </span>内生性がどのようにして間違った推論になるか考えてみましょう。</span>
+<span id="cb4-179"><a href="#cb4-179"></a></span>
+<span id="cb4-180"><a href="#cb4-180"></a><span class="fu">## 絶対的基準としてのランダム化実験</span></span>
+<span id="cb4-181"><a href="#cb4-181"></a></span>
+<span id="cb4-182"><a href="#cb4-182"></a>外生的な変動をつくり出す法法として、**ランダム化実験**(randomized experiment)があります。があります。</span>
+<span id="cb4-183"><a href="#cb4-183"></a>ドーナツの例で言うと、大勢の人をランダムに集めて2つのグループに分け、片方のグループ(処置群)にはドーナツを食べさせ、もう片方のグループ(統制群)にはドーナツを食べさせないようにします。</span>
+<span id="cb4-184"><a href="#cb4-184"></a>その後、両グループの体重を比較することで、ドーナツを食べた個数が外生的に変動するようにして、ドーナツを食べた個数が体重に与える影響を推定することができます。</span>
+<span id="cb4-185"><a href="#cb4-185"></a>このような実験は**ランダム化比較実験**(Randomized Controlled Trial: **RCT**)と呼ばれ、因果関係を特定するための最も信頼できる方法とされています。ただし、倫理的な理由や実行の難しさから、すべての研究でRCTを行うことはできません。</span>
+<span id="cb4-186"><a href="#cb4-186"></a></span>
+<span id="cb4-187"><a href="#cb4-187"></a>RCTで得られた実験結果はどこまで一般化できるでしょうか？</span>
+<span id="cb4-188"><a href="#cb4-188"></a>ドーナツのRCTで得られた結果は、その他のスイーツや、その他の国の人々に一般化できるでしょうか？</span>
+<span id="cb4-189"><a href="#cb4-189"></a>このような問題は**外的妥当性**(external validity)の問題と呼ばれます。</span>
+<span id="cb4-190"><a href="#cb4-190"></a></span>
+<span id="cb4-191"><a href="#cb4-191"></a>:::{.column-margin}</span>
+<span id="cb4-192"><a href="#cb4-192"></a>外的妥当性とは、推論がどの程度一般化できるか、つまり、研究の結果が他の状況や集団に適用できるかどうかを指します。</span>
+<span id="cb4-193"><a href="#cb4-193"></a>それに対して、**内的妥当性**(internal validity)は、研究の結果がどの程度正確であるか、つまり、研究のデザインや実施が適切であり、結果が真の因果関係を反映しているかどうかを指します。</span>
+<span id="cb4-194"><a href="#cb4-194"></a>:::</span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

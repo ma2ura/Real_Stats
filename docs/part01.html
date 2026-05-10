@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.8.27">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
 <meta name="author" content="Soichi Matsuura">
-<title>社会科学のための統計分析入門の勉強ノート</title>
+
+<title>第1部 OLSの分析枠組みを理解する – 社会科学のための統計分析入門の勉強ノート</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -55,6 +58,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
+
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
@@ -62,7 +66,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./chapter01.html" rel="next">
+<link href="./chapter03.html" rel="next">
+<link href="./chapter02.html" rel="prev">
 <link href="./img/favicon.ico" rel="icon">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -78,7 +83,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-52e09e6e303b1dda867a222b625ac07f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark-52e09e6e303b1dda867a222b625ac07f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-52e09e6e303b1dda867a222b625ac07f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-52e09e6e303b1dda867a222b625ac07f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -104,34 +110,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
-<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script><style>
+}</script>
+<style>
 .marky {background: linear-gradient(transparent 60%, #FCFFC1 0%);}
 .markb {background: linear-gradient(transparent 60%, #b1f6fc 0%);} 
 .markp {background: linear-gradient(transparent 60%, #ffcdd2 0%);}
 </style>
-<meta name="twitter:title" content="社会科学のための統計分析入門の勉強ノート">
+
+
+<meta name="twitter:title" content="第1部 OLSの分析枠組みを理解する – 社会科学のための統計分析入門の勉強ノート">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="https://so-ichi.com/img/real_stats.jpg">
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content="summary">
 </head>
+
 <body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">はじめに</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./part01.html">第1部 OLSの分析枠組みを理解する</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">社会科学のための統計分析入門の勉強ノート</a> 
         <div class="sidebar-tools-main">
@@ -151,9 +165,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-<li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">はじめに</span></span></a>
   </div>
 </li>
@@ -171,48 +185,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./part01.html" class="sidebar-item-text sidebar-link">
+            <a href="./part01.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">第1部 OLSの分析枠組みを理解する</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chapter03.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">二変量OLS | 計量社会科学分析の基礎</span></span></a>
   </div>
 </li>
       </ul>
-</li>
+  </li>
     </ul>
-</div>
-    <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99"><h2 id="toc-title">ここの目次</h2>
-   
-  <ul class="collapse">
-<li><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" id="toc-はじめに" class="nav-link active" data-scroll-target="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB"><span class="header-section-number">0.1</span> はじめに</a></li>
-  <li><a href="#%E6%BA%96%E5%82%99" id="toc-準備" class="nav-link" data-scroll-target="#%E6%BA%96%E5%82%99"><span class="header-section-number">0.2</span> 準備</a></li>
-  </ul></nav>
-</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+    </div>
+    
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">社会科学のための統計分析入門の勉強ノート</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">第1部 OLSの分析枠組みを理解する</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Soichi Matsuura </p>
-          </div>
-  </div>
     
   
     
@@ -221,32 +228,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 </header>
-<section id="はじめに" class="level2" data-number="0.1"><h2 data-number="0.1" class="anchored" data-anchor-id="はじめに">
-<span class="header-section-number">0.1</span> はじめに</h2><p><img src="img/real_stats.jpg" title="社会科学のための統計分析入門の勉強ノート" class="quarto-cover-image nolightbox img-fluid"></p>
-<p>このノートは、マイケル・ベイリー先生が書かれた「Real Stats: Using Econometrics for Political Science and Public Policy, 2nd ed.」の翻訳書である「社会科学のための統計分析入門」勁草書房の勉強内容をまとめたものです。</p>
-</section><section id="準備" class="level2" data-number="0.2"><h2 data-number="0.2" class="anchored" data-anchor-id="準備">
-<span class="header-section-number">0.2</span> 準備</h2>
-<p>各自のPC(WindowsかMacを想定)の好きな場所に<code>Real_Stats</code>というフォルダを作成し，そこを作業ディレクトリにしていることを想定しています。 この文章の意味が分からない人は，Rの入門書を確認してください。 作業ディレクトリの中に<code>data</code>というフォルダを作成し，そこにテキストで使うデータファイルを保存してある，という前提で進めます。<code>Rdata</code>ファイルを読み込む場合は、以下のように<code><a href="https://rdrr.io/r/base/load.html">load()</a></code>関数を使います。</p>
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">load</span>(<span class="st">"data/Ch2_Exercise1_DonutX.RData"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">ls</span>() <span class="co"># データセットの中身を確認</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "dta"             "pandoc_dir"      "quarto_bin_path"</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>dta <span class="co"># データセットの内容を確認</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div data-pagedtable="false">
-  <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["donutsx"],"name":[2],"type":["chr"],"align":["left"]},{"label":["weightx"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["childx"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["malex"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"Homer","2":"14","3":"275","4":"0","5":"0"},{"1":"Marge","2":"0","3":"141","4":"0","5":"1"},{"1":"Lisa","2":"0","3":"70","4":"-1","5":"1"},{"1":"Bart","2":"5","3":"75","4":"-1","5":"0"},{"1":"ComicBookGuy","2":"20","3":"310","4":"0","5":"0"},{"1":"Mr Burns","2":"0.75","3":"80","4":"0","5":"0"},{"1":"Smithers","2":"0.25","3":"160","4":"0","5":"0"},{"1":"Chief Wiggum","2":"16","3":"263","4":"0","5":"0"},{"1":"Principal Skinner","2":"3","3":"205","4":"0","5":"0"},{"1":"Rev. Lovejoy","2":"2","3":"185","4":"0","5":"0"},{"1":"Ned Flanders","2":"0.8","3":"170","4":"0","5":"0"},{"1":"Patty","2":"five","3":"1550","4":"0","5":"1"},{"1":"Selma","2":"4","3":"145","4":"0","5":"1"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
-</div>
-</div>
-</div>
+
+
+<p>第1部では、変数間の関係が線形(linear)であると想定して構築されたモデルを分析するための手法として、<strong>最小二乗法</strong>(ordinary least squares: OLS)を紹介します。 OLSは、独立変数と従属変数の関係を分析するための基本的な方法であり、社会科学の分野で広く使用されているため、非常に重要な分析手法です。</p>
 
 
 <!-- -->
 
-</section><a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
     const anchorJS = new window.AnchorJS();
@@ -698,33 +689,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       }
     }
   });
-  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./chapter02.html" class="pagination-link" aria-label="現場で使う統計">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">現場で使う統計</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./chapter01.html" class="pagination-link" aria-label="因果の探究">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">因果の探究</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./chapter03.html" class="pagination-link" aria-label="二変量OLS | 計量社会科学分析の基礎">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">二変量OLS | 計量社会科学分析の基礎</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">## はじめに</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a></span>
-<span id="cb4-3"><a href="#cb4-3"></a>このノートは、マイケル・ベイリー先生が書かれた「Real Stats: Using Econometrics for Political Science and Public Policy, 2nd ed.」の翻訳書である「社会科学のための統計分析入門」勁草書房の勉強内容をまとめたものです。</span>
-<span id="cb4-4"><a href="#cb4-4"></a></span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="fu">## 準備</span></span>
-<span id="cb4-6"><a href="#cb4-6"></a></span>
-<span id="cb4-7"><a href="#cb4-7"></a>各自のPC(WindowsかMacを想定)の好きな場所に<span class="in">`Real_Stats`</span>というフォルダを作成し，そこを作業ディレクトリにしていることを想定しています。</span>
-<span id="cb4-8"><a href="#cb4-8"></a>この文章の意味が分からない人は，Rの入門書を確認してください。</span>
-<span id="cb4-9"><a href="#cb4-9"></a>作業ディレクトリの中に<span class="in">`data`</span>というフォルダを作成し，そこにテキストで使うデータファイルを保存してある，という前提で進めます。<span class="in">`Rdata`</span>ファイルを読み込む場合は、以下のように<span class="in">`load()`</span>関数を使います。</span>
-<span id="cb4-10"><a href="#cb4-10"></a></span>
-<span id="cb4-13"><a href="#cb4-13"></a><span class="in">```{r}</span></span>
-<span id="cb4-14"><a href="#cb4-14"></a><span class="fu">load</span>(<span class="st">"data/Ch2_Exercise1_DonutX.RData"</span>)</span>
-<span id="cb4-15"><a href="#cb4-15"></a><span class="fu">ls</span>() <span class="co"># データセットの中身を確認</span></span>
-<span id="cb4-16"><a href="#cb4-16"></a>dta <span class="co"># データセットの内容を確認</span></span>
-<span id="cb4-17"><a href="#cb4-17"></a><span class="in">```</span></span>
-</code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">## 第1部 OLSの分析枠組みを理解する</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a></span>
+<span id="cb1-3"><a href="#cb1-3"></a>第1部では、変数間の関係が線形(linear)であると想定して構築されたモデルを分析するための手法として、**最小二乗法**(ordinary least squares: OLS)を紹介します。</span>
+<span id="cb1-4"><a href="#cb1-4"></a>OLSは、独立変数と従属変数の関係を分析するための基本的な方法であり、社会科学の分野で広く使用されているため、非常に重要な分析手法です。</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
-<footer class="footer"><div class="nav-footer">
+<footer class="footer">
+  <div class="nav-footer">
     <div class="nav-footer-left">
 <p>Copyright 2026, Soichi Matsuura</p>
 </div>   
@@ -733,7 +718,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
-<li class="nav-item compact">
+    <li class="nav-item compact">
     <a class="nav-link" href="https://so-ichi.com/r.html">
       <i class="bi bi-house" role="img">
 </i> 
@@ -752,9 +737,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
   </li>  
 </ul>
-</div>
+    </div>
   </div>
 </footer>
+
+
 
 
 </body></html>
