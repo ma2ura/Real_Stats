@@ -2,11 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.27">
+<meta name="generator" content="quarto-1.9.37">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Soichi Matsuura">
 <title>社会科学のための統計分析入門の勉強ノート</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -66,19 +69,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="./img/favicon.ico" rel="icon">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-c2faf606acb82b7945c08ef153ee7e46.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-8b6ec28c7624df160bce42457c818d22.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-c2faf606acb82b7945c08ef153ee7e46.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-fc8564e7bb1a38287883ba922e186079.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-28d2321d8d7e4f93cd9754515dc59dad.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-fc8564e7bb1a38287883ba922e186079.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-52e09e6e303b1dda867a222b625ac07f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-52e09e6e303b1dda867a222b625ac07f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-52e09e6e303b1dda867a222b625ac07f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-4821737fae1cfc579e75059a4b0a2faf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-4821737fae1cfc579e75059a4b0a2faf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-4821737fae1cfc579e75059a4b0a2faf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -191,8 +193,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99"><h2 id="toc-title">ここの目次</h2>
    
   <ul class="collapse">
-<li><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" id="toc-はじめに" class="nav-link active" data-scroll-target="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB"><span class="header-section-number">0.1</span> はじめに</a></li>
-  <li><a href="#%E6%BA%96%E5%82%99" id="toc-準備" class="nav-link" data-scroll-target="#%E6%BA%96%E5%82%99"><span class="header-section-number">0.2</span> 準備</a></li>
+<li>
+<a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" id="toc-はじめに" class="nav-link active" data-scroll-target="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB"><span class="header-section-number">1</span> はじめに</a>
+  <ul class="collapse">
+<li><a href="#%E6%BA%96%E5%82%99" id="toc-準備" class="nav-link" data-scroll-target="#%E6%BA%96%E5%82%99"><span class="header-section-number">1.1</span> 準備</a></li>
+  </ul>
+</li>
   </ul></nav>
 </nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -221,19 +227,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 </header>
-<section id="はじめに" class="level2" data-number="0.1"><h2 data-number="0.1" class="anchored" data-anchor-id="はじめに">
-<span class="header-section-number">0.1</span> はじめに</h2><p><img src="img/real_stats.jpg" title="社会科学のための統計分析入門の勉強ノート" class="quarto-cover-image nolightbox img-fluid"></p>
+<section id="はじめに" class="level1" data-number="1"><h1 data-number="1">
+<span class="header-section-number">1</span> はじめに</h1><p><img src="img/real_stats.jpg" title="社会科学のための統計分析入門の勉強ノート" class="quarto-cover-image nolightbox img-fluid"></p>
 <p>このノートは、マイケル・ベイリー先生が書かれた「Real Stats: Using Econometrics for Political Science and Public Policy, 2nd ed.」の翻訳書である「社会科学のための統計分析入門」勁草書房の勉強内容をまとめたものです。</p>
-</section><section id="準備" class="level2" data-number="0.2"><h2 data-number="0.2" class="anchored" data-anchor-id="準備">
-<span class="header-section-number">0.2</span> 準備</h2>
-<p>各自のPC(WindowsかMacを想定)の好きな場所に<code>Real_Stats</code>というフォルダを作成し，そこを作業ディレクトリにしていることを想定しています。 この文章の意味が分からない人は，Rの入門書を確認してください。 作業ディレクトリの中に<code>data</code>というフォルダを作成し，そこにテキストで使うデータファイルを保存してある，という前提で進めます。<code>Rdata</code>ファイルを読み込む場合は、以下のように<code><a href="https://rdrr.io/r/base/load.html">load()</a></code>関数を使います。</p>
+<section id="準備" class="level2" data-number="1.1"><h2 data-number="1.1" class="anchored" data-anchor-id="準備">
+<span class="header-section-number">1.1</span> 準備</h2>
+<p>各自のPC(WindowsかMacを想定)の好きな場所に<code>Real_Stats</code>というフォルダを作成し、そこを作業ディレクトリにしていることを想定しています。 この文章の意味が分からない人は、Rの入門書を確認してください。 作業ディレクトリの中に<code>data</code>というフォルダを作成し、そこにテキストで使うデータファイルを保存してある、という前提で進めます。 <code>Rdata</code>ファイルを読み込む場合は、以下のように<code><a href="https://rdrr.io/r/base/load.html">load()</a></code>関数を使います。</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">load</span>(<span class="st">"data/Ch2_Exercise1_DonutX.RData"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">ls</span>() <span class="co"># データセットの中身を確認</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="co"># 中身をチェック</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">ls</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "dta"             "pandoc_dir"      "quarto_bin_path"</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>dta <span class="co"># データセットの内容を確認</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>読み込んだ<code>Rdata</code>の中身は、</p>
+<ul>
+<li>
+<code>data</code> : データフレーム</li>
+<li>
+<code>dta</code> : データフレーム</li>
+<li>
+<code>g</code> : グラフオブジェクト</li>
+<li>
+<code>my_font</code> : フォント設定</li>
+<li>
+<code>n</code> : 数値</li>
+<li>
+<code>x</code> : 数値ベクトル</li>
+<li>
+<code>y</code> : 数値ベクトル</li>
+</ul>
+<p>の7つのオブジェクトが入っています。 ここでは、<code>dta</code>を使います。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>dta</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
@@ -246,7 +273,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <!-- -->
 
-</section><a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section></section><a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
     const anchorJS = new window.AnchorJS();
@@ -706,21 +733,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">## はじめに</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu"># はじめに</span></span>
 <span id="cb4-2"><a href="#cb4-2"></a></span>
 <span id="cb4-3"><a href="#cb4-3"></a>このノートは、マイケル・ベイリー先生が書かれた「Real Stats: Using Econometrics for Political Science and Public Policy, 2nd ed.」の翻訳書である「社会科学のための統計分析入門」勁草書房の勉強内容をまとめたものです。</span>
 <span id="cb4-4"><a href="#cb4-4"></a></span>
 <span id="cb4-5"><a href="#cb4-5"></a><span class="fu">## 準備</span></span>
 <span id="cb4-6"><a href="#cb4-6"></a></span>
-<span id="cb4-7"><a href="#cb4-7"></a>各自のPC(WindowsかMacを想定)の好きな場所に<span class="in">`Real_Stats`</span>というフォルダを作成し，そこを作業ディレクトリにしていることを想定しています。</span>
-<span id="cb4-8"><a href="#cb4-8"></a>この文章の意味が分からない人は，Rの入門書を確認してください。</span>
-<span id="cb4-9"><a href="#cb4-9"></a>作業ディレクトリの中に<span class="in">`data`</span>というフォルダを作成し，そこにテキストで使うデータファイルを保存してある，という前提で進めます。<span class="in">`Rdata`</span>ファイルを読み込む場合は、以下のように<span class="in">`load()`</span>関数を使います。</span>
-<span id="cb4-10"><a href="#cb4-10"></a></span>
-<span id="cb4-13"><a href="#cb4-13"></a><span class="in">```{r}</span></span>
-<span id="cb4-14"><a href="#cb4-14"></a><span class="fu">load</span>(<span class="st">"data/Ch2_Exercise1_DonutX.RData"</span>)</span>
-<span id="cb4-15"><a href="#cb4-15"></a><span class="fu">ls</span>() <span class="co"># データセットの中身を確認</span></span>
-<span id="cb4-16"><a href="#cb4-16"></a>dta <span class="co"># データセットの内容を確認</span></span>
-<span id="cb4-17"><a href="#cb4-17"></a><span class="in">```</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a>各自のPC(WindowsかMacを想定)の好きな場所に<span class="in">`Real_Stats`</span>というフォルダを作成し、そこを作業ディレクトリにしていることを想定しています。</span>
+<span id="cb4-8"><a href="#cb4-8"></a>この文章の意味が分からない人は、Rの入門書を確認してください。</span>
+<span id="cb4-9"><a href="#cb4-9"></a>作業ディレクトリの中に<span class="in">`data`</span>というフォルダを作成し、そこにテキストで使うデータファイルを保存してある、という前提で進めます。</span>
+<span id="cb4-10"><a href="#cb4-10"></a><span class="in">`Rdata`</span>ファイルを読み込む場合は、以下のように<span class="in">`load()`</span>関数を使います。</span>
+<span id="cb4-11"><a href="#cb4-11"></a></span>
+<span id="cb4-14"><a href="#cb4-14"></a><span class="in">```{r}</span></span>
+<span id="cb4-15"><a href="#cb4-15"></a><span class="fu">load</span>(<span class="st">"data/Ch2_Exercise1_DonutX.RData"</span>)</span>
+<span id="cb4-16"><a href="#cb4-16"></a><span class="co"># 中身をチェック</span></span>
+<span id="cb4-17"><a href="#cb4-17"></a><span class="fu">ls</span>()</span>
+<span id="cb4-18"><a href="#cb4-18"></a><span class="in">```</span></span>
+<span id="cb4-19"><a href="#cb4-19"></a></span>
+<span id="cb4-20"><a href="#cb4-20"></a>読み込んだ<span class="in">`Rdata`</span>の中身は、</span>
+<span id="cb4-21"><a href="#cb4-21"></a></span>
+<span id="cb4-22"><a href="#cb4-22"></a><span class="ss">- </span><span class="in">`data`</span> : データフレーム</span>
+<span id="cb4-23"><a href="#cb4-23"></a><span class="ss">- </span><span class="in">`dta`</span> : データフレーム</span>
+<span id="cb4-24"><a href="#cb4-24"></a><span class="ss">- </span><span class="in">`g`</span> : グラフオブジェクト</span>
+<span id="cb4-25"><a href="#cb4-25"></a><span class="ss">- </span><span class="in">`my_font`</span> : フォント設定</span>
+<span id="cb4-26"><a href="#cb4-26"></a><span class="ss">- </span><span class="in">`n`</span> : 数値</span>
+<span id="cb4-27"><a href="#cb4-27"></a><span class="ss">- </span><span class="in">`x`</span> : 数値ベクトル</span>
+<span id="cb4-28"><a href="#cb4-28"></a><span class="ss">- </span><span class="in">`y`</span> : 数値ベクトル</span>
+<span id="cb4-29"><a href="#cb4-29"></a></span>
+<span id="cb4-30"><a href="#cb4-30"></a>の7つのオブジェクトが入っています。</span>
+<span id="cb4-31"><a href="#cb4-31"></a>ここでは、<span class="in">`dta`</span>を使います。</span>
+<span id="cb4-32"><a href="#cb4-32"></a></span>
+<span id="cb4-35"><a href="#cb4-35"></a><span class="in">```{r}</span></span>
+<span id="cb4-36"><a href="#cb4-36"></a>dta</span>
+<span id="cb4-37"><a href="#cb4-37"></a><span class="in">```</span></span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

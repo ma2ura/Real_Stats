@@ -1,0 +1,125 @@
+## 仮説検定と区間推定
+
+## 仮説検定
+
+Persico, Postlewaite and Silverman (2004)の研究を例に、<span class="markp">高身長の人ほど賃金が高いのでは？</span>、というリサーチ・クエスチョンを考えます。
+
+:::{.column-margin}
+Nicola Persico  and Andrew Postlewaite  and Dan Silverman, 
+**The Effect of Adolescent Experience on Labor Market Outcomes: The Case of Height**, 
+Journal of Political Economy, 112(5), 1019-1053, 2004.
+:::
+
+この疑問に対して納得できる証拠を示すため、統計的手法を用います。
+
+自然科学の実験とは異なり、社会科学の研究では、同じ条件で複数の標本を得ることができないことが多いです。
+例えば、身長と賃金の関係を調べるために、同じ条件で複数の標本を得ることはできません。
+このため、社会科学の研究では、<span class="markp">1つの標本から、母集団の特性を推測する</span>、という方法が用いられます。
+その主要な方法の1つが、線形回帰分析による**仮説検定**(hypothesis testing)です。
+以下では、仮説検定の概念として重要な
+
+- 帰無仮説
+- 対立仮説
+- 有意水準
+
+を説明します。
+
+次のような線形関係を想定した統計モデルを考えます。
+$$
+賃金_i = \beta_0 + \beta_1 成人身長_i + \varepsilon_i
+$$
+このとき、帰無仮説$H_0$は、
+
+:::{.column-margin}
+帰無仮説を英語でNull Hypothesisと呼ぶことから、帰無仮説を表す記号として$H_0$が用いられます。
+対立仮説は英語でAlternative Hypothesisと呼ばれることから、対立仮説を表す記号として$H_a$あるいは$H_1$が用いられます。
+:::
+
+<span style="font-size: 1.5em; text-align: center;">
+**成人身長は賃金に影響を<span class="markb">与えない</span>**
+</span>
+つまり、<span class="markb">$\beta_1 = 0$である</span>、という仮説です。
+これに対して、対立仮説$H_1$は帰無仮説の否定であるため、
+<span style="font-size: 1.5em; text-align: center;">
+**成人身長は賃金に影響を<span class="markp">与える</span>**
+</span>
+つまり、<span class="markp">$\beta_1 \neq 0$である</span>、という仮説になります。
+
+ここでわれわれは、<span class="markb">帰無仮説を直接証明することはできない</span>、ということを理解しておく必要があります。
+できることは、<span class="markp">帰無仮説が正しいと仮定したときに、観測されたデータがどれくらい珍しいかを評価すること</span>です。
+つまり$\beta_1 = 0$が正しい(つまり身長と賃金の間に関係がない)と仮定したときに、身長と賃金の間に関係があると言えるほど手元にあるサンプルから計算された推定量$\beta_1$の値が大きい、ということが<span class="markp">どれほど起こりにくいことなのか</span>、を評価することができます。
+
+
+### 標本は1つしかない。
+
+ここで、手元で計算できた$\beta$の値は、理想的には複数得られた標本のうち1つでしかなく、この値がどれほど起こりえない値であるのかを評価するためには、複数の標本から$\beta$の値を計算し、その分布を調べる必要があります。
+しかし、社会科学の研究では、同じ条件で複数の標本を得ることができないことがほとんどなので、パラメータの推定量の分布を直接観察することはできません。
+このため、パラメータの推定量の分布の代わりに<span class="markp">パラメータの推定量の標準誤差</span>を計算して、推定量の値がどれほど起こりにくい値であるのかを評価します。
+
+母集団の未知のパラメータ$\beta_1$と$\beta_2$をもつ真のモデルが次のような線形関係であるとします。
+$$
+賃金_i = 100 + 10 \times 成人身長_i + \varepsilon_i
+$$
+
+ここで$\varepsilon_i$は平均0、分散10の正規分布に従う誤差項であるとします。
+身長はセンチメートル、賃金は万円で表されているとします。
+つまり、真のモデルでは、身長が1センチメートル高くなると、賃金が10万円高くなることになります。
+この未知のパラメータをもつ母集団から標本を1000回抽出し、それぞれの標本から$\beta_1$の推定量を計算します。
+
+```{r}
+#| code-fold: true
+pacman::p_load(
+  tidyverse,
+  downlit,
+  xml2
+  )
+set.seed(123)
+N <- 100         # 1回あたりの標本サイズ (Sample Size)
+n_sim <- 1000   # シミュレーションの反復回数 (Replications)
+
+beta1 <- 100    # 真の切片 (True Intercept)
+beta2 <- 10     # 真の傾き (True Slope)
+
+beta2_estimates <- numeric(n_sim)
+
+for (i in 1:n_sim) {
+  # 毎回、母集団からサイズNの独立な標本を抽出
+  x_sim <- rnorm(N, mean = 170, sd = 10)
+  epsilon <- rnorm(N, mean = 0, sd = sqrt(10)) # 分散が10、標準誤差はsqrt(10)
+  y_sim <- beta1 + beta2 * x_sim + epsilon　# yの推定値
+  model_sim <- lm(y_sim ~ x_sim) # 回帰
+  beta2_estimates[i] <- coef(model_sim)[2]
+}
+
+# 1000個の推定量をもつデータフレームを作成
+df_estimates <- tibble(beta2_hat = beta2_estimates)
+
+# プロットの作成
+
+ggplot(df_estimates, aes(x = beta2_hat)) +
+  geom_histogram(aes(y = after_stat(density)), bins = 30, 
+                 fill = "#3c78c3", color = "white", alpha = 0.7) +
+  geom_vline(xintercept = beta2, color = "#FF7F24", linetype = "dashed", linewidth = 1) +
+  labs(
+    title = expression(paste(hat(beta)[2], "の推定値の分布")),
+    x = expression(paste("推定された係数", hat(beta)[2])),
+    y = "密度"
+  ) +
+  theme_minimal()
+```
+
+
+![標準誤差](img/standard_error.png)
+
+
+
+## t検定
+
+## p値
+
+## 検出力
+
+## 仮説検定に関する素直な説明
+
+## 信頼区間
+

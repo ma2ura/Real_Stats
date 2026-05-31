@@ -2,17 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.37">
+<meta name="generator" content="quarto-1.8.27">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Soichi Matsuura">
 
-<title>第1部 OLSの分析枠組みを理解する – 社会科学のための統計分析入門の勉強ノート</title>
+<title>5&nbsp; 仮説検定と区間推定 – 社会科学のための統計分析入門の勉強ノート</title>
 <style>
-/* Default styles provided by pandoc.
-** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
-*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -69,23 +66,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./chapter03.html" rel="next">
-<link href="./chapter02.html" rel="prev">
+<link href="./chapter03.html" rel="prev">
 <link href="./img/favicon.ico" rel="icon">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-fc8564e7bb1a38287883ba922e186079.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-28d2321d8d7e4f93cd9754515dc59dad.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-fc8564e7bb1a38287883ba922e186079.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-c2faf606acb82b7945c08ef153ee7e46.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-8b6ec28c7624df160bce42457c818d22.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-c2faf606acb82b7945c08ef153ee7e46.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-4821737fae1cfc579e75059a4b0a2faf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-4821737fae1cfc579e75059a4b0a2faf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-4821737fae1cfc579e75059a4b0a2faf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-52e09e6e303b1dda867a222b625ac07f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-52e09e6e303b1dda867a222b625ac07f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-52e09e6e303b1dda867a222b625ac07f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -119,8 +116,51 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 .markp {background: linear-gradient(transparent 60%, #ffcdd2 0%);}
 </style>
 
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
 
-<meta name="twitter:title" content="第1部 OLSの分析枠組みを理解する – 社会科学のための統計分析入門の勉強ノート">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta name="twitter:title" content="5&nbsp; 仮説検定と区間推定 – 社会科学のための統計分析入門の勉強ノート">
 <meta name="twitter:description" content="">
 <meta name="twitter:card" content="summary">
 </head>
@@ -134,7 +174,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./part01.html">第1部 OLSの分析枠組みを理解する</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./part01.html">第1部 OLSの分析枠組みを理解する</a></li><li class="breadcrumb-item"><a href="./chapter04.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">仮説検定と区間推定</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -187,7 +227,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./part01.html" class="sidebar-item-text sidebar-link active">
+            <a href="./part01.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">第1部 OLSの分析枠組みを理解する</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -202,7 +242,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapter04.html" class="sidebar-item-text sidebar-link">
+  <a href="./chapter04.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">仮説検定と区間推定</span></span></a>
   </div>
 </li>
@@ -210,7 +250,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
     </ul>
     </div>
-    
+    <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">ここの目次</h2>
+   
+  <ul class="collapse">
+  <li><a href="#仮説検定" id="toc-仮説検定" class="nav-link active" data-scroll-target="#仮説検定"><span class="header-section-number">5.1</span> 仮説検定</a></li>
+  </ul>
+</nav>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -219,9 +265,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./part01.html">第1部 OLSの分析枠組みを理解する</a></li><li class="breadcrumb-item"><a href="./chapter04.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">仮説検定と区間推定</span></a></li></ol></nav>
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">第1部 OLSの分析枠組みを理解する</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">仮説検定と区間推定</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -238,11 +284,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>第1部では、変数間の関係が線形(linear)であると想定して構築されたモデルを分析するための手法として、<strong>最小二乗法</strong>(ordinary least squares: OLS)を紹介します。 OLSは、独立変数と従属変数の関係を分析するための基本的な方法であり、社会科学の分野で広く使用されているため、非常に重要な分析手法です。</p>
+<section id="仮説検定" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="仮説検定"><span class="header-section-number">5.1</span> 仮説検定</h2>
+<p>自分が考えるリサーチ・クエスチョンに答えるため、相手を納得させられる証拠を示すため、統計的手法を用います。 その主要な方法の1つが、線形回帰分析による<strong>仮説検定</strong>(hypothesis testing)です。 以下では、仮説検定の概念として重要な</p>
+<ul>
+<li>帰無仮説</li>
+<li>対立仮説</li>
+<li>有意水準</li>
+</ul>
+<p>を説明します。 以下では、第3章の例(p.102)の身長と賃金の関係を用います。 次のような統計モデルを考えます。 <span class="math display">
+賃金_i = \beta_0 + \beta_1 成人身長_i + \varepsilon_i
+</span></p>
+<p>帰無仮説は、</p>
+<p><span style="font-size: 1.5em; text-align: center;"> <strong>成人身長は賃金に影響を与えない</strong> </span></p>
+<p>つまり、<span class="math inline">\beta_1 = 0</span>である、という仮説です。 これに対して、対立仮説は帰無仮説の否定であるため、</p>
+<p><span style="font-size: 1.5em; text-align: center;"> <strong>成人身長は賃金に影響を与える</strong> </span></p>
+<p>つまり、<span class="math inline">\beta_1 \neq 0</span>である、という仮説になります。</p>
 
 
 <!-- -->
 
+</section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -700,20 +762,101 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./chapter02.html" class="pagination-link" aria-label="現場で使う統計">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">現場で使う統計</span></span>
+      <a href="./chapter03.html" class="pagination-link" aria-label="二変量OLS | 計量社会科学分析の基礎">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">二変量OLS | 計量社会科学分析の基礎</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./chapter03.html" class="pagination-link" aria-label="二変量OLS | 計量社会科学分析の基礎">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">二変量OLS | 計量社会科学分析の基礎</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">## 第1部 OLSの分析枠組みを理解する</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">## 仮説検定と区間推定</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a></span>
-<span id="cb1-3"><a href="#cb1-3"></a>第1部では、変数間の関係が線形(linear)であると想定して構築されたモデルを分析するための手法として、**最小二乗法**(ordinary least squares: OLS)を紹介します。</span>
-<span id="cb1-4"><a href="#cb1-4"></a>OLSは、独立変数と従属変数の関係を分析するための基本的な方法であり、社会科学の分野で広く使用されているため、非常に重要な分析手法です。</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">## 仮説検定</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a>Persico, Postlewaite and Silverman (2004)の研究を例に、<span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"markp"</span><span class="dt">&gt;</span>高身長の人ほど賃金が高いのでは？<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span>、というリサーチ・クエスチョンを考えます。</span>
+<span id="cb1-6"><a href="#cb1-6"></a></span>
+<span id="cb1-7"><a href="#cb1-7"></a>:::{.column-margin}</span>
+<span id="cb1-8"><a href="#cb1-8"></a>Nicola Persico  and Andrew Postlewaite  and Dan Silverman, </span>
+<span id="cb1-9"><a href="#cb1-9"></a>**The Effect of Adolescent Experience on Labor Market Outcomes: The Case of Height**, </span>
+<span id="cb1-10"><a href="#cb1-10"></a>Journal of Political Economy, 112(5), 1019-1053, 2004.</span>
+<span id="cb1-11"><a href="#cb1-11"></a>:::</span>
+<span id="cb1-12"><a href="#cb1-12"></a></span>
+<span id="cb1-13"><a href="#cb1-13"></a>この疑問に対して納得できる証拠を示すため、統計的手法を用います。</span>
+<span id="cb1-14"><a href="#cb1-14"></a></span>
+<span id="cb1-15"><a href="#cb1-15"></a>自然科学の実験とは異なり、社会科学の研究では、同じ条件で複数の標本を得ることができないことが多いです。</span>
+<span id="cb1-16"><a href="#cb1-16"></a>例えば、身長と賃金の関係を調べるために、同じ条件で複数の標本を得ることはできません。</span>
+<span id="cb1-17"><a href="#cb1-17"></a>このため、社会科学の研究では、<span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"markp"</span><span class="dt">&gt;</span>1つの標本から、母集団の特性を推測する<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span>、という方法が用いられます。</span>
+<span id="cb1-18"><a href="#cb1-18"></a>その主要な方法の1つが、線形回帰分析による**仮説検定**(hypothesis testing)です。</span>
+<span id="cb1-19"><a href="#cb1-19"></a>以下では、仮説検定の概念として重要な</span>
+<span id="cb1-20"><a href="#cb1-20"></a></span>
+<span id="cb1-21"><a href="#cb1-21"></a><span class="ss">- </span>帰無仮説</span>
+<span id="cb1-22"><a href="#cb1-22"></a><span class="ss">- </span>対立仮説</span>
+<span id="cb1-23"><a href="#cb1-23"></a><span class="ss">- </span>有意水準</span>
+<span id="cb1-24"><a href="#cb1-24"></a></span>
+<span id="cb1-25"><a href="#cb1-25"></a>を説明します。</span>
+<span id="cb1-26"><a href="#cb1-26"></a></span>
+<span id="cb1-27"><a href="#cb1-27"></a>次のような線形関係を想定した統計モデルを考えます。</span>
+<span id="cb1-28"><a href="#cb1-28"></a>$$</span>
+<span id="cb1-29"><a href="#cb1-29"></a>賃金_i = \beta_0 + \beta_1 成人身長_i + \varepsilon_i</span>
+<span id="cb1-30"><a href="#cb1-30"></a>$$</span>
+<span id="cb1-31"><a href="#cb1-31"></a>このとき、帰無仮説$H_0$は、</span>
+<span id="cb1-32"><a href="#cb1-32"></a></span>
+<span id="cb1-33"><a href="#cb1-33"></a>:::{.column-margin}</span>
+<span id="cb1-34"><a href="#cb1-34"></a>帰無仮説を英語でNull Hypothesisと呼ぶことから、帰無仮説を表す記号として$H_0$が用いられます。</span>
+<span id="cb1-35"><a href="#cb1-35"></a>対立仮説は英語でAlternative Hypothesisと呼ばれることから、対立仮説を表す記号として$H_a$あるいは$H_1$が用いられます。</span>
+<span id="cb1-36"><a href="#cb1-36"></a>:::</span>
+<span id="cb1-37"><a href="#cb1-37"></a></span>
+<span id="cb1-38"><a href="#cb1-38"></a><span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> style</span><span class="op">=</span><span class="st">"font-size: 1.5em; text-align: center;"</span><span class="dt">&gt;</span></span>
+<span id="cb1-39"><a href="#cb1-39"></a>**成人身長は賃金に影響を&lt;span class="markb"&gt;与えない&lt;/span&gt;**</span>
+<span id="cb1-40"><a href="#cb1-40"></a><span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span></span>
+<span id="cb1-41"><a href="#cb1-41"></a>つまり、<span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"markb"</span><span class="dt">&gt;</span>$\beta_1 = 0$である<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span>、という仮説です。</span>
+<span id="cb1-42"><a href="#cb1-42"></a>これに対して、対立仮説$H_1$は帰無仮説の否定であるため、</span>
+<span id="cb1-43"><a href="#cb1-43"></a><span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> style</span><span class="op">=</span><span class="st">"font-size: 1.5em; text-align: center;"</span><span class="dt">&gt;</span></span>
+<span id="cb1-44"><a href="#cb1-44"></a>**成人身長は賃金に影響を&lt;span class="markp"&gt;与える&lt;/span&gt;**</span>
+<span id="cb1-45"><a href="#cb1-45"></a><span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span></span>
+<span id="cb1-46"><a href="#cb1-46"></a>つまり、<span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"markp"</span><span class="dt">&gt;</span>$\beta_1 \neq 0$である<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span>、という仮説になります。</span>
+<span id="cb1-47"><a href="#cb1-47"></a></span>
+<span id="cb1-48"><a href="#cb1-48"></a>ここでわれわれは、<span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"markb"</span><span class="dt">&gt;</span>帰無仮説を直接証明することはできない<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span>、ということを理解しておく必要があります。</span>
+<span id="cb1-49"><a href="#cb1-49"></a>できることは、<span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"markp"</span><span class="dt">&gt;</span>帰無仮説が正しいと仮定したときに、観測されたデータがどれくらい珍しいかを評価すること<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span>です。</span>
+<span id="cb1-50"><a href="#cb1-50"></a>つまり$\beta_1 = 0$が正しい(つまり身長と賃金の間に関係がない)と仮定したときに、身長と賃金の間に関係があると言えるほど手元にあるサンプルから計算された推定量$\beta_1$の値が大きい、ということが<span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"markp"</span><span class="dt">&gt;</span>どれほど起こりにくいことなのか<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span>、を評価することができます。</span>
+<span id="cb1-51"><a href="#cb1-51"></a></span>
+<span id="cb1-52"><a href="#cb1-52"></a></span>
+<span id="cb1-53"><a href="#cb1-53"></a><span class="fu">### 標本は1つしかない。</span></span>
+<span id="cb1-54"><a href="#cb1-54"></a></span>
+<span id="cb1-55"><a href="#cb1-55"></a>ここで、手元で計算できた$\beta$の値は、理想的には複数得られた標本のうち1つでしかなく、この値がどれほど起こりえない値であるのかを評価するためには、複数の標本から$\beta$の値を計算し、その分布を調べる必要があります。</span>
+<span id="cb1-56"><a href="#cb1-56"></a>しかし、社会科学の研究では、同じ条件で複数の標本を得ることができないことがほとんどなので、パラメータの推定量の分布を直接観察することはできません。</span>
+<span id="cb1-57"><a href="#cb1-57"></a>このため、パラメータの推定量の分布の代わりに<span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"markp"</span><span class="dt">&gt;</span>パラメータの推定量の標準誤差<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span>を計算して、推定量の値がどれほど起こりにくい値であるのかを評価します。</span>
+<span id="cb1-58"><a href="#cb1-58"></a></span>
+<span id="cb1-59"><a href="#cb1-59"></a>母集団の未知のパラメータ$\beta_1$と$\beta_2$をもつ真のモデルが次のような線形関係であるとします。</span>
+<span id="cb1-60"><a href="#cb1-60"></a>$$</span>
+<span id="cb1-61"><a href="#cb1-61"></a>賃金_i = 100 + 10 \times 成人身長_i + \varepsilon_i</span>
+<span id="cb1-62"><a href="#cb1-62"></a>$$</span>
+<span id="cb1-63"><a href="#cb1-63"></a></span>
+<span id="cb1-64"><a href="#cb1-64"></a>ここで$\varepsilon_i$は平均0、分散10の正規分布に従う誤差項であるとします。</span>
+<span id="cb1-65"><a href="#cb1-65"></a>身長はセンチメートル、賃金は万円で表されているとします。</span>
+<span id="cb1-66"><a href="#cb1-66"></a>つまり、真のモデルでは、身長が1センチメートル高くなると、賃金が10万円高くなることになります。</span>
+<span id="cb1-67"><a href="#cb1-67"></a>この未知のパラメータをもつ母集団から標本を1000回抽出し、それぞれの標本から$\beta_1$の推定量を計算します。</span>
+<span id="cb1-68"><a href="#cb1-68"></a></span>
+<span id="cb1-71"><a href="#cb1-71"></a><span class="in">```{r}</span></span>
+<span id="cb1-72"><a href="#cb1-72"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb1-73"><a href="#cb1-73"></a>N <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb1-74"><a href="#cb1-74"></a>beta1 <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb1-75"><a href="#cb1-75"></a>beta2 <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb1-76"><a href="#cb1-76"></a>n <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb1-77"><a href="#cb1-77"></a>beta1_estimates <span class="ot">&lt;-</span> <span class="fu">numeric</span>(n)</span>
+<span id="cb1-78"><a href="#cb1-78"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) {</span>
+<span id="cb1-79"><a href="#cb1-79"></a>    x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N, <span class="at">mean =</span> <span class="dv">170</span>, <span class="at">sd =</span> <span class="dv">10</span>)</span>
+<span id="cb1-80"><a href="#cb1-80"></a>    epsilon <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="fu">sqrt</span>(<span class="dv">10</span>))</span>
+<span id="cb1-81"><a href="#cb1-81"></a>    y <span class="ot">&lt;-</span> beta1 <span class="sc">+</span> beta2 <span class="sc">*</span> x <span class="sc">+</span> epsilon</span>
+<span id="cb1-82"><a href="#cb1-82"></a>    model <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x)</span>
+<span id="cb1-83"><a href="#cb1-83"></a>    beta1_estimates[i] <span class="ot">&lt;-</span> <span class="fu">coef</span>(model)[<span class="dv">2</span>]</span>
+<span id="cb1-84"><a href="#cb1-84"></a>}</span>
+<span id="cb1-85"><a href="#cb1-85"></a>beta1_estimates <span class="sc">|&gt;</span> <span class="fu">hist</span>()</span>
+<span id="cb1-86"><a href="#cb1-86"></a><span class="in">```</span></span>
+<span id="cb1-87"><a href="#cb1-87"></a></span>
+<span id="cb1-88"><a href="#cb1-88"></a></span>
+<span id="cb1-89"><a href="#cb1-89"></a><span class="al">![標準誤差](img/standard_error.png)</span></span>
+</code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">

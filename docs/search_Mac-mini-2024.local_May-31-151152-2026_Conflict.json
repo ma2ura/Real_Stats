@@ -112,9 +112,9 @@
   {
     "objectID": "chapter04.html",
     "href": "chapter04.html",
-    "title": "\n5  仮説検定と区間推定\n",
+    "title": "5  仮説検定と区間推定",
     "section": "",
-    "text": "5.1 仮説検定\nPersico, Postlewaite and Silverman (2004)の研究を例に、高身長の人ほど賃金が高いのでは？、というリサーチ・クエスチョンを考えます。\nこの疑問に対して納得できる証拠を示すため、統計的手法を用います。\n自然科学の実験とは異なり、社会科学の研究では、同じ条件で複数の標本を得ることができないことが多いです。 例えば、身長と賃金の関係を調べるために、同じ条件で複数の標本を得ることはできません。 このため、社会科学の研究では、1つの標本から、母集団の特性を推測する、という方法が用いられます。 その主要な方法の1つが、線形回帰分析による仮説検定(hypothesis testing)です。 以下では、仮説検定の概念として重要な\nを説明します。\n次のような線形関係を想定した統計モデルを考えます。 \n賃金_i = \\beta_0 + \\beta_1 成人身長_i + \\varepsilon_i\n このとき、帰無仮説H_0は、\n成人身長は賃金に影響を与えない  つまり、\\beta_1 = 0である、という仮説です。 これに対して、対立仮説H_1は帰無仮説の否定であるため、  成人身長は賃金に影響を与える  つまり、\\beta_1 \\neq 0である、という仮説になります。\nここでわれわれは、帰無仮説を直接証明することはできない、ということを理解しておく必要があります。 できることは、帰無仮説が正しいと仮定したときに、観測されたデータがどれくらい珍しいかを評価することです。 つまり\\beta_1 = 0が正しい(つまり身長と賃金の間に関係がない)と仮定したときに、身長と賃金の間に関係があると言えるほど手元にあるサンプルから計算された推定量\\beta_1の値が大きい、ということがどれほど起こりにくいことなのか、を評価することができます。",
+    "text": "5.1 仮説検定\n自分が考えるリサーチ・クエスチョンに答えるため、相手を納得させられる証拠を示すため、統計的手法を用います。 その主要な方法の1つが、線形回帰分析による仮説検定(hypothesis testing)です。 以下では、仮説検定の概念として重要な\nを説明します。 以下では、第3章の例(p.102)の身長と賃金の関係を用います。 次のような統計モデルを考えます。 \n賃金_i = \\beta_0 + \\beta_1 成人身長_i + \\varepsilon_i\n帰無仮説は、\n成人身長は賃金に影響を与えない\nつまり、\\beta_1 = 0である、という仮説です。 これに対して、対立仮説は帰無仮説の否定であるため、\n成人身長は賃金に影響を与える\nつまり、\\beta_1 \\neq 0である、という仮説になります。",
     "crumbs": [
       "第1部 OLSの分析枠組みを理解する",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>仮説検定と区間推定</span>"
@@ -123,9 +123,9 @@
   {
     "objectID": "chapter04.html#仮説検定",
     "href": "chapter04.html#仮説検定",
-    "title": "\n5  仮説検定と区間推定\n",
+    "title": "5  仮説検定と区間推定",
     "section": "",
-    "text": "Nicola Persico and Andrew Postlewaite and Dan Silverman, The Effect of Adolescent Experience on Labor Market Outcomes: The Case of Height, Journal of Political Economy, 112(5), 1019-1053, 2004.\n\n\n\n帰無仮説\n対立仮説\n有意水準\n\n\n\n\n\n帰無仮説を英語でNull Hypothesisと呼ぶことから、帰無仮説を表す記号としてH_0が用いられます。 対立仮説は英語でAlternative Hypothesisと呼ばれることから、対立仮説を表す記号としてH_aあるいはH_1が用いられます。\n\n\n\n5.1.1 標本は1つしかない。\nここで、手元で計算できた\\betaの値は、理想的には複数得られた標本のうち1つでしかなく、この値がどれほど起こりえない値であるのかを評価するためには、複数の標本から\\betaの値を計算し、その分布を調べる必要があります。 しかし、社会科学の研究では、同じ条件で複数の標本を得ることができないことがほとんどなので、パラメータの推定量の分布を直接観察することはできません。 このため、パラメータの推定量の分布の代わりにパラメータの推定量の標準誤差を計算して、推定量の値がどれほど起こりにくい値であるのかを評価します。\n母集団の未知のパラメータ\\beta_1と\\beta_2をもつ真のモデルが次のような線形関係であるとします。 \n賃金_i = 100 + 10 \\times 成人身長_i + \\varepsilon_i\n\nここで\\varepsilon_iは平均0、分散10の正規分布に従う誤差項であるとします。 身長はセンチメートル、賃金は万円で表されているとします。 つまり、真のモデルでは、身長が1センチメートル高くなると、賃金が10万円高くなることになります。 この未知のパラメータをもつ母集団から標本を1000回抽出し、それぞれの標本から\\beta_1の推定量を計算します。\n\nCodepacman::p_load(\n  tidyverse,\n  downlit,\n  xml2\n  )\nset.seed(123)\nN &lt;- 100         # 1回あたりの標本サイズ (Sample Size)\nn_sim &lt;- 1000   # シミュレーションの反復回数 (Replications)\n\nbeta1 &lt;- 100    # 真の切片 (True Intercept)\nbeta2 &lt;- 10     # 真の傾き (True Slope)\n\nbeta2_estimates &lt;- numeric(n_sim)\n\nfor (i in 1:n_sim) {\n  # 毎回、母集団からサイズNの独立な標本を抽出\n  x_sim &lt;- rnorm(N, mean = 170, sd = 10)\n  epsilon &lt;- rnorm(N, mean = 0, sd = sqrt(10)) # 分散が10、標準誤差はsqrt(10)\n  y_sim &lt;- beta1 + beta2 * x_sim + epsilon　# yの推定値\n  model_sim &lt;- lm(y_sim ~ x_sim) # 回帰\n  beta2_estimates[i] &lt;- coef(model_sim)[2]\n}\n\n# 1000個の推定量をもつデータフレームを作成\ndf_estimates &lt;- tibble(beta2_hat = beta2_estimates)\n\n# プロットの作成\n\nggplot(df_estimates, aes(x = beta2_hat)) +\n  geom_histogram(aes(y = after_stat(density)), bins = 30, \n                 fill = \"#3c78c3\", color = \"white\", alpha = 0.7) +\n  geom_vline(xintercept = beta2, color = \"#FF7F24\", linetype = \"dashed\", linewidth = 1) +\n  labs(\n    title = expression(paste(hat(beta)[2], \"の推定値の分布\")),\n    x = expression(paste(\"推定された係数\", hat(beta)[2])),\n    y = \"密度\"\n  ) +\n  theme_minimal()\n\n\n\n\n\n\n\n\n\n標準誤差",
+    "text": "帰無仮説\n対立仮説\n有意水準",
     "crumbs": [
       "第1部 OLSの分析枠組みを理解する",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>仮説検定と区間推定</span>"
@@ -136,7 +136,7 @@
     "href": "chapter03.html",
     "title": "4  二変量OLS | 計量社会科学分析の基礎",
     "section": "",
-    "text": "4.1 二変量回帰モデル\nここでは、2つの変数間の関係を定量化して、その関係が、\nを分析します。\n先に、数式の表記について説明しておきます。\nここでは従属変数 Y 1つと独立変数 X 1つの2変数からなる二変量回帰モデルを考えます。 次のようなモデルを推定する方法として、二変量OLSを学習します。\nY_i = \\beta_0 + \\beta_1 X_i + \\varepsilon_i\nここで、\\beta_0や\\beta_1はパラメータ(parameter)と呼ばれるもので、それぞれ切片と傾きを表します。 \\varepsilon_i は誤差項(error term)と呼ばれるもので、観測されない要因を表します。 i は観測単位を表すインデックスで、i=1, 2, \\ldots, N とします。\n今、売上高 Y_i と従業員数 X_i のデータが手元にあるとしましょう。 横軸を従業員数、縦軸を売上高とした散布図に描くと次のようになります。\nCode\npacman::p_load(\n    tidyverse, \n    ggthemes, \n    GGally, \n    gt, \n    # gtExtra, \n    knitr, \n    kableExtra, \n    modelsummary\n)\n従業員数と売上高の散布図\n\nset.seed(123) # 乱数のタネ\nn &lt;- 15 # サンプルサイズ\nx &lt;- seq(1, 10, length.out = n) # 独立変数\ny &lt;- 3 + 1.5 * x + rnorm(n, mean = 0, sd = 2) # 従属変数\ndata &lt;- data.frame(x = x, y = y) # データフレームの作成\nmy_font &lt;- if (Sys.info()[\"sysname\"] == \"Darwin\") \"HiraKakuProN-W3\" else \"sans\"\n\n# 作図\ng &lt;- ggplot(data, aes(x = x, y = y)) +\n    geom_point(size = 2.5, color = \"black\", alpha = 0.8) +\n    theme_economist_white(base_family = my_font) +\n        labs(\n        title = \"データの散布図\",\n        x = \"従業員数 (X)\",\n        y = \"売上高 (Y)\"\n    )\n\nprint(g)\n散布図をみると右肩上がりの関係があるように見えますが、もっと明確に変数間の関係を表すために、そのデータを最も良く説明できる直線をひこうと思います。 つまり、切片の\\beta_0と傾きの\\beta_1を決めるということです。 この直線が「モデル」で、それぞれの黒い点とモデルの直線との縦軸方向への距離を「誤差」または「残差」と呼びます。",
+    "text": "4.1 二変量回帰モデル\nここでは、2つの変数間の関係を定量化して、その関係が、\nを分析します。\n先に、数式の表記について説明しておきます。\nここでは従属変数 Y 1つと独立変数 X 1つの2変数からなる二変量回帰モデルを考えます。 次のようなモデルを推定する方法として、二変量OLSを学習します。\nY_i = \\beta_0 + \\beta_1 X_i + \\varepsilon_i\nここで、\\beta_0や\\beta_1はパラメータ(parameter)と呼ばれるもので、それぞれ切片と傾きを表します。 \\varepsilon_i は誤差項(error term)と呼ばれるもので、観測されない要因を表します。 i は観測単位を表すインデックスで、i=1, 2, \\ldots, N とします。\n今、売上高 Y_i と従業員数 X_i のデータが手元にあるとしましょう。 横軸を従業員数、縦軸を売上高とした散布図に描くと次のようになります。\nCode\npacman::p_load(\n    tidyverse, \n    ggthemes, \n    GGally, \n    gt, \n    knitr, \n    kableExtra, \n    modelsummary,\n    xml2\n)\n従業員数と売上高の散布図\n\nset.seed(123) # 乱数のタネ\nn &lt;- 15 # サンプルサイズ\nx &lt;- seq(1, 10, length.out = n) # 独立変数\ny &lt;- 3 + 1.5 * x + rnorm(n, mean = 0, sd = 2) # 従属変数\ndata &lt;- data.frame(x = x, y = y) # データフレームの作成\nmy_font &lt;- if (Sys.info()[\"sysname\"] == \"Darwin\") \"HiraKakuProN-W3\" else \"sans\"\n\n# 作図\ng &lt;- ggplot(data, aes(x = x, y = y)) +\n    geom_point(size = 2.5, color = \"black\", alpha = 0.8) +\n    theme_economist_white(base_family = my_font) +\n        labs(\n        title = \"データの散布図\",\n        x = \"従業員数 (X)\",\n        y = \"売上高 (Y)\"\n    )\n\nprint(g)\n散布図をみると右肩上がりの関係があるように見えますが、もっと明確に変数間の関係を表すために、そのデータを最も良く説明できる直線をひこうと思います。 つまり、切片の\\beta_0と傾きの\\beta_1を決めるということです。 この直線が「モデル」で、それぞれの黒い点とモデルの直線との縦軸方向への距離を「誤差」または「残差」と呼びます。",
     "crumbs": [
       "第1部 OLSの分析枠組みを理解する",
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>二変量OLS | 計量社会科学分析の基礎</span>"
@@ -217,61 +217,6 @@
     "crumbs": [
       "第1部 OLSの分析枠組みを理解する",
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>二変量OLS | 計量社会科学分析の基礎</span>"
-    ]
-  },
-  {
-    "objectID": "chapter04.html#t検定",
-    "href": "chapter04.html#t検定",
-    "title": "\n5  仮説検定と区間推定\n",
-    "section": "\n5.2 t検定",
-    "text": "5.2 t検定",
-    "crumbs": [
-      "第1部 OLSの分析枠組みを理解する",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>仮説検定と区間推定</span>"
-    ]
-  },
-  {
-    "objectID": "chapter04.html#p値",
-    "href": "chapter04.html#p値",
-    "title": "\n5  仮説検定と区間推定\n",
-    "section": "\n5.3 p値",
-    "text": "5.3 p値",
-    "crumbs": [
-      "第1部 OLSの分析枠組みを理解する",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>仮説検定と区間推定</span>"
-    ]
-  },
-  {
-    "objectID": "chapter04.html#検出力",
-    "href": "chapter04.html#検出力",
-    "title": "\n5  仮説検定と区間推定\n",
-    "section": "\n5.4 検出力",
-    "text": "5.4 検出力",
-    "crumbs": [
-      "第1部 OLSの分析枠組みを理解する",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>仮説検定と区間推定</span>"
-    ]
-  },
-  {
-    "objectID": "chapter04.html#仮説検定に関する素直な説明",
-    "href": "chapter04.html#仮説検定に関する素直な説明",
-    "title": "\n5  仮説検定と区間推定\n",
-    "section": "\n5.5 仮説検定に関する素直な説明",
-    "text": "5.5 仮説検定に関する素直な説明",
-    "crumbs": [
-      "第1部 OLSの分析枠組みを理解する",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>仮説検定と区間推定</span>"
-    ]
-  },
-  {
-    "objectID": "chapter04.html#信頼区間",
-    "href": "chapter04.html#信頼区間",
-    "title": "\n5  仮説検定と区間推定\n",
-    "section": "\n5.6 信頼区間",
-    "text": "5.6 信頼区間",
-    "crumbs": [
-      "第1部 OLSの分析枠組みを理解する",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>仮説検定と区間推定</span>"
     ]
   }
 ]

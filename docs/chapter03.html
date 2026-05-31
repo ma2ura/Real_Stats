@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.8.27">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
 <meta name="author" content="Soichi Matsuura">
+
 <title>4&nbsp; 二変量OLS | 計量社会科学分析の基礎 – 社会科学のための統計分析入門の勉強ノート</title>
 <style>
 code{white-space: pre-wrap;}
@@ -55,6 +58,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
+
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
@@ -62,6 +66,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./chapter04.html" rel="next">
 <link href="./part01.html" rel="prev">
 <link href="./img/favicon.ico" rel="icon">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
@@ -81,7 +86,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/bootstrap/bootstrap-52e09e6e303b1dda867a222b625ac07f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
-<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -107,13 +113,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
-<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script><style>
+}</script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<style>
 .marky {background: linear-gradient(transparent 60%, #FCFFC1 0%);}
 .markb {background: linear-gradient(transparent 60%, #b1f6fc 0%);} 
 .markp {background: linear-gradient(transparent 60%, #ffcdd2 0%);}
 </style>
-<script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script><script>document.addEventListener("DOMContentLoaded", function () {
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
  var mathElements = document.getElementsByClassName("math");
  var macros = [];
  for (var i = 0; i < mathElements.length; i++) {
@@ -126,7 +136,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     fleqn: false
    });
 }}});
-  </script><script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
 <script type="text/javascript">
 const typesetMath = (el) => {
   if (window.MathJax) {
@@ -153,6 +165,7 @@ window.Quarto = {
   typesetMath
 };
 </script>
+
 <meta name="twitter:title" content="4&nbsp; 二変量OLS | 計量社会科学分析の基礎 – 社会科学のための統計分析入門の勉強ノート">
 <meta name="twitter:description" content="">
 <meta name="twitter:image" content="https://so-ichi.com/chapter03_files/figure-html/fig01-1.png">
@@ -160,10 +173,13 @@ window.Quarto = {
 <meta name="twitter:image-width" content="6300">
 <meta name="twitter:card" content="summary_large_image">
 </head>
+
 <body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
@@ -174,9 +190,13 @@ window.Quarto = {
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">社会科学のための統計分析入門の勉強ノート</a> 
         <div class="sidebar-tools-main">
@@ -196,7 +216,7 @@ window.Quarto = {
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-<li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">はじめに</span></span></a>
@@ -222,39 +242,48 @@ window.Quarto = {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chapter03.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">二変量OLS | 計量社会科学分析の基礎</span></span></a>
   </div>
 </li>
-      </ul>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">仮説検定と区間推定</span></span></a>
+  </div>
 </li>
+      </ul>
+  </li>
     </ul>
-</div>
-    <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99"><h2 id="toc-title">ここの目次</h2>
+    </div>
+    <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">ここの目次</h2>
    
   <ul class="collapse">
-<li><a href="#%E4%BA%8C%E5%A4%89%E9%87%8Fols-%E8%A8%88%E9%87%8F%E7%A4%BE%E4%BC%9A%E7%A7%91%E5%AD%A6%E5%88%86%E6%9E%90%E3%81%AE%E5%9F%BA%E7%A4%8E" id="toc-二変量ols-計量社会科学分析の基礎" class="nav-link active" data-scroll-target="#%E4%BA%8C%E5%A4%89%E9%87%8Fols-%E8%A8%88%E9%87%8F%E7%A4%BE%E4%BC%9A%E7%A7%91%E5%AD%A6%E5%88%86%E6%9E%90%E3%81%AE%E5%9F%BA%E7%A4%8E"><span class="header-section-number">4.1</span> 二変量OLS | 計量社会科学分析の基礎</a></li>
-  <li><a href="#%E4%BA%8C%E5%A4%89%E9%87%8F%E5%9B%9E%E5%B8%B0%E3%83%A2%E3%83%87%E3%83%AB" id="toc-二変量回帰モデル" class="nav-link" data-scroll-target="#%E4%BA%8C%E5%A4%89%E9%87%8F%E5%9B%9E%E5%B8%B0%E3%83%A2%E3%83%87%E3%83%AB"><span class="header-section-number">4.2</span> 二変量回帰モデル</a></li>
-  <li><a href="#%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%97%E6%B3%95%E3%81%AB%E3%82%88%E3%82%8B%E4%BF%82%E6%95%B0%E6%8E%A8%E5%AE%9A" id="toc-最小二乗法による係数推定" class="nav-link" data-scroll-target="#%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%97%E6%B3%95%E3%81%AB%E3%82%88%E3%82%8B%E4%BF%82%E6%95%B0%E6%8E%A8%E5%AE%9A"><span class="header-section-number">4.3</span> 最小二乗法による係数推定</a></li>
-  <li><a href="#%E5%86%85%E7%94%9F%E6%80%A7%E3%81%A8%E3%83%90%E3%82%A4%E3%82%A2%E3%82%B9" id="toc-内生性とバイアス" class="nav-link" data-scroll-target="#%E5%86%85%E7%94%9F%E6%80%A7%E3%81%A8%E3%83%90%E3%82%A4%E3%82%A2%E3%82%B9"><span class="header-section-number">4.4</span> 内生性とバイアス</a></li>
-  <li><a href="#%E6%8E%A8%E5%AE%9A%E5%80%A4%E3%81%AE%E5%88%B6%E5%BA%A6" id="toc-推定値の制度" class="nav-link" data-scroll-target="#%E6%8E%A8%E5%AE%9A%E5%80%A4%E3%81%AE%E5%88%B6%E5%BA%A6"><span class="header-section-number">4.5</span> 推定値の制度</a></li>
-  <li><a href="#%E7%A2%BA%E7%8E%87%E3%81%AE%E9%99%90%E7%95%8C%E3%81%A8%E4%B8%80%E8%B2%AB%E6%80%A7" id="toc-確率の限界と一貫性" class="nav-link" data-scroll-target="#%E7%A2%BA%E7%8E%87%E3%81%AE%E9%99%90%E7%95%8C%E3%81%A8%E4%B8%80%E8%B2%AB%E6%80%A7"><span class="header-section-number">4.6</span> 確率の限界と一貫性</a></li>
-  <li><a href="#%E5%9B%9E%E7%AD%94%E5%8F%AF%E8%83%BD%E3%81%AA%E5%95%8F%E9%A1%8C---%E4%B8%8D%E5%9D%87%E4%B8%80%E5%88%86%E6%95%A3%E3%81%A8%E8%AA%A4%E4%BD%9C%E5%90%8C%E5%A3%AB%E3%81%AE%E7%9B%B8%E9%96%A2" id="toc-回答可能な問題---不均一分散と誤作同士の相関" class="nav-link" data-scroll-target="#%E5%9B%9E%E7%AD%94%E5%8F%AF%E8%83%BD%E3%81%AA%E5%95%8F%E9%A1%8C---%E4%B8%8D%E5%9D%87%E4%B8%80%E5%88%86%E6%95%A3%E3%81%A8%E8%AA%A4%E4%BD%9C%E5%90%8C%E5%A3%AB%E3%81%AE%E7%9B%B8%E9%96%A2"><span class="header-section-number">4.7</span> 回答可能な問題 - 不均一分散と誤作同士の相関</a></li>
-  <li><a href="#%E9%81%A9%E5%90%88%E5%BA%A6" id="toc-適合度" class="nav-link" data-scroll-target="#%E9%81%A9%E5%90%88%E5%BA%A6"><span class="header-section-number">4.8</span> 適合度</a></li>
-  <li><a href="#%E5%A4%96%E3%82%8C%E5%80%A4" id="toc-外れ値" class="nav-link" data-scroll-target="#%E5%A4%96%E3%82%8C%E5%80%A4"><span class="header-section-number">4.9</span> 外れ値</a></li>
-  </ul></nav>
-</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+  <li><a href="#二変量回帰モデル" id="toc-二変量回帰モデル" class="nav-link active" data-scroll-target="#二変量回帰モデル"><span class="header-section-number">4.1</span> 二変量回帰モデル</a></li>
+  <li><a href="#最小二乗法による係数推定" id="toc-最小二乗法による係数推定" class="nav-link" data-scroll-target="#最小二乗法による係数推定"><span class="header-section-number">4.2</span> 最小二乗法による係数推定</a></li>
+  <li><a href="#内生性とバイアス" id="toc-内生性とバイアス" class="nav-link" data-scroll-target="#内生性とバイアス"><span class="header-section-number">4.3</span> 内生性とバイアス</a></li>
+  <li><a href="#推定値の制度" id="toc-推定値の制度" class="nav-link" data-scroll-target="#推定値の制度"><span class="header-section-number">4.4</span> 推定値の制度</a></li>
+  <li><a href="#確率の限界と一貫性" id="toc-確率の限界と一貫性" class="nav-link" data-scroll-target="#確率の限界と一貫性"><span class="header-section-number">4.5</span> 確率の限界と一貫性</a></li>
+  <li><a href="#回答可能な問題---不均一分散と誤作同士の相関" id="toc-回答可能な問題---不均一分散と誤作同士の相関" class="nav-link" data-scroll-target="#回答可能な問題---不均一分散と誤作同士の相関"><span class="header-section-number">4.6</span> 回答可能な問題 - 不均一分散と誤作同士の相関</a></li>
+  <li><a href="#適合度" id="toc-適合度" class="nav-link" data-scroll-target="#適合度"><span class="header-section-number">4.7</span> 適合度</a></li>
+  <li><a href="#外れ値" id="toc-外れ値" class="nav-link" data-scroll-target="#外れ値"><span class="header-section-number">4.8</span> 外れ値</a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./part01.html">第1部 OLSの分析枠組みを理解する</a></li><li class="breadcrumb-item"><a href="./chapter03.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">二変量OLS | 計量社会科学分析の基礎</span></a></li></ol></nav><div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">
-<span class="chapter-number">4</span>&nbsp; <span class="chapter-title">二変量OLS | 計量社会科学分析の基礎</span>
-</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./part01.html">第1部 OLSの分析枠組みを理解する</a></li><li class="breadcrumb-item"><a href="./chapter03.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">二変量OLS | 計量社会科学分析の基礎</span></a></li></ol></nav>
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">二変量OLS | 計量社会科学分析の基礎</span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 </div>
 
 
@@ -268,8 +297,9 @@ window.Quarto = {
   
 
 
-</header><section id="二変量ols-計量社会科学分析の基礎" class="level2" data-number="4.1"><h2 data-number="4.1" class="anchored" data-anchor-id="二変量ols-計量社会科学分析の基礎">
-<span class="header-section-number">4.1</span> 二変量OLS | 計量社会科学分析の基礎</h2>
+</header>
+
+
 <p>ここでは、2つの変数間の関係を定量化して、その関係が、</p>
 <ul>
 <li>本当は無関係なのに、たまたま手にしたサンプルで関係があるように見えてしまうのか、</li>
@@ -284,113 +314,180 @@ window.Quarto = {
 <li>確率変数の平均は、変数の上にバーをつけて表記します。例: <span class="math inline">\bar{Y}</span>, <span class="math inline">\bar{X}</span>。</li>
 <li>パラメータの推定値には、ハットをつけて表記します。例: <span class="math inline">\hat{\beta}_0</span>, <span class="math inline">\hat{\beta}_1</span>。</li>
 <li>サンプルサイズは <span class="math inline">N</span> で表記します。</li>
-</ul></section><section id="二変量回帰モデル" class="level2" data-number="4.2"><h2 data-number="4.2" class="anchored" data-anchor-id="二変量回帰モデル">
-<span class="header-section-number">4.2</span> 二変量回帰モデル</h2>
+</ul>
+<section id="二変量回帰モデル" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="二変量回帰モデル"><span class="header-section-number">4.1</span> 二変量回帰モデル</h2>
 <p>ここでは従属変数 <span class="math inline">Y</span> 1つと独立変数 <span class="math inline">X</span> 1つの2変数からなる二変量回帰モデルを考えます。 次のようなモデルを推定する方法として、二変量OLSを学習します。</p>
 <p><span class="math display">
 Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i
 </span></p>
-<p>ここで、<span class="math inline">\beta_0</span> や <span class="math inline">\beta_1</span> は<strong>パラメータ</strong>(parameter)と呼ばれるもので、それぞれ切片と傾きを表します。 <span class="math inline">\varepsilon_i</span> は<strong>誤差項</strong>(error term)と呼ばれるもので、観測されない要因を表します。 <span class="math inline">i</span> は観測単位を表すインデックスで、<span class="math inline">i=1, 2, \ldots, N</span> とします。</p>
+<p>ここで、<span class="math inline">\beta_0</span>や<span class="math inline">\beta_1</span>は<strong>パラメータ</strong>(parameter)と呼ばれるもので、それぞれ切片と傾きを表します。 <span class="math inline">\varepsilon_i</span> は<strong>誤差項</strong>(error term)と呼ばれるもので、観測されない要因を表します。 <span class="math inline">i</span> は観測単位を表すインデックスで、<span class="math inline">i=1, 2, \ldots, N</span> とします。</p>
 <p>今、売上高 <span class="math inline">Y_i</span> と従業員数 <span class="math inline">X_i</span> のデータが手元にあるとしましょう。 横軸を従業員数、縦軸を売上高とした散布図に描くと次のようになります。</p>
 <div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(</span>
+<span id="cb1-2"><a href="#cb1-2"></a>    tidyverse, </span>
+<span id="cb1-3"><a href="#cb1-3"></a>    ggthemes, </span>
+<span id="cb1-4"><a href="#cb1-4"></a>    GGally, </span>
+<span id="cb1-5"><a href="#cb1-5"></a>    gt, </span>
+<span id="cb1-6"><a href="#cb1-6"></a>    <span class="co"># gtExtra, </span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>    knitr, </span>
+<span id="cb1-8"><a href="#cb1-8"></a>    kableExtra, </span>
+<span id="cb1-9"><a href="#cb1-9"></a>    modelsummary</span>
+<span id="cb1-10"><a href="#cb1-10"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div class="cell" data-layout-align="center">
 <div class="code-with-filename">
-<details class="code-fold"><summary>Code</summary><div class="code-with-filename-file">
+<div class="code-with-filename-file">
 <pre><strong>従業員数と売上高の散布図</strong></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, ggthemes, GGally, gt, gtExtra, knitr, kableExtra, modelsummary)</span>
-<span id="cb1-2"><a href="#cb1-2"></a></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="co"># 乱数のタネ</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a>n <span class="ot">&lt;-</span> <span class="dv">15</span> <span class="co"># サンプルサイズ</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="at">length.out =</span> n) <span class="co"># 独立変数</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a>y <span class="ot">&lt;-</span> <span class="dv">3</span> <span class="sc">+</span> <span class="fl">1.5</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">2</span>) <span class="co"># 従属変数</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> x, <span class="at">y =</span> y) <span class="co"># データフレームの作成</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a>my_font <span class="ot">&lt;-</span> <span class="cf">if</span> (<span class="fu">Sys.info</span>()[<span class="st">"sysname"</span>] <span class="sc">==</span> <span class="st">"Darwin"</span>) <span class="st">"HiraKakuProN-W3"</span> <span class="cf">else</span> <span class="st">"sans"</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a></span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="co"># 作図</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a>g <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
-<span id="cb1-12"><a href="#cb1-12"></a>    <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">2.5</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb1-13"><a href="#cb1-13"></a>    <span class="fu">theme_economist_white</span>(<span class="at">base_family =</span> my_font) <span class="sc">+</span></span>
-<span id="cb1-14"><a href="#cb1-14"></a>        <span class="fu">labs</span>(</span>
-<span id="cb1-15"><a href="#cb1-15"></a>        <span class="at">title =</span> <span class="st">"データの散布図"</span>,</span>
-<span id="cb1-16"><a href="#cb1-16"></a>        <span class="at">x =</span> <span class="st">"従業員数 (X)"</span>,</span>
-<span id="cb1-17"><a href="#cb1-17"></a>        <span class="at">y =</span> <span class="st">"売上高 (Y)"</span></span>
-<span id="cb1-18"><a href="#cb1-18"></a>    )</span>
-<span id="cb1-19"><a href="#cb1-19"></a></span>
-<span id="cb1-20"><a href="#cb1-20"></a><span class="fu">print</span>(g)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="co"># 乱数のタネ</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>n <span class="ot">&lt;-</span> <span class="dv">15</span> <span class="co"># サンプルサイズ</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="at">length.out =</span> n) <span class="co"># 独立変数</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>y <span class="ot">&lt;-</span> <span class="dv">3</span> <span class="sc">+</span> <span class="fl">1.5</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">2</span>) <span class="co"># 従属変数</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> x, <span class="at">y =</span> y) <span class="co"># データフレームの作成</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a>my_font <span class="ot">&lt;-</span> <span class="cf">if</span> (<span class="fu">Sys.info</span>()[<span class="st">"sysname"</span>] <span class="sc">==</span> <span class="st">"Darwin"</span>) <span class="st">"HiraKakuProN-W3"</span> <span class="cf">else</span> <span class="st">"sans"</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="co"># 作図</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a>g <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a>    <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">2.5</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a>    <span class="fu">theme_economist_white</span>(<span class="at">base_family =</span> my_font) <span class="sc">+</span></span>
+<span id="cb2-12"><a href="#cb2-12"></a>        <span class="fu">labs</span>(</span>
+<span id="cb2-13"><a href="#cb2-13"></a>        <span class="at">title =</span> <span class="st">"データの散布図"</span>,</span>
+<span id="cb2-14"><a href="#cb2-14"></a>        <span class="at">x =</span> <span class="st">"従業員数 (X)"</span>,</span>
+<span id="cb2-15"><a href="#cb2-15"></a>        <span class="at">y =</span> <span class="st">"売上高 (Y)"</span></span>
+<span id="cb2-16"><a href="#cb2-16"></a>    )</span>
+<span id="cb2-17"><a href="#cb2-17"></a></span>
+<span id="cb2-18"><a href="#cb2-18"></a><span class="fu">print</span>(g)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><a href="chapter03_files/figure-html/fig01-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="chapter03_files/figure-html/fig01-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="3150"></a></p>
+<figure class="figure">
+<p><a href="chapter03_files/figure-html/fig01-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="chapter03_files/figure-html/fig01-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="3150"></a></p>
 </figure>
 </div>
 </div>
 </div>
 <p>散布図をみると右肩上がりの関係があるように見えますが、もっと明確に変数間の関係を表すために、<span class="markp">そのデータを最も良く説明できる直線</span>をひこうと思います。 つまり、<span class="markp">切片の<span class="math inline">\beta_0</span>と傾きの<span class="math inline">\beta_1</span>を決めるということ</span>です。 この直線が「モデル」で、それぞれの黒い点とモデルの直線との縦軸方向への距離を「誤差」または「残差」と呼びます。</p>
-</section><section id="最小二乗法による係数推定" class="level2" data-number="4.3"><h2 data-number="4.3" class="anchored" data-anchor-id="最小二乗法による係数推定">
-<span class="header-section-number">4.3</span> 最小二乗法による係数推定</h2>
+</section>
+<section id="最小二乗法による係数推定" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="最小二乗法による係数推定"><span class="header-section-number">4.2</span> 最小二乗法による係数推定</h2>
 <div class="cell" data-layout-align="center">
 <div class="code-with-filename">
-<details class="code-fold"><summary>Code</summary><div class="code-with-filename-file">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-with-filename-file">
 <pre><strong>回帰式と誤差</strong></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> data)</span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="co"># 予測値をpredictedに格納</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a>data<span class="sc">$</span>predicted <span class="ot">&lt;-</span> <span class="fu">predict</span>(model)</span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="co"># OSに合わせてフォントを自動選択（Macならヒラギノ、それ以外ならデフォルト）</span></span>
-<span id="cb2-5"><a href="#cb2-5"></a></span>
-<span id="cb2-6"><a href="#cb2-6"></a>g <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
-<span id="cb2-7"><a href="#cb2-7"></a>    <span class="fu">geom_segment</span>(</span>
-<span id="cb2-8"><a href="#cb2-8"></a>        <span class="fu">aes</span>(<span class="at">xend =</span> x, <span class="at">yend =</span> predicted),</span>
-<span id="cb2-9"><a href="#cb2-9"></a>        <span class="at">color =</span> <span class="st">"#D55E00"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>, <span class="at">linewidth =</span> <span class="fl">0.8</span></span>
-<span id="cb2-10"><a href="#cb2-10"></a>    ) <span class="sc">+</span></span>
-<span id="cb2-11"><a href="#cb2-11"></a>    <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">2.5</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb2-12"><a href="#cb2-12"></a>    <span class="fu">theme_economist_white</span>(<span class="at">base_family =</span> my_font) <span class="sc">+</span></span>
-<span id="cb2-13"><a href="#cb2-13"></a>    <span class="fu">labs</span>(</span>
-<span id="cb2-14"><a href="#cb2-14"></a>        <span class="at">title =</span> <span class="st">"回帰式と誤差"</span>,</span>
-<span id="cb2-15"><a href="#cb2-15"></a>        <span class="at">x =</span> <span class="st">"従業員数 (x)"</span>,</span>
-<span id="cb2-16"><a href="#cb2-16"></a>        <span class="at">y =</span> <span class="st">"売上高 (y)"</span></span>
-<span id="cb2-17"><a href="#cb2-17"></a>    ) <span class="sc">+</span></span>
-<span id="cb2-18"><a href="#cb2-18"></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">"#0072B2"</span>, <span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
-<span id="cb2-19"><a href="#cb2-19"></a>    <span class="fu">theme</span>(</span>
-<span id="cb2-20"><a href="#cb2-20"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">16</span>),</span>
-<span id="cb2-21"><a href="#cb2-21"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
-<span id="cb2-22"><a href="#cb2-22"></a>    ) <span class="sc">+</span></span>
-<span id="cb2-23"><a href="#cb2-23"></a>    <span class="fu">annotate</span>(<span class="st">"text"</span>,</span>
-<span id="cb2-24"><a href="#cb2-24"></a>        <span class="at">x =</span> <span class="fu">min</span>(data<span class="sc">$</span>x) <span class="sc">+</span> <span class="dv">2</span>,</span>
-<span id="cb2-25"><a href="#cb2-25"></a>        <span class="at">y =</span> <span class="fu">max</span>(data<span class="sc">$</span>y) <span class="sc">+</span> <span class="dv">1</span>,</span>
-<span id="cb2-26"><a href="#cb2-26"></a>        <span class="at">label =</span> <span class="st">"y[i] == beta[0] + beta[1] * x[i] + u[i]"</span>,</span>
-<span id="cb2-27"><a href="#cb2-27"></a>        <span class="at">parse =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb2-28"><a href="#cb2-28"></a>        <span class="at">size =</span> <span class="dv">6</span>, <span class="at">family =</span> my_font</span>
-<span id="cb2-29"><a href="#cb2-29"></a>    )</span>
-<span id="cb2-30"><a href="#cb2-30"></a><span class="fu">print</span>(g)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> data)</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="co"># 予測値をpredictedに格納</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>data<span class="sc">$</span>predicted <span class="ot">&lt;-</span> <span class="fu">predict</span>(model)</span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="co"># OSに合わせてフォントを自動選択（Macならヒラギノ、それ以外ならデフォルト）</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a></span>
+<span id="cb3-6"><a href="#cb3-6"></a>g <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a>    <span class="fu">geom_segment</span>(</span>
+<span id="cb3-8"><a href="#cb3-8"></a>        <span class="fu">aes</span>(<span class="at">xend =</span> x, <span class="at">yend =</span> predicted),</span>
+<span id="cb3-9"><a href="#cb3-9"></a>        <span class="at">color =</span> <span class="st">"#D55E00"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>, <span class="at">linewidth =</span> <span class="fl">0.8</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a>    ) <span class="sc">+</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a>    <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">2.5</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a>    <span class="fu">theme_economist_white</span>(<span class="at">base_family =</span> my_font) <span class="sc">+</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a>    <span class="fu">labs</span>(</span>
+<span id="cb3-14"><a href="#cb3-14"></a>        <span class="at">title =</span> <span class="st">"回帰式と誤差"</span>,</span>
+<span id="cb3-15"><a href="#cb3-15"></a>        <span class="at">x =</span> <span class="st">"従業員数 (x)"</span>,</span>
+<span id="cb3-16"><a href="#cb3-16"></a>        <span class="at">y =</span> <span class="st">"売上高 (y)"</span></span>
+<span id="cb3-17"><a href="#cb3-17"></a>    ) <span class="sc">+</span></span>
+<span id="cb3-18"><a href="#cb3-18"></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">"#0072B2"</span>, <span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb3-19"><a href="#cb3-19"></a>    <span class="fu">theme</span>(</span>
+<span id="cb3-20"><a href="#cb3-20"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">16</span>),</span>
+<span id="cb3-21"><a href="#cb3-21"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb3-22"><a href="#cb3-22"></a>    ) <span class="sc">+</span></span>
+<span id="cb3-23"><a href="#cb3-23"></a>    <span class="fu">annotate</span>(<span class="st">"text"</span>,</span>
+<span id="cb3-24"><a href="#cb3-24"></a>        <span class="at">x =</span> <span class="fu">min</span>(data<span class="sc">$</span>x) <span class="sc">+</span> <span class="dv">2</span>,</span>
+<span id="cb3-25"><a href="#cb3-25"></a>        <span class="at">y =</span> <span class="fu">max</span>(data<span class="sc">$</span>y) <span class="sc">+</span> <span class="dv">1</span>,</span>
+<span id="cb3-26"><a href="#cb3-26"></a>        <span class="at">label =</span> <span class="st">"y[i] == beta[0] + beta[1] * x[i] + u[i]"</span>,</span>
+<span id="cb3-27"><a href="#cb3-27"></a>        <span class="at">parse =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb3-28"><a href="#cb3-28"></a>        <span class="at">size =</span> <span class="dv">6</span>, <span class="at">family =</span> my_font</span>
+<span id="cb3-29"><a href="#cb3-29"></a>    )</span>
+<span id="cb3-30"><a href="#cb3-30"></a><span class="fu">print</span>(g)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><a href="chapter03_files/figure-html/fig02-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="chapter03_files/figure-html/fig02-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="3150"></a></p>
+<figure class="figure">
+<p><a href="chapter03_files/figure-html/fig02-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="chapter03_files/figure-html/fig02-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="3150"></a></p>
 </figure>
 </div>
 </div>
 </div>
+<p>上の図の青い線は、データを説明するためのモデルで、切片<span class="math inline">\beta_0</span>と傾き<span class="math inline">\beta_1</span>を決めることによって引かれています。 では、<span class="markp">どのような切片と傾きを選べば、データを最もよく説明できる</span>でしょうか。</p>
 <p>望ましい性質を備えた直線の引き方の1つとして、ガウス(Gauss)が構築した最小二乗法(Ordinaly Least Square Methods: OLS)について説明します。</p>
-</section><section id="内生性とバイアス" class="level2" data-number="4.4"><h2 data-number="4.4" class="anchored" data-anchor-id="内生性とバイアス">
-<span class="header-section-number">4.4</span> 内生性とバイアス</h2>
-</section><section id="推定値の制度" class="level2" data-number="4.5"><h2 data-number="4.5" class="anchored" data-anchor-id="推定値の制度">
-<span class="header-section-number">4.5</span> 推定値の制度</h2>
-</section><section id="確率の限界と一貫性" class="level2" data-number="4.6"><h2 data-number="4.6" class="anchored" data-anchor-id="確率の限界と一貫性">
-<span class="header-section-number">4.6</span> 確率の限界と一貫性</h2>
-</section><section id="回答可能な問題---不均一分散と誤作同士の相関" class="level2" data-number="4.7"><h2 data-number="4.7" class="anchored" data-anchor-id="回答可能な問題---不均一分散と誤作同士の相関">
-<span class="header-section-number">4.7</span> 回答可能な問題 - 不均一分散と誤作同士の相関</h2>
-</section><section id="適合度" class="level2" data-number="4.8"><h2 data-number="4.8" class="anchored" data-anchor-id="適合度">
-<span class="header-section-number">4.8</span> 適合度</h2>
-</section><section id="外れ値" class="level2" data-number="4.9"><h2 data-number="4.9" class="anchored" data-anchor-id="外れ値">
-<span class="header-section-number">4.9</span> 外れ値</h2>
+<p>OLSとは、モデル(青い線)と観測データの点(黒い点)との距離(<span class="math inline">\varepsilon_i</span>)の二乗の合計を最小化するような切片<span class="math inline">\beta_0</span>と傾き<span class="math inline">\beta_1</span>を選ぶ方法です。</p>
+<p>独立変数<span class="math inline">X</span>の特定の値<span class="math inline">X_i</span>に対して、モデルが予測する従属変数の値は <span class="math inline">\hat{Y}_i = \hat{\beta}_0 + \hat{\beta}_1 X_i</span> となります。 このとき、観測された従属変数の値<span class="math inline">Y_i</span>とモデルが予測する値<span class="math inline">\hat{Y}_i</span>の差は、誤差項<span class="math inline">\varepsilon_i</span>で表されます。 この誤差項の二乗の合計を最小化するような切片<span class="math inline">\beta_0</span>と傾き<span class="math inline">\beta_1</span>を選ぶことが、OLSの基本的な考え方です。</p>
+<p><span class="math display">
+\begin{aligned}
+\varepsilon_i  &amp;= Y_i - \hat{Y}_i \\
+&amp;= Y_i - (\hat{\beta}_0 + \hat{\beta}_1 X_i)
+\end{aligned}
+</span></p>
+<p>この誤差を二乗します。</p>
+<p><span class="math display">
+\begin{aligned}
+\varepsilon_i^2 &amp;= \{Y_i - (\hat{\beta}_0 + \hat{\beta}_1 X_i)\}^2\\
+&amp;= Y_i^2 - 2Y_i(\hat{\beta}_0 + \hat{\beta}_1 X_i) + (\hat{\beta}_0 + \hat{\beta}_1 X_i)^2\\
+&amp;= Y_i^2 - 2\hat{\beta}_0 Y_i - 2 \hat{\beta}_1 X_i Y_i  + \hat{\beta}_0^2 + 2 \hat{\beta}_0\hat{\beta}_1  X_i  + \hat{\beta}_1^2 X_i^2
+\end{aligned}
+</span></p>
+<p>誤差を合計します。これを<strong>残差平方和</strong>(Sum of Squared Errors: <span class="math inline">SSE</span>)と呼びます。</p>
+<p><span class="math display">
+\begin{aligned}
+SSE &amp;= \sum_{i=1}^N \varepsilon_i^2 \\
+    &amp;= \sum_{i=1}^N Y_i^2 - 2\hat{\beta}_0 \sum_{i=1}^N Y_i - 2 \hat{\beta}_1 \sum_{i=1}^N X_i Y_i  + \sum_{i=1}^N \hat{\beta}_0^2 + 2 \hat{\beta}_0\hat{\beta}_1  \sum_{i=1}^N X_i  + \hat{\beta}_1^2 \sum_{i=1}^N X_i^2\\
+    &amp;= \sum_{i=1}^N Y_i^2 - 2\hat{\beta}_0 \sum_{i=1}^N Y_i - 2 \hat{\beta}_1 \sum_{i=1}^N X_i Y_i  + N\hat{\beta}_0^2 + 2 \hat{\beta}_0\hat{\beta}_1  \sum_{i=1}^N X_i  + \hat{\beta}_1^2 \sum_{i=1}^N X_i^2
+\end{aligned}
+</span></p>
+<p>この残差平方和を最小化するような<span class="math inline">\hat{\beta}_0</span>と<span class="math inline">\hat{\beta}_1</span>を求めるために、残差平方和を<span class="math inline">\hat{\beta}_0</span>と<span class="math inline">\hat{\beta}_1</span>で偏微分して、それぞれを0に等しくします。</p>
+<p><span class="math display">
+\begin{aligned}
+\frac{\partial SSE}{\partial \hat{\beta}_0} &amp;= -2 \sum_{i=1}^N Y_i + 2N\hat{\beta}_0 + 2 \hat{\beta}_1  \sum_{i=1}^N X_i = 0\\
+\frac{\partial SSE}{\partial \hat{\beta}_1} &amp;= - 2 \sum_{i=1}^N X_i Y_i + 2 \hat{\beta}_0  \sum_{i=1}^N X_i  + 2 \hat{\beta}_1 \sum_{i=1}^N X_i^2 = 0
+\end{aligned}
+</span></p>
+<p>この連立方程式を<span class="math inline">\beta_0</span>と<span class="math inline">\beta_1</span>について解きます。</p>
+<p><span class="math display">
+\begin{aligned}
+\hat{\beta}_0 &amp;= \frac{\sum_{i=1}^N Y_i - \hat{\beta}_1 \sum_{i=1}^N X_i}{N}\\
+\hat{\beta}_1 &amp;= \frac{\sum_{i=1}^N X_i Y_i - \hat{\beta}_0  \sum_{i=1}^N X_i}{\sum_{i=1}^N X_i^2}
+\end{aligned}
+</span></p>
+<p>この連立方程式を解くと、次のような切片<span class="math inline">\hat{\beta}_0</span>と傾き<span class="math inline">\hat{\beta}_1</span>の推定値が得られます。</p>
+</section>
+<section id="内生性とバイアス" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="内生性とバイアス"><span class="header-section-number">4.3</span> 内生性とバイアス</h2>
+</section>
+<section id="推定値の制度" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="推定値の制度"><span class="header-section-number">4.4</span> 推定値の制度</h2>
+</section>
+<section id="確率の限界と一貫性" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="確率の限界と一貫性"><span class="header-section-number">4.5</span> 確率の限界と一貫性</h2>
+</section>
+<section id="回答可能な問題---不均一分散と誤作同士の相関" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="回答可能な問題---不均一分散と誤作同士の相関"><span class="header-section-number">4.6</span> 回答可能な問題 - 不均一分散と誤作同士の相関</h2>
+</section>
+<section id="適合度" class="level2" data-number="4.7">
+<h2 data-number="4.7" class="anchored" data-anchor-id="適合度"><span class="header-section-number">4.7</span> 適合度</h2>
+</section>
+<section id="外れ値" class="level2" data-number="4.8">
+<h2 data-number="4.8" class="anchored" data-anchor-id="外れ値"><span class="header-section-number">4.8</span> 外れ値</h2>
 
 
 <!-- -->
 
-</section><a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
     const anchorJS = new window.AnchorJS();
@@ -842,142 +939,207 @@ Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i
       }
     }
   });
-  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
       <a href="./part01.html" class="pagination-link" aria-label="第1部 OLSの分析枠組みを理解する">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">第1部 OLSの分析枠組みを理解する</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./chapter04.html" class="pagination-link" aria-label="仮説検定と区間推定">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">仮説検定と区間推定</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1"></a><span class="co">---</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="an">title:</span><span class="co"> "二変量OLS | 計量社会科学分析の基礎"</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="co">---</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a></span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="fu">## 二変量OLS | 計量社会科学分析の基礎</span></span>
-<span id="cb3-6"><a href="#cb3-6"></a></span>
-<span id="cb3-7"><a href="#cb3-7"></a>ここでは、2つの変数間の関係を定量化して、その関係が、</span>
-<span id="cb3-8"><a href="#cb3-8"></a></span>
-<span id="cb3-9"><a href="#cb3-9"></a><span class="ss">- </span>本当は無関係なのに、たまたま手にしたサンプルで関係があるように見えてしまうのか、</span>
-<span id="cb3-10"><a href="#cb3-10"></a><span class="ss">- </span>それとも、サンプルで見えている関係が、母集団でも同じように存在しているのか、</span>
-<span id="cb3-11"><a href="#cb3-11"></a></span>
-<span id="cb3-12"><a href="#cb3-12"></a>を分析します。</span>
-<span id="cb3-13"><a href="#cb3-13"></a></span>
-<span id="cb3-14"><a href="#cb3-14"></a>先に、数式の表記について説明しておきます。</span>
-<span id="cb3-15"><a href="#cb3-15"></a></span>
-<span id="cb3-16"><a href="#cb3-16"></a><span class="ss">- </span>確率変数は大文字のイタリック体で表記します。例: $Y$, $X$。</span>
-<span id="cb3-17"><a href="#cb3-17"></a><span class="ss">- </span>変数の観測値はインデックスをつけて表記します。例: $Y_i$, $X_i$。</span>
-<span id="cb3-18"><a href="#cb3-18"></a><span class="ss">- </span>パラメータはギリシャ文字で表記します。例: $\beta_0$, $\beta_1$。</span>
-<span id="cb3-19"><a href="#cb3-19"></a><span class="ss">- </span>確率変数の平均は、変数の上にバーをつけて表記します。例: $\bar{Y}$, $\bar{X}$。</span>
-<span id="cb3-20"><a href="#cb3-20"></a><span class="ss">- </span>パラメータの推定値には、ハットをつけて表記します。例: $\hat{\beta}_0$, $\hat{\beta}_1$。</span>
-<span id="cb3-21"><a href="#cb3-21"></a><span class="ss">- </span>サンプルサイズは $N$ で表記します。</span>
-<span id="cb3-22"><a href="#cb3-22"></a></span>
-<span id="cb3-23"><a href="#cb3-23"></a></span>
-<span id="cb3-24"><a href="#cb3-24"></a><span class="fu">## 二変量回帰モデル</span></span>
-<span id="cb3-25"><a href="#cb3-25"></a></span>
-<span id="cb3-26"><a href="#cb3-26"></a>ここでは従属変数 $Y$ 1つと独立変数 $X$ 1つの2変数からなる二変量回帰モデルを考えます。</span>
-<span id="cb3-27"><a href="#cb3-27"></a>次のようなモデルを推定する方法として、二変量OLSを学習します。</span>
-<span id="cb3-28"><a href="#cb3-28"></a></span>
-<span id="cb3-29"><a href="#cb3-29"></a>$$</span>
-<span id="cb3-30"><a href="#cb3-30"></a>Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i</span>
-<span id="cb3-31"><a href="#cb3-31"></a>$$</span>
-<span id="cb3-32"><a href="#cb3-32"></a></span>
-<span id="cb3-33"><a href="#cb3-33"></a>ここで、$\beta_0$ や $\beta_1$ は**パラメータ**(parameter)と呼ばれるもので、それぞれ切片と傾きを表します。</span>
-<span id="cb3-34"><a href="#cb3-34"></a>$\varepsilon_i$ は**誤差項**(error term)と呼ばれるもので、観測されない要因を表します。</span>
-<span id="cb3-35"><a href="#cb3-35"></a>$i$ は観測単位を表すインデックスで、$i=1, 2, \ldots, N$ とします。</span>
-<span id="cb3-36"><a href="#cb3-36"></a></span>
-<span id="cb3-37"><a href="#cb3-37"></a></span>
-<span id="cb3-38"><a href="#cb3-38"></a></span>
-<span id="cb3-39"><a href="#cb3-39"></a></span>
-<span id="cb3-40"><a href="#cb3-40"></a>今、売上高 $Y_i$ と従業員数 $X_i$ のデータが手元にあるとしましょう。</span>
-<span id="cb3-41"><a href="#cb3-41"></a>横軸を従業員数、縦軸を売上高とした散布図に描くと次のようになります。</span>
-<span id="cb3-42"><a href="#cb3-42"></a></span>
-<span id="cb3-43"><a href="#cb3-43"></a><span class="in">```{r fig01, filename="従業員数と売上高の散布図"}</span></span>
-<span id="cb3-44"><a href="#cb3-44"></a><span class="co">#| code-fold: true</span></span>
-<span id="cb3-45"><a href="#cb3-45"></a><span class="co">#| warning: false</span></span>
-<span id="cb3-46"><a href="#cb3-46"></a><span class="co">#| message: false</span></span>
-<span id="cb3-47"><a href="#cb3-47"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, ggthemes, GGally, gt, gtExtra, knitr, kableExtra, modelsummary)</span>
-<span id="cb3-48"><a href="#cb3-48"></a></span>
-<span id="cb3-49"><a href="#cb3-49"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="co"># 乱数のタネ</span></span>
-<span id="cb3-50"><a href="#cb3-50"></a>n <span class="ot">&lt;-</span> <span class="dv">15</span> <span class="co"># サンプルサイズ</span></span>
-<span id="cb3-51"><a href="#cb3-51"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="at">length.out =</span> n) <span class="co"># 独立変数</span></span>
-<span id="cb3-52"><a href="#cb3-52"></a>y <span class="ot">&lt;-</span> <span class="dv">3</span> <span class="sc">+</span> <span class="fl">1.5</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">2</span>) <span class="co"># 従属変数</span></span>
-<span id="cb3-53"><a href="#cb3-53"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> x, <span class="at">y =</span> y) <span class="co"># データフレームの作成</span></span>
-<span id="cb3-54"><a href="#cb3-54"></a>my_font <span class="ot">&lt;-</span> <span class="cf">if</span> (<span class="fu">Sys.info</span>()[<span class="st">"sysname"</span>] <span class="sc">==</span> <span class="st">"Darwin"</span>) <span class="st">"HiraKakuProN-W3"</span> <span class="cf">else</span> <span class="st">"sans"</span></span>
-<span id="cb3-55"><a href="#cb3-55"></a></span>
-<span id="cb3-56"><a href="#cb3-56"></a><span class="co"># 作図</span></span>
-<span id="cb3-57"><a href="#cb3-57"></a>g <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
-<span id="cb3-58"><a href="#cb3-58"></a>    <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">2.5</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb3-59"><a href="#cb3-59"></a>    <span class="fu">theme_economist_white</span>(<span class="at">base_family =</span> my_font) <span class="sc">+</span></span>
-<span id="cb3-60"><a href="#cb3-60"></a>        <span class="fu">labs</span>(</span>
-<span id="cb3-61"><a href="#cb3-61"></a>        <span class="at">title =</span> <span class="st">"データの散布図"</span>,</span>
-<span id="cb3-62"><a href="#cb3-62"></a>        <span class="at">x =</span> <span class="st">"従業員数 (X)"</span>,</span>
-<span id="cb3-63"><a href="#cb3-63"></a>        <span class="at">y =</span> <span class="st">"売上高 (Y)"</span></span>
-<span id="cb3-64"><a href="#cb3-64"></a>    )</span>
-<span id="cb3-65"><a href="#cb3-65"></a></span>
-<span id="cb3-66"><a href="#cb3-66"></a><span class="fu">print</span>(g)</span>
-<span id="cb3-67"><a href="#cb3-67"></a><span class="in">```</span></span>
-<span id="cb3-68"><a href="#cb3-68"></a></span>
-<span id="cb3-69"><a href="#cb3-69"></a>散布図をみると右肩上がりの関係があるように見えますが、もっと明確に変数間の関係を表すために、<span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"markp"</span><span class="dt">&gt;</span>そのデータを最も良く説明できる直線<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span>をひこうと思います。</span>
-<span id="cb3-70"><a href="#cb3-70"></a>つまり、<span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"markp"</span><span class="dt">&gt;</span>切片の$\beta_0$と傾きの$\beta_1$を決めるということ<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span>です。</span>
-<span id="cb3-71"><a href="#cb3-71"></a>この直線が「モデル」で、それぞれの黒い点とモデルの直線との縦軸方向への距離を「誤差」または「残差」と呼びます。</span>
-<span id="cb3-72"><a href="#cb3-72"></a></span>
-<span id="cb3-73"><a href="#cb3-73"></a></span>
-<span id="cb3-74"><a href="#cb3-74"></a><span class="fu">## 最小二乗法による係数推定</span></span>
-<span id="cb3-75"><a href="#cb3-75"></a></span>
-<span id="cb3-76"><a href="#cb3-76"></a><span class="in">```{r fig02, filename="回帰式と誤差"}</span></span>
-<span id="cb3-77"><a href="#cb3-77"></a><span class="co">#| code-fold: true</span></span>
-<span id="cb3-78"><a href="#cb3-78"></a><span class="co">#| warning: false</span></span>
-<span id="cb3-79"><a href="#cb3-79"></a><span class="co">#| message: false</span></span>
-<span id="cb3-80"><a href="#cb3-80"></a><span class="co">#| # 回帰式をlm()で推定</span></span>
-<span id="cb3-81"><a href="#cb3-81"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> data)</span>
-<span id="cb3-82"><a href="#cb3-82"></a><span class="co"># 予測値をpredictedに格納</span></span>
-<span id="cb3-83"><a href="#cb3-83"></a>data<span class="sc">$</span>predicted <span class="ot">&lt;-</span> <span class="fu">predict</span>(model)</span>
-<span id="cb3-84"><a href="#cb3-84"></a><span class="co"># OSに合わせてフォントを自動選択（Macならヒラギノ、それ以外ならデフォルト）</span></span>
-<span id="cb3-85"><a href="#cb3-85"></a></span>
-<span id="cb3-86"><a href="#cb3-86"></a>g <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
-<span id="cb3-87"><a href="#cb3-87"></a>    <span class="fu">geom_segment</span>(</span>
-<span id="cb3-88"><a href="#cb3-88"></a>        <span class="fu">aes</span>(<span class="at">xend =</span> x, <span class="at">yend =</span> predicted),</span>
-<span id="cb3-89"><a href="#cb3-89"></a>        <span class="at">color =</span> <span class="st">"#D55E00"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>, <span class="at">linewidth =</span> <span class="fl">0.8</span></span>
-<span id="cb3-90"><a href="#cb3-90"></a>    ) <span class="sc">+</span></span>
-<span id="cb3-91"><a href="#cb3-91"></a>    <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">2.5</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb3-92"><a href="#cb3-92"></a>    <span class="fu">theme_economist_white</span>(<span class="at">base_family =</span> my_font) <span class="sc">+</span></span>
-<span id="cb3-93"><a href="#cb3-93"></a>    <span class="fu">labs</span>(</span>
-<span id="cb3-94"><a href="#cb3-94"></a>        <span class="at">title =</span> <span class="st">"回帰式と誤差"</span>,</span>
-<span id="cb3-95"><a href="#cb3-95"></a>        <span class="at">x =</span> <span class="st">"従業員数 (x)"</span>,</span>
-<span id="cb3-96"><a href="#cb3-96"></a>        <span class="at">y =</span> <span class="st">"売上高 (y)"</span></span>
-<span id="cb3-97"><a href="#cb3-97"></a>    ) <span class="sc">+</span></span>
-<span id="cb3-98"><a href="#cb3-98"></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">"#0072B2"</span>, <span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
-<span id="cb3-99"><a href="#cb3-99"></a>    <span class="fu">theme</span>(</span>
-<span id="cb3-100"><a href="#cb3-100"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">16</span>),</span>
-<span id="cb3-101"><a href="#cb3-101"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
-<span id="cb3-102"><a href="#cb3-102"></a>    ) <span class="sc">+</span></span>
-<span id="cb3-103"><a href="#cb3-103"></a>    <span class="fu">annotate</span>(<span class="st">"text"</span>,</span>
-<span id="cb3-104"><a href="#cb3-104"></a>        <span class="at">x =</span> <span class="fu">min</span>(data<span class="sc">$</span>x) <span class="sc">+</span> <span class="dv">2</span>,</span>
-<span id="cb3-105"><a href="#cb3-105"></a>        <span class="at">y =</span> <span class="fu">max</span>(data<span class="sc">$</span>y) <span class="sc">+</span> <span class="dv">1</span>,</span>
-<span id="cb3-106"><a href="#cb3-106"></a>        <span class="at">label =</span> <span class="st">"y[i] == beta[0] + beta[1] * x[i] + u[i]"</span>,</span>
-<span id="cb3-107"><a href="#cb3-107"></a>        <span class="at">parse =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb3-108"><a href="#cb3-108"></a>        <span class="at">size =</span> <span class="dv">6</span>, <span class="at">family =</span> my_font</span>
-<span id="cb3-109"><a href="#cb3-109"></a>    )</span>
-<span id="cb3-110"><a href="#cb3-110"></a><span class="fu">print</span>(g)</span>
-<span id="cb3-111"><a href="#cb3-111"></a><span class="in">```</span></span>
-<span id="cb3-112"><a href="#cb3-112"></a></span>
-<span id="cb3-113"><a href="#cb3-113"></a>望ましい性質を備えた直線の引き方の1つとして、ガウス(Gauss)が構築した最小二乗法(Ordinaly Least Square Methods: OLS)について説明します。</span>
-<span id="cb3-114"><a href="#cb3-114"></a></span>
-<span id="cb3-115"><a href="#cb3-115"></a><span class="fu">## 内生性とバイアス</span></span>
-<span id="cb3-116"><a href="#cb3-116"></a></span>
-<span id="cb3-117"><a href="#cb3-117"></a><span class="fu">## 推定値の制度</span></span>
-<span id="cb3-118"><a href="#cb3-118"></a></span>
-<span id="cb3-119"><a href="#cb3-119"></a><span class="fu">## 確率の限界と一貫性</span></span>
-<span id="cb3-120"><a href="#cb3-120"></a></span>
-<span id="cb3-121"><a href="#cb3-121"></a><span class="fu">## 回答可能な問題 - 不均一分散と誤作同士の相関</span></span>
-<span id="cb3-122"><a href="#cb3-122"></a></span>
-<span id="cb3-123"><a href="#cb3-123"></a><span class="fu">## 適合度</span></span>
-<span id="cb3-124"><a href="#cb3-124"></a></span>
-<span id="cb3-125"><a href="#cb3-125"></a><span class="fu">## 外れ値</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">## 二変量OLS | 計量社会科学分析の基礎</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a></span>
+<span id="cb4-3"><a href="#cb4-3"></a>ここでは、2つの変数間の関係を定量化して、その関係が、</span>
+<span id="cb4-4"><a href="#cb4-4"></a></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="ss">- </span>本当は無関係なのに、たまたま手にしたサンプルで関係があるように見えてしまうのか、</span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="ss">- </span>それとも、サンプルで見えている関係が、母集団でも同じように存在しているのか、</span>
+<span id="cb4-7"><a href="#cb4-7"></a></span>
+<span id="cb4-8"><a href="#cb4-8"></a>を分析します。</span>
+<span id="cb4-9"><a href="#cb4-9"></a></span>
+<span id="cb4-10"><a href="#cb4-10"></a>先に、数式の表記について説明しておきます。</span>
+<span id="cb4-11"><a href="#cb4-11"></a></span>
+<span id="cb4-12"><a href="#cb4-12"></a><span class="ss">- </span>確率変数は大文字のイタリック体で表記します。例: $Y$, $X$。</span>
+<span id="cb4-13"><a href="#cb4-13"></a><span class="ss">- </span>変数の観測値はインデックスをつけて表記します。例: $Y_i$, $X_i$。</span>
+<span id="cb4-14"><a href="#cb4-14"></a><span class="ss">- </span>パラメータはギリシャ文字で表記します。例: $\beta_0$, $\beta_1$。</span>
+<span id="cb4-15"><a href="#cb4-15"></a><span class="ss">- </span>確率変数の平均は、変数の上にバーをつけて表記します。例: $\bar{Y}$, $\bar{X}$。</span>
+<span id="cb4-16"><a href="#cb4-16"></a><span class="ss">- </span>パラメータの推定値には、ハットをつけて表記します。例: $\hat{\beta}_0$, $\hat{\beta}_1$。</span>
+<span id="cb4-17"><a href="#cb4-17"></a><span class="ss">- </span>サンプルサイズは $N$ で表記します。</span>
+<span id="cb4-18"><a href="#cb4-18"></a></span>
+<span id="cb4-19"><a href="#cb4-19"></a></span>
+<span id="cb4-20"><a href="#cb4-20"></a><span class="fu">## 二変量回帰モデル</span></span>
+<span id="cb4-21"><a href="#cb4-21"></a></span>
+<span id="cb4-22"><a href="#cb4-22"></a>ここでは従属変数 $Y$ 1つと独立変数 $X$ 1つの2変数からなる二変量回帰モデルを考えます。</span>
+<span id="cb4-23"><a href="#cb4-23"></a>次のようなモデルを推定する方法として、二変量OLSを学習します。</span>
+<span id="cb4-24"><a href="#cb4-24"></a></span>
+<span id="cb4-25"><a href="#cb4-25"></a></span>
+<span id="cb4-26"><a href="#cb4-26"></a></span>
+<span id="cb4-27"><a href="#cb4-27"></a>$$</span>
+<span id="cb4-28"><a href="#cb4-28"></a>Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i</span>
+<span id="cb4-29"><a href="#cb4-29"></a>$$</span>
+<span id="cb4-30"><a href="#cb4-30"></a></span>
+<span id="cb4-31"><a href="#cb4-31"></a>ここで、$\beta_0$や$\beta_1$は**パラメータ**(parameter)と呼ばれるもので、それぞれ切片と傾きを表します。</span>
+<span id="cb4-32"><a href="#cb4-32"></a>$\varepsilon_i$ は**誤差項**(error term)と呼ばれるもので、観測されない要因を表します。</span>
+<span id="cb4-33"><a href="#cb4-33"></a>$i$ は観測単位を表すインデックスで、$i=1, 2, \ldots, N$ とします。</span>
+<span id="cb4-34"><a href="#cb4-34"></a></span>
+<span id="cb4-35"><a href="#cb4-35"></a></span>
+<span id="cb4-36"><a href="#cb4-36"></a>今、売上高 $Y_i$ と従業員数 $X_i$ のデータが手元にあるとしましょう。</span>
+<span id="cb4-37"><a href="#cb4-37"></a>横軸を従業員数、縦軸を売上高とした散布図に描くと次のようになります。</span>
+<span id="cb4-38"><a href="#cb4-38"></a></span>
+<span id="cb4-39"><a href="#cb4-39"></a><span class="in">```{r setup}</span></span>
+<span id="cb4-40"><a href="#cb4-40"></a><span class="co">#| code-fold: true</span></span>
+<span id="cb4-41"><a href="#cb4-41"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(</span>
+<span id="cb4-42"><a href="#cb4-42"></a>    tidyverse, </span>
+<span id="cb4-43"><a href="#cb4-43"></a>    ggthemes, </span>
+<span id="cb4-44"><a href="#cb4-44"></a>    GGally, </span>
+<span id="cb4-45"><a href="#cb4-45"></a>    gt, </span>
+<span id="cb4-46"><a href="#cb4-46"></a>    <span class="co"># gtExtra, </span></span>
+<span id="cb4-47"><a href="#cb4-47"></a>    knitr, </span>
+<span id="cb4-48"><a href="#cb4-48"></a>    kableExtra, </span>
+<span id="cb4-49"><a href="#cb4-49"></a>    modelsummary</span>
+<span id="cb4-50"><a href="#cb4-50"></a>)</span>
+<span id="cb4-51"><a href="#cb4-51"></a><span class="in">```</span></span>
+<span id="cb4-52"><a href="#cb4-52"></a></span>
+<span id="cb4-53"><a href="#cb4-53"></a></span>
+<span id="cb4-54"><a href="#cb4-54"></a><span class="in">```{r fig01, filename="従業員数と売上高の散布図"}</span></span>
+<span id="cb4-55"><a href="#cb4-55"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="co"># 乱数のタネ</span></span>
+<span id="cb4-56"><a href="#cb4-56"></a>n <span class="ot">&lt;-</span> <span class="dv">15</span> <span class="co"># サンプルサイズ</span></span>
+<span id="cb4-57"><a href="#cb4-57"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="at">length.out =</span> n) <span class="co"># 独立変数</span></span>
+<span id="cb4-58"><a href="#cb4-58"></a>y <span class="ot">&lt;-</span> <span class="dv">3</span> <span class="sc">+</span> <span class="fl">1.5</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">2</span>) <span class="co"># 従属変数</span></span>
+<span id="cb4-59"><a href="#cb4-59"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> x, <span class="at">y =</span> y) <span class="co"># データフレームの作成</span></span>
+<span id="cb4-60"><a href="#cb4-60"></a>my_font <span class="ot">&lt;-</span> <span class="cf">if</span> (<span class="fu">Sys.info</span>()[<span class="st">"sysname"</span>] <span class="sc">==</span> <span class="st">"Darwin"</span>) <span class="st">"HiraKakuProN-W3"</span> <span class="cf">else</span> <span class="st">"sans"</span></span>
+<span id="cb4-61"><a href="#cb4-61"></a></span>
+<span id="cb4-62"><a href="#cb4-62"></a><span class="co"># 作図</span></span>
+<span id="cb4-63"><a href="#cb4-63"></a>g <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
+<span id="cb4-64"><a href="#cb4-64"></a>    <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">2.5</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb4-65"><a href="#cb4-65"></a>    <span class="fu">theme_economist_white</span>(<span class="at">base_family =</span> my_font) <span class="sc">+</span></span>
+<span id="cb4-66"><a href="#cb4-66"></a>        <span class="fu">labs</span>(</span>
+<span id="cb4-67"><a href="#cb4-67"></a>        <span class="at">title =</span> <span class="st">"データの散布図"</span>,</span>
+<span id="cb4-68"><a href="#cb4-68"></a>        <span class="at">x =</span> <span class="st">"従業員数 (X)"</span>,</span>
+<span id="cb4-69"><a href="#cb4-69"></a>        <span class="at">y =</span> <span class="st">"売上高 (Y)"</span></span>
+<span id="cb4-70"><a href="#cb4-70"></a>    )</span>
+<span id="cb4-71"><a href="#cb4-71"></a></span>
+<span id="cb4-72"><a href="#cb4-72"></a><span class="fu">print</span>(g)</span>
+<span id="cb4-73"><a href="#cb4-73"></a><span class="in">```</span></span>
+<span id="cb4-74"><a href="#cb4-74"></a></span>
+<span id="cb4-75"><a href="#cb4-75"></a>散布図をみると右肩上がりの関係があるように見えますが、もっと明確に変数間の関係を表すために、<span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"markp"</span><span class="dt">&gt;</span>そのデータを最も良く説明できる直線<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span>をひこうと思います。</span>
+<span id="cb4-76"><a href="#cb4-76"></a>つまり、<span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"markp"</span><span class="dt">&gt;</span>切片の$\beta_0$と傾きの$\beta_1$を決めるということ<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span>です。</span>
+<span id="cb4-77"><a href="#cb4-77"></a>この直線が「モデル」で、それぞれの黒い点とモデルの直線との縦軸方向への距離を「誤差」または「残差」と呼びます。</span>
+<span id="cb4-78"><a href="#cb4-78"></a></span>
+<span id="cb4-79"><a href="#cb4-79"></a></span>
+<span id="cb4-80"><a href="#cb4-80"></a><span class="fu">## 最小二乗法による係数推定</span></span>
+<span id="cb4-81"><a href="#cb4-81"></a></span>
+<span id="cb4-82"><a href="#cb4-82"></a><span class="in">```{r fig02, filename="回帰式と誤差"}</span></span>
+<span id="cb4-83"><a href="#cb4-83"></a><span class="co">#| code-fold: true</span></span>
+<span id="cb4-84"><a href="#cb4-84"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> data)</span>
+<span id="cb4-85"><a href="#cb4-85"></a><span class="co"># 予測値をpredictedに格納</span></span>
+<span id="cb4-86"><a href="#cb4-86"></a>data<span class="sc">$</span>predicted <span class="ot">&lt;-</span> <span class="fu">predict</span>(model)</span>
+<span id="cb4-87"><a href="#cb4-87"></a><span class="co"># OSに合わせてフォントを自動選択（Macならヒラギノ、それ以外ならデフォルト）</span></span>
+<span id="cb4-88"><a href="#cb4-88"></a></span>
+<span id="cb4-89"><a href="#cb4-89"></a>g <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
+<span id="cb4-90"><a href="#cb4-90"></a>    <span class="fu">geom_segment</span>(</span>
+<span id="cb4-91"><a href="#cb4-91"></a>        <span class="fu">aes</span>(<span class="at">xend =</span> x, <span class="at">yend =</span> predicted),</span>
+<span id="cb4-92"><a href="#cb4-92"></a>        <span class="at">color =</span> <span class="st">"#D55E00"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>, <span class="at">linewidth =</span> <span class="fl">0.8</span></span>
+<span id="cb4-93"><a href="#cb4-93"></a>    ) <span class="sc">+</span></span>
+<span id="cb4-94"><a href="#cb4-94"></a>    <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">2.5</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb4-95"><a href="#cb4-95"></a>    <span class="fu">theme_economist_white</span>(<span class="at">base_family =</span> my_font) <span class="sc">+</span></span>
+<span id="cb4-96"><a href="#cb4-96"></a>    <span class="fu">labs</span>(</span>
+<span id="cb4-97"><a href="#cb4-97"></a>        <span class="at">title =</span> <span class="st">"回帰式と誤差"</span>,</span>
+<span id="cb4-98"><a href="#cb4-98"></a>        <span class="at">x =</span> <span class="st">"従業員数 (x)"</span>,</span>
+<span id="cb4-99"><a href="#cb4-99"></a>        <span class="at">y =</span> <span class="st">"売上高 (y)"</span></span>
+<span id="cb4-100"><a href="#cb4-100"></a>    ) <span class="sc">+</span></span>
+<span id="cb4-101"><a href="#cb4-101"></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">"#0072B2"</span>, <span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb4-102"><a href="#cb4-102"></a>    <span class="fu">theme</span>(</span>
+<span id="cb4-103"><a href="#cb4-103"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">16</span>),</span>
+<span id="cb4-104"><a href="#cb4-104"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb4-105"><a href="#cb4-105"></a>    ) <span class="sc">+</span></span>
+<span id="cb4-106"><a href="#cb4-106"></a>    <span class="fu">annotate</span>(<span class="st">"text"</span>,</span>
+<span id="cb4-107"><a href="#cb4-107"></a>        <span class="at">x =</span> <span class="fu">min</span>(data<span class="sc">$</span>x) <span class="sc">+</span> <span class="dv">2</span>,</span>
+<span id="cb4-108"><a href="#cb4-108"></a>        <span class="at">y =</span> <span class="fu">max</span>(data<span class="sc">$</span>y) <span class="sc">+</span> <span class="dv">1</span>,</span>
+<span id="cb4-109"><a href="#cb4-109"></a>        <span class="at">label =</span> <span class="st">"y[i] == beta[0] + beta[1] * x[i] + u[i]"</span>,</span>
+<span id="cb4-110"><a href="#cb4-110"></a>        <span class="at">parse =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb4-111"><a href="#cb4-111"></a>        <span class="at">size =</span> <span class="dv">6</span>, <span class="at">family =</span> my_font</span>
+<span id="cb4-112"><a href="#cb4-112"></a>    )</span>
+<span id="cb4-113"><a href="#cb4-113"></a><span class="fu">print</span>(g)</span>
+<span id="cb4-114"><a href="#cb4-114"></a><span class="in">```</span></span>
+<span id="cb4-115"><a href="#cb4-115"></a></span>
+<span id="cb4-116"><a href="#cb4-116"></a>上の図の青い線は、データを説明するためのモデルで、切片$\beta_0$と傾き$\beta_1$を決めることによって引かれています。</span>
+<span id="cb4-117"><a href="#cb4-117"></a>では、<span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"markp"</span><span class="dt">&gt;</span>どのような切片と傾きを選べば、データを最もよく説明できる<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span>でしょうか。</span>
+<span id="cb4-118"><a href="#cb4-118"></a></span>
+<span id="cb4-119"><a href="#cb4-119"></a>望ましい性質を備えた直線の引き方の1つとして、ガウス(Gauss)が構築した最小二乗法(Ordinaly Least Square Methods: OLS)について説明します。</span>
+<span id="cb4-120"><a href="#cb4-120"></a></span>
+<span id="cb4-121"><a href="#cb4-121"></a>OLSとは、モデル(青い線)と観測データの点(黒い点)との距離($\varepsilon_i$)の二乗の合計を最小化するような切片$\beta_0$と傾き$\beta_1$を選ぶ方法です。</span>
+<span id="cb4-122"><a href="#cb4-122"></a></span>
+<span id="cb4-123"><a href="#cb4-123"></a>独立変数$X$の特定の値$X_i$に対して、モデルが予測する従属変数の値は $\hat{Y}_i = \hat{\beta}_0 + \hat{\beta}_1 X_i$ となります。</span>
+<span id="cb4-124"><a href="#cb4-124"></a>このとき、観測された従属変数の値$Y_i$とモデルが予測する値$\hat{Y}_i$の差は、誤差項$\varepsilon_i$で表されます。</span>
+<span id="cb4-125"><a href="#cb4-125"></a>この誤差項の二乗の合計を最小化するような切片$\beta_0$と傾き$\beta_1$を選ぶことが、OLSの基本的な考え方です。</span>
+<span id="cb4-126"><a href="#cb4-126"></a></span>
+<span id="cb4-127"><a href="#cb4-127"></a>$$</span>
+<span id="cb4-128"><a href="#cb4-128"></a>\begin{aligned}</span>
+<span id="cb4-129"><a href="#cb4-129"></a>\varepsilon_i  &amp;= Y_i - \hat{Y}_i <span class="sc">\\</span></span>
+<span id="cb4-130"><a href="#cb4-130"></a>&amp;= Y_i - (\hat{\beta}_0 + \hat{\beta}_1 X_i)</span>
+<span id="cb4-131"><a href="#cb4-131"></a>\end{aligned}</span>
+<span id="cb4-132"><a href="#cb4-132"></a>$$</span>
+<span id="cb4-133"><a href="#cb4-133"></a></span>
+<span id="cb4-134"><a href="#cb4-134"></a>この誤差を二乗します。</span>
+<span id="cb4-135"><a href="#cb4-135"></a></span>
+<span id="cb4-136"><a href="#cb4-136"></a>$$</span>
+<span id="cb4-137"><a href="#cb4-137"></a>\begin{aligned}</span>
+<span id="cb4-138"><a href="#cb4-138"></a>\varepsilon_i^2 &amp;= <span class="sc">\{</span>Y_i - (\hat{\beta}_0 + \hat{\beta}_1 X_i)<span class="sc">\}</span>^2<span class="sc">\\</span></span>
+<span id="cb4-139"><a href="#cb4-139"></a>&amp;= Y_i^2 - 2Y_i(\hat{\beta}_0 + \hat{\beta}_1 X_i) + (\hat{\beta}_0 + \hat{\beta}_1 X_i)^2<span class="sc">\\</span></span>
+<span id="cb4-140"><a href="#cb4-140"></a>&amp;= Y_i^2 - 2\hat{\beta}_0 Y_i - 2 \hat{\beta}_1 X_i Y_i  + \hat{\beta}_0^2 + 2 \hat{\beta}_0\hat{\beta}_1  X_i  + \hat{\beta}_1^2 X_i^2 </span>
+<span id="cb4-141"><a href="#cb4-141"></a>\end{aligned}</span>
+<span id="cb4-142"><a href="#cb4-142"></a>$$</span>
+<span id="cb4-143"><a href="#cb4-143"></a></span>
+<span id="cb4-144"><a href="#cb4-144"></a>誤差を合計します。これを**残差平方和**(Sum of Squared Errors: $SSE$)と呼びます。</span>
+<span id="cb4-145"><a href="#cb4-145"></a></span>
+<span id="cb4-146"><a href="#cb4-146"></a>$$</span>
+<span id="cb4-147"><a href="#cb4-147"></a>\begin{aligned}</span>
+<span id="cb4-148"><a href="#cb4-148"></a>SSE &amp;= \sum_{i=1}^N \varepsilon_i^2 <span class="sc">\\</span></span>
+<span id="cb4-149"><a href="#cb4-149"></a>    &amp;= \sum_{i=1}^N Y_i^2 - 2\hat{\beta}_0 \sum_{i=1}^N Y_i - 2 \hat{\beta}_1 \sum_{i=1}^N X_i Y_i  + \sum_{i=1}^N \hat{\beta}_0^2 + 2 \hat{\beta}_0\hat{\beta}_1  \sum_{i=1}^N X_i  + \hat{\beta}_1^2 \sum_{i=1}^N X_i^2<span class="sc">\\</span></span>
+<span id="cb4-150"><a href="#cb4-150"></a>    &amp;= \sum_{i=1}^N Y_i^2 - 2\hat{\beta}_0 \sum_{i=1}^N Y_i - 2 \hat{\beta}_1 \sum_{i=1}^N X_i Y_i  + N\hat{\beta}_0^2 + 2 \hat{\beta}_0\hat{\beta}_1  \sum_{i=1}^N X_i  + \hat{\beta}_1^2 \sum_{i=1}^N X_i^2</span>
+<span id="cb4-151"><a href="#cb4-151"></a>\end{aligned}</span>
+<span id="cb4-152"><a href="#cb4-152"></a>$$</span>
+<span id="cb4-153"><a href="#cb4-153"></a></span>
+<span id="cb4-154"><a href="#cb4-154"></a>この残差平方和を最小化するような$\hat{\beta}_0$と$\hat{\beta}_1$を求めるために、残差平方和を$\hat{\beta}_0$と$\hat{\beta}_1$で偏微分して、それぞれを0に等しくします。</span>
+<span id="cb4-155"><a href="#cb4-155"></a></span>
+<span id="cb4-156"><a href="#cb4-156"></a>$$</span>
+<span id="cb4-157"><a href="#cb4-157"></a>\begin{aligned}</span>
+<span id="cb4-158"><a href="#cb4-158"></a>\frac{\partial SSE}{\partial \hat{\beta}_0} &amp;= -2 \sum_{i=1}^N Y_i + 2N\hat{\beta}_0 + 2 \hat{\beta}_1  \sum_{i=1}^N X_i = 0<span class="sc">\\</span></span>
+<span id="cb4-159"><a href="#cb4-159"></a>\frac{\partial SSE}{\partial \hat{\beta}_1} &amp;= - 2 \sum_{i=1}^N X_i Y_i + 2 \hat{\beta}_0  \sum_{i=1}^N X_i  + 2 \hat{\beta}_1 \sum_{i=1}^N X_i^2 = 0</span>
+<span id="cb4-160"><a href="#cb4-160"></a>\end{aligned}</span>
+<span id="cb4-161"><a href="#cb4-161"></a>$$</span>
+<span id="cb4-162"><a href="#cb4-162"></a></span>
+<span id="cb4-163"><a href="#cb4-163"></a>この連立方程式を$\beta_0$と$\beta_1$について解きます。</span>
+<span id="cb4-164"><a href="#cb4-164"></a></span>
+<span id="cb4-165"><a href="#cb4-165"></a>$$</span>
+<span id="cb4-166"><a href="#cb4-166"></a>\begin{aligned}</span>
+<span id="cb4-167"><a href="#cb4-167"></a>\hat{\beta}_0 &amp;= \frac{\sum_{i=1}^N Y_i - \hat{\beta}_1 \sum_{i=1}^N X_i}{N}<span class="sc">\\</span></span>
+<span id="cb4-168"><a href="#cb4-168"></a>\hat{\beta}_1 &amp;= \frac{\sum_{i=1}^N X_i Y_i - \hat{\beta}_0  \sum_{i=1}^N X_i}{\sum_{i=1}^N X_i^2}</span>
+<span id="cb4-169"><a href="#cb4-169"></a>\end{aligned}</span>
+<span id="cb4-170"><a href="#cb4-170"></a>$$</span>
+<span id="cb4-171"><a href="#cb4-171"></a></span>
+<span id="cb4-172"><a href="#cb4-172"></a>この連立方程式を解くと、次のような切片$\hat{\beta}_0$と傾き$\hat{\beta}_1$の推定値が得られます。</span>
+<span id="cb4-173"><a href="#cb4-173"></a></span>
+<span id="cb4-174"><a href="#cb4-174"></a><span class="fu">## 内生性とバイアス</span></span>
+<span id="cb4-175"><a href="#cb4-175"></a></span>
+<span id="cb4-176"><a href="#cb4-176"></a><span class="fu">## 推定値の制度</span></span>
+<span id="cb4-177"><a href="#cb4-177"></a></span>
+<span id="cb4-178"><a href="#cb4-178"></a><span class="fu">## 確率の限界と一貫性</span></span>
+<span id="cb4-179"><a href="#cb4-179"></a></span>
+<span id="cb4-180"><a href="#cb4-180"></a><span class="fu">## 回答可能な問題 - 不均一分散と誤作同士の相関</span></span>
+<span id="cb4-181"><a href="#cb4-181"></a></span>
+<span id="cb4-182"><a href="#cb4-182"></a><span class="fu">## 適合度</span></span>
+<span id="cb4-183"><a href="#cb4-183"></a></span>
+<span id="cb4-184"><a href="#cb4-184"></a><span class="fu">## 外れ値</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
-<footer class="footer"><div class="nav-footer">
+<footer class="footer">
+  <div class="nav-footer">
     <div class="nav-footer-left">
 <p>Copyright 2026, Soichi Matsuura</p>
 </div>   
@@ -986,7 +1148,7 @@ Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i
     </div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
-<li class="nav-item compact">
+    <li class="nav-item compact">
     <a class="nav-link" href="https://so-ichi.com/r.html">
       <i class="bi bi-house" role="img">
 </i> 
@@ -1005,9 +1167,10 @@ Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i
     </a>
   </li>  
 </ul>
-</div>
+    </div>
   </div>
-</footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+</footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
@@ -1039,6 +1202,8 @@ Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i
   
 })();
           </script>
+
+
 
 
 </body></html>
