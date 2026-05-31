@@ -1,0 +1,10 @@
+/.quarto/
+**/*.quarto_ipynb
+
+/data/
+/_extensions/
+/img/
+/part*/
+/chapter*/
+.DS_Store
+/documents/

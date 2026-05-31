@@ -36,7 +36,7 @@ book:
     - part: part01.qmd
       chapters:
         - chapter03.qmd
-    #     - chapter04.qmd
+        - chapter04.qmd
     #     - chapter05.qmd
     #     - chapter06.qmd
     #     - chapter07.qmd

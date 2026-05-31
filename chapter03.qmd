@@ -1,7 +1,3 @@
----
-title: "二変量OLS | 計量社会科学分析の基礎"
----
-
 ## 二変量OLS | 計量社会科学分析の基礎
 
 ここでは、2つの変数間の関係を定量化して、その関係が、
@@ -26,26 +22,36 @@ title: "二変量OLS | 計量社会科学分析の基礎"
 ここでは従属変数 $Y$ 1つと独立変数 $X$ 1つの2変数からなる二変量回帰モデルを考えます。
 次のようなモデルを推定する方法として、二変量OLSを学習します。
 
+
+
 $$
 Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i
 $$
 
-ここで、$\beta_0$ や $\beta_1$ は**パラメータ**(parameter)と呼ばれるもので、それぞれ切片と傾きを表します。
+ここで、$\beta_0$や$\beta_1$は**パラメータ**(parameter)と呼ばれるもので、それぞれ切片と傾きを表します。
 $\varepsilon_i$ は**誤差項**(error term)と呼ばれるもので、観測されない要因を表します。
 $i$ は観測単位を表すインデックスで、$i=1, 2, \ldots, N$ とします。
-
-
 
 
 今、売上高 $Y_i$ と従業員数 $X_i$ のデータが手元にあるとしましょう。
 横軸を従業員数、縦軸を売上高とした散布図に描くと次のようになります。
 
-```{r fig01, filename="従業員数と売上高の散布図"}
+```{r setup}
 #| code-fold: true
-#| warning: false
-#| message: false
-pacman::p_load(tidyverse, ggthemes, GGally, gt, gtExtra, knitr, kableExtra, modelsummary)
+pacman::p_load(
+    tidyverse, 
+    ggthemes, 
+    GGally, 
+    gt, 
+    # gtExtra, 
+    knitr, 
+    kableExtra, 
+    modelsummary
+)
+```
 
+
+```{r fig01, filename="従業員数と売上高の散布図"}
 set.seed(123) # 乱数のタネ
 n <- 15 # サンプルサイズ
 x <- seq(1, 10, length.out = n) # 独立変数
@@ -75,9 +81,6 @@ print(g)
 
 ```{r fig02, filename="回帰式と誤差"}
 #| code-fold: true
-#| warning: false
-#| message: false
-#| # 回帰式をlm()で推定
 model <- lm(y ~ x, data = data)
 # 予測値をpredictedに格納
 data$predicted <- predict(model)
@@ -110,7 +113,63 @@ g <- ggplot(data, aes(x = x, y = y)) +
 print(g)
 ```
 
+上の図の青い線は、データを説明するためのモデルで、切片$\beta_0$と傾き$\beta_1$を決めることによって引かれています。
+では、<span class="markp">どのような切片と傾きを選べば、データを最もよく説明できる</span>でしょうか。
+
 望ましい性質を備えた直線の引き方の1つとして、ガウス(Gauss)が構築した最小二乗法(Ordinaly Least Square Methods: OLS)について説明します。
+
+OLSとは、モデル(青い線)と観測データの点(黒い点)との距離($\varepsilon_i$)の二乗の合計を最小化するような切片$\beta_0$と傾き$\beta_1$を選ぶ方法です。
+
+独立変数$X$の特定の値$X_i$に対して、モデルが予測する従属変数の値は $\hat{Y}_i = \hat{\beta}_0 + \hat{\beta}_1 X_i$ となります。
+このとき、観測された従属変数の値$Y_i$とモデルが予測する値$\hat{Y}_i$の差は、誤差項$\varepsilon_i$で表されます。
+この誤差項の二乗の合計を最小化するような切片$\beta_0$と傾き$\beta_1$を選ぶことが、OLSの基本的な考え方です。
+
+$$
+\begin{aligned}
+\varepsilon_i  &= Y_i - \hat{Y}_i \\
+&= Y_i - (\hat{\beta}_0 + \hat{\beta}_1 X_i)
+\end{aligned}
+$$
+
+この誤差を二乗します。
+
+$$
+\begin{aligned}
+\varepsilon_i^2 &= \{Y_i - (\hat{\beta}_0 + \hat{\beta}_1 X_i)\}^2\\
+&= Y_i^2 - 2Y_i(\hat{\beta}_0 + \hat{\beta}_1 X_i) + (\hat{\beta}_0 + \hat{\beta}_1 X_i)^2\\
+&= Y_i^2 - 2\hat{\beta}_0 Y_i - 2 \hat{\beta}_1 X_i Y_i  + \hat{\beta}_0^2 + 2 \hat{\beta}_0\hat{\beta}_1  X_i  + \hat{\beta}_1^2 X_i^2 
+\end{aligned}
+$$
+
+誤差を合計します。これを**残差平方和**(Sum of Squared Errors: $SSE$)と呼びます。
+
+$$
+\begin{aligned}
+SSE &= \sum_{i=1}^N \varepsilon_i^2 \\
+    &= \sum_{i=1}^N Y_i^2 - 2\hat{\beta}_0 \sum_{i=1}^N Y_i - 2 \hat{\beta}_1 \sum_{i=1}^N X_i Y_i  + \sum_{i=1}^N \hat{\beta}_0^2 + 2 \hat{\beta}_0\hat{\beta}_1  \sum_{i=1}^N X_i  + \hat{\beta}_1^2 \sum_{i=1}^N X_i^2\\
+    &= \sum_{i=1}^N Y_i^2 - 2\hat{\beta}_0 \sum_{i=1}^N Y_i - 2 \hat{\beta}_1 \sum_{i=1}^N X_i Y_i  + N\hat{\beta}_0^2 + 2 \hat{\beta}_0\hat{\beta}_1  \sum_{i=1}^N X_i  + \hat{\beta}_1^2 \sum_{i=1}^N X_i^2
+\end{aligned}
+$$
+
+この残差平方和を最小化するような$\hat{\beta}_0$と$\hat{\beta}_1$を求めるために、残差平方和を$\hat{\beta}_0$と$\hat{\beta}_1$で偏微分して、それぞれを0に等しくします。
+
+$$
+\begin{aligned}
+\frac{\partial SSE}{\partial \hat{\beta}_0} &= -2 \sum_{i=1}^N Y_i + 2N\hat{\beta}_0 + 2 \hat{\beta}_1  \sum_{i=1}^N X_i = 0\\
+\frac{\partial SSE}{\partial \hat{\beta}_1} &= - 2 \sum_{i=1}^N X_i Y_i + 2 \hat{\beta}_0  \sum_{i=1}^N X_i  + 2 \hat{\beta}_1 \sum_{i=1}^N X_i^2 = 0
+\end{aligned}
+$$
+
+この連立方程式を$\beta_0$と$\beta_1$について解きます。
+
+$$
+\begin{aligned}
+\hat{\beta}_0 &= \frac{\sum_{i=1}^N Y_i - \hat{\beta}_1 \sum_{i=1}^N X_i}{N}\\
+\hat{\beta}_1 &= \frac{\sum_{i=1}^N X_i Y_i - \hat{\beta}_0  \sum_{i=1}^N X_i}{\sum_{i=1}^N X_i^2}
+\end{aligned}
+$$
+
+この連立方程式を解くと、次のような切片$\hat{\beta}_0$と傾き$\hat{\beta}_1$の推定値が得られます。
 
 ## 内生性とバイアス
 
