@@ -114,7 +114,7 @@ ggplot(df_estimates, aes(x = beta2_hat)) +
 
 
 ## t検定
-
+08031391346
 ## p値
 
 ## 検出力
@@ -122,4 +122,7 @@ ggplot(df_estimates, aes(x = beta2_hat)) +
 ## 仮説検定に関する素直な説明
 
 ## 信頼区間
+
+08031391346
+08031391346
 
